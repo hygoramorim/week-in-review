@@ -50,5 +50,16 @@ class TestFonteEAudio(unittest.TestCase):
             self.assertTrue(any(c[0] == "download" for c in chamadas))
             self.assertEqual(p, audio_dir / "2026-07-31.mp3")
 
+class TestGravar(unittest.TestCase):
+    def test_grava_campo_preservando_json(self):
+        with tempfile.TemporaryDirectory() as d:
+            content = Path(d); (content / "2026-07-31").mkdir()
+            arq = content / "2026-07-31" / "edicao.json"
+            arq.write_text(json.dumps({"edicao": "001", "itens": []}), encoding="utf-8")
+            nb.gravar_podcast_audio("2026-07-31", "2026-07-31.mp3", content_dir=content)
+            d2 = json.loads(arq.read_text())
+            self.assertEqual(d2["podcast_audio"], "2026-07-31.mp3")
+            self.assertEqual(d2["edicao"], "001")
+
 if __name__ == "__main__":
     unittest.main()

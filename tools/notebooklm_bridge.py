@@ -56,3 +56,31 @@ def gerar_e_baixar(nb_id, source_id, data, runner=_run, audio_dir=AUDIO):
     destino = audio_dir / f"{data}.mp3"
     runner(["download", "audio", str(destino), "--notebook", nb_id, "--latest"])
     return destino
+
+def gravar_podcast_audio(data, nome_mp3, content_dir=CONTENT):
+    arq = Path(content_dir) / data / "edicao.json"
+    dados = json.loads(arq.read_text(encoding="utf-8"))
+    dados["podcast_audio"] = nome_mp3
+    arq.write_text(json.dumps(dados, ensure_ascii=False, indent=2), encoding="utf-8")
+
+def main():
+    args = sys.argv[1:]
+    if not args:
+        sys.exit("uso: notebooklm_bridge.py AAAA-MM-DD [--dry-run]")
+    data = args[0]
+    brief = RAIZ / "podcast" / f"{data}-brief.md"
+    if not brief.exists():
+        sys.exit(f"brief não encontrado: {brief}. Rode build.py antes.")
+    nb_id = resolver_notebook()
+    print(f"  notebook: {nb_id}")
+    if "--dry-run" in args:
+        print("  dry-run: parando antes de gerar áudio.")
+        return
+    src = adicionar_fonte(nb_id, brief)
+    print(f"  fonte adicionada: {src}")
+    mp3 = gerar_e_baixar(nb_id, src, data)
+    gravar_podcast_audio(data, mp3.name)
+    print(f"  mp3 em {mp3}, podcast_audio gravado. Rode build.py + publicar.sh.")
+
+if __name__ == "__main__":
+    main()
