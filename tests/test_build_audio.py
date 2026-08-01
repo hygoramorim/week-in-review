@@ -23,5 +23,26 @@ class TestPodcastPlayer(unittest.TestCase):
                                    lambda s: f"{s}.html", prefixo_audio=".")
         self.assertNotIn('<audio', html)
 
+class TestPodarAudio(unittest.TestCase):
+    def test_mantem_os_tres_mais_recentes(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as d:
+            dir_audio = Path(d)
+            for nome in ["2026-07-10.mp3", "2026-07-17.mp3",
+                         "2026-07-24.mp3", "2026-07-31.mp3"]:
+                (dir_audio / nome).write_bytes(b"x")
+            apagados = build.podar_audio(dir_audio, manter=3)
+            restantes = sorted(p.name for p in dir_audio.glob("*.mp3"))
+            self.assertEqual(apagados, ["2026-07-10.mp3"])
+            self.assertEqual(restantes,
+                ["2026-07-17.mp3", "2026-07-24.mp3", "2026-07-31.mp3"])
+
+    def test_nada_a_podar_quando_ha_tres_ou_menos(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as d:
+            dir_audio = Path(d)
+            (dir_audio / "2026-07-31.mp3").write_bytes(b"x")
+            self.assertEqual(build.podar_audio(dir_audio, manter=3), [])
+
 if __name__ == "__main__":
     unittest.main()
