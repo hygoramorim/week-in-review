@@ -90,7 +90,7 @@ conteúdo o resumo, o "por que importa" e o artigo completo quando pronto.
 
 A ponte com o NotebookLM está **implementada**: `tools/notebooklm_bridge.py` usa
 a CLI `notebooklm` (pacote `notebooklm-py`, precisa estar logada: `notebooklm
-login`) para resolver ou criar um notebook fixo chamado "Week In Review",
+login`) para criar um notebook novo a cada semana (nome `week in review DD MM AA`),
 adicionar o brief da semana como fonte, gerar o áudio em pt-BR limitado àquela
 fonte (`-s <source_id>`), baixar o mp3 para `podcast/audio/` e gravar o campo
 `podcast_audio` em `edicao.json`. A partir daí o build embute um player na

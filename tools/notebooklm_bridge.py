@@ -2,7 +2,7 @@
 """Ponte entre o brief da edicao e o NotebookLM (gera e baixa o mp3).
 
   python3 tools/notebooklm_bridge.py AAAA-MM-DD            # gera + baixa + grava
-  python3 tools/notebooklm_bridge.py AAAA-MM-DD --dry-run  # so resolve o notebook
+  python3 tools/notebooklm_bridge.py AAAA-MM-DD --dry-run  # so valida, nao cria nada
 
 Usa a CLI notebooklm-py (ja autenticada em ~/.notebooklm). Um notebook novo por
 semana (nome 'week in review DD MM AA'); o audio e limitado a fonte da semana via
@@ -72,11 +72,11 @@ def main():
     brief = RAIZ / "podcast" / f"{data}-brief.md"
     if not brief.exists():
         sys.exit(f"brief não encontrado: {brief}. Rode build.py antes.")
+    if "--dry-run" in args:
+        print(f"  dry-run: brief ok, notebook seria '{nome_notebook(data)}'. Nada criado.")
+        return
     nb_id = criar_notebook_semana(data)
     print(f"  notebook: {nb_id}")
-    if "--dry-run" in args:
-        print("  dry-run: parando antes de gerar áudio.")
-        return
     src = adicionar_fonte(nb_id, brief)
     print(f"  fonte adicionada: {src}")
     mp3 = gerar_e_baixar(nb_id, src, data)
