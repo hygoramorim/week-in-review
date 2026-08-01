@@ -13,19 +13,17 @@ class FakeRunner:
         val = self.respostas.get(chave, "")
         return val() if callable(val) else val
 
-class TestResolver(unittest.TestCase):
-    def test_acha_notebook_existente(self):
-        r = FakeRunner({"list": json.dumps(
-            {"notebooks": [{"title": "Outro", "id": "x"},
-                           {"title": "Week In Review", "id": "wir-123"}]})})
-        self.assertEqual(nb.resolver_notebook("Week In Review", runner=r), "wir-123")
-        self.assertNotIn("create", [c[0] for c in r.chamadas])
+class TestNotebookSemana(unittest.TestCase):
+    def test_nome_notebook_formata_data(self):
+        self.assertEqual(nb.nome_notebook("2026-07-31"), "week in review 31 07 26")
+        self.assertEqual(nb.nome_notebook("2026-01-05"), "week in review 05 01 26")
 
-    def test_cria_quando_nao_existe(self):
-        r = FakeRunner({"list": json.dumps({"notebooks": []}),
-                        "create": json.dumps({"id": "novo-456"})})
-        self.assertEqual(nb.resolver_notebook("Week In Review", runner=r), "novo-456")
+    def test_cria_sempre_novo(self):
+        r = FakeRunner({"create": json.dumps({"id": "novo-1"})})
+        self.assertEqual(nb.criar_notebook_semana("2026-07-31", runner=r), "novo-1")
+        # sempre chama create, nunca list
         self.assertIn("create", [c[0] for c in r.chamadas])
+        self.assertNotIn("list", [c[0] for c in r.chamadas])
 
 class TestFonteEAudio(unittest.TestCase):
     def test_adicionar_fonte_devolve_id(self):

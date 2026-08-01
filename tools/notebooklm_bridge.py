@@ -4,8 +4,9 @@
   python3 tools/notebooklm_bridge.py AAAA-MM-DD            # gera + baixa + grava
   python3 tools/notebooklm_bridge.py AAAA-MM-DD --dry-run  # so resolve o notebook
 
-Usa a CLI notebooklm-py (ja autenticada em ~/.notebooklm). Notebook fixo, fontes
-acumulam; o audio e limitado a fonte da semana via -s <source_id>.
+Usa a CLI notebooklm-py (ja autenticada em ~/.notebooklm). Um notebook novo por
+semana (nome 'week in review DD MM AA'); o audio e limitado a fonte da semana via
+-s <source_id>.
 """
 import json
 import subprocess
@@ -15,7 +16,6 @@ from pathlib import Path
 RAIZ = Path(__file__).resolve().parent.parent
 CONTENT = RAIZ / "content"
 AUDIO = RAIZ / "podcast" / "audio"
-NOTEBOOK = "Week In Review"
 
 def _run(args, capture=True):
     r = subprocess.run(["notebooklm", *args], capture_output=capture, text=True)
@@ -23,15 +23,14 @@ def _run(args, capture=True):
         raise RuntimeError(f"notebooklm {' '.join(args)} falhou: {r.stderr or r.stdout}")
     return r.stdout if capture else ""
 
-def _notebooks(payload):
-    d = json.loads(payload)
-    return d.get("notebooks", d) if isinstance(d, dict) else d
+def nome_notebook(data):
+    """Nome do notebook da semana: 'week in review DD MM AA' a partir de AAAA-MM-DD."""
+    aaaa, mm, dd = data.split("-")
+    return f"week in review {dd} {mm} {aaaa[2:]}"
 
-def resolver_notebook(titulo=NOTEBOOK, runner=_run):
-    for n in _notebooks(runner(["list", "--json"])):
-        if isinstance(n, dict) and n.get("title") == titulo:
-            return n.get("id") or n.get("notebook_id")
-    criado = json.loads(runner(["create", titulo, "--json"]))
+def criar_notebook_semana(data, runner=_run):
+    """Cria SEMPRE um notebook novo para a semana e devolve o id."""
+    criado = json.loads(runner(["create", nome_notebook(data), "--json"]))
     return criado.get("id") or criado.get("notebook_id")
 
 def adicionar_fonte(nb_id, brief_path, runner=_run):
@@ -73,7 +72,7 @@ def main():
     brief = RAIZ / "podcast" / f"{data}-brief.md"
     if not brief.exists():
         sys.exit(f"brief não encontrado: {brief}. Rode build.py antes.")
-    nb_id = resolver_notebook()
+    nb_id = criar_notebook_semana(data)
     print(f"  notebook: {nb_id}")
     if "--dry-run" in args:
         print("  dry-run: parando antes de gerar áudio.")
