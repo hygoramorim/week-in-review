@@ -16,16 +16,21 @@ content/AAAA-MM-DD/          ← EDITE AQUI
 
 transcricoes/                fonte bruta do Vault. Fora do git, nunca publicada.
 
-index.html                   GERADO — edição mais recente
-arquivo.html                 GERADO — índice de todas as edições
-editions/AAAA-MM-DD/         GERADO — index.html + uma página por artigo
-podcast/AAAA-MM-DD-brief.md  GERADO — o resumo que alimenta o NotebookLM
-assets/revista.css           folha de estilo única, compartilhada por todas as páginas
-tools/build.py               o build
+index.html                   GERADO (edição mais recente)
+arquivo.html                 GERADO (índice de todas as edições)
+editions/AAAA-MM-DD/         GERADO: index.html + uma página por artigo
+podcast/AAAA-MM-DD-brief.md  GERADO: o resumo que alimenta o NotebookLM
+podcast/audio/AAAA-MM-DD.mp3 GERADO, committed: o episódio, retenção de 3 (poda a cada build)
+assets/revista.css           folha de estilo única, compartilhada por todas as páginas, mobile-first
+tools/build.py               o build (player de áudio + poda de mp3 antigos)
 tools/markdown_min.py        renderizador de Markdown sem dependência externa
+tools/vault_intake.py        monta content/AAAA-MM-DD/ a partir das 5 transcrições mais recentes do Vault
+tools/notebooklm_bridge.py   gera e baixa o episódio no NotebookLM, grava podcast_audio
+tools/pipeline.md            o roteiro do pipeline semanal (o que o cron executa via claude -p)
+tools/sexta.sh               wrapper do cron: roda tools/pipeline.md toda sexta
 ```
 
-Nunca edite `index.html`, `arquivo.html`, `editions/` ou `podcast/` diretamente —
+Nunca edite `index.html`, `arquivo.html`, `editions/` ou `podcast/` diretamente:
 o próximo `./publicar.sh` apaga a alteração.
 
 ## Comandos
@@ -41,24 +46,30 @@ Sem dependências além do `python3` do sistema. Não instale nada.
 
 ## A rotina da semana
 
-1. As transcrições novas chegam no Vault (`Estudos/<Canal>/YouTube/AAAA-MM-DD...`).
-2. Criar `content/AAAA-MM-DD/` com `edicao.json`, `editorial.md` e os artigos.
-3. Escrever cada artigo a partir da transcrição correspondente.
-4. `./publicar.sh`.
-5. Mandar `podcast/AAAA-MM-DD-brief.md` para o NotebookLM gerar o episódio.
+Roda sozinha toda sexta às 15h30 no Mac Mini via `tools/sexta.sh` (cron).
 
-O jeito mais rápido de começar uma edição é copiar a pasta da anterior e
-substituir o conteúdo — a forma do `edicao.json` já está certa.
+Manual, se precisar rodar fora do horário ou depurar um passo:
+
+1. `python3 tools/vault_intake.py` monta `content/AAAA-MM-DD/` com as 5
+   transcrições mais recentes do Vault.
+2. Escrever os artigos (e `editorial.md`) a partir das transcrições apontadas.
+3. `python3 tools/build.py` gera o brief.
+4. `python3 tools/notebooklm_bridge.py AAAA-MM-DD` gera e baixa o episódio.
+5. `python3 tools/build.py` de novo, agora com o player de áudio.
+6. `./publicar.sh`.
+
+O jeito mais rápido de começar uma edição sem o `vault_intake.py` é copiar a
+pasta da anterior e substituir o conteúdo: a forma do `edicao.json` já está certa.
 
 ## Como escrever os artigos
 
 - **Alvo: 1.000 a 1.200 palavras** (~5 min de leitura).
-- A primeira linha do `.md` é `# Título` — vira o título da página.
+- A primeira linha do `.md` é `# Título`: vira o título da página.
 - Abaixo de **200 palavras** o artigo conta como rascunho: o botão "Leia o artigo"
   não aparece no card e a página mostra um aviso. É assim que se controla o que
   já está pronto para publicar.
 - O texto é **análise e síntese** a partir da transcrição, com tese própria.
-  Nunca a transcrição reescrita ou parafraseada de ponta a ponta — o site é
+  Nunca a transcrição reescrita ou parafraseada de ponta a ponta: o site é
   público e as fontes são de terceiros.
 - Markdown suportado: `#` a `###`, parágrafos, `**negrito**`, `*itálico*`,
   `[link](url)`, `` `código` ``, `>` citação, listas `-` e `1.`, `---`.
@@ -69,7 +80,7 @@ substituir o conteúdo — a forma do `edicao.json` já está certa.
 - **Nenhuma imagem gerada por IA.** Thumbnails oficiais do YouTube ou bancos com
   crédito (Unsplash). O crédito vai em `credito` no `edicao.json`.
 - Todo conteúdo leva pelo menos um link para a fonte original em `links`.
-- O campo `porque` é o "Por que importa" — a consequência prática, não o resumo.
+- O campo `porque` é o "Por que importa" (a consequência prática, não o resumo).
 
 ## O podcast
 
@@ -77,15 +88,24 @@ O build gera `podcast/AAAA-MM-DD-brief.md`: direção de roteiro (25 min, todos 
 conteúdos, orçamento de minutos por bloco, tom), a carta editorial, e para cada
 conteúdo o resumo, o "por que importa" e o artigo completo quando pronto.
 
-Esse arquivo é o payload. O sistema que conversa com o NotebookLM Studio roda no
-**Mac Mini** e é ele quem envia o brief e gera o episódio — não existe API pública
-do NotebookLM para isso, então a ponte é o sistema local.
+A ponte com o NotebookLM está **implementada**: `tools/notebooklm_bridge.py` usa
+a CLI `notebooklm` (pacote `notebooklm-py`, precisa estar logada: `notebooklm
+login`) para resolver ou criar um notebook fixo chamado "Week In Review",
+adicionar o brief da semana como fonte, gerar o áudio em pt-BR limitado àquela
+fonte (`-s <source_id>`), baixar o mp3 para `podcast/audio/` e gravar o campo
+`podcast_audio` em `edicao.json`. A partir daí o build embute um player na
+página da edição automaticamente.
+
+O mp3 fica hospedado no próprio repo (`podcast/audio/AAAA-MM-DD.mp3`,
+committed), com retenção de 3 episódios: a cada `build.py`, os mais antigos
+são apagados.
 
 ## Onde as coisas rodam
 
 - **MacBook Air:** edição do projeto, build, publicação. Não tem o Vault.
-- **Mac Mini:** tem o Vault do Obsidian e o sistema que fala com o NotebookLM.
-  É onde a integração do podcast é implementada e onde os artigos podem ser
-  escritos com acesso direto às transcrições.
+- **Mac Mini:** tem o Vault do Obsidian, a CLI `notebooklm` autenticada e o
+  cron do pipeline semanal (`tools/sexta.sh`, sexta às 15h30, chamando
+  `claude -p` com `tools/pipeline.md`). É onde os artigos podem ser escritos
+  com acesso direto às transcrições e onde o episódio é gerado e baixado.
 
 O git é o que sincroniza os dois. Antes de começar em qualquer máquina: `git pull`.
