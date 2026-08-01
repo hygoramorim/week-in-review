@@ -1,26 +1,32 @@
 #!/usr/bin/env bash
-# Publica a edição que está em index.html:
-# arquiva em editions/, regenera arquivo.html e manda pro GitHub Pages.
+# Constrói o site a partir de content/ e publica no GitHub Pages.
 #
-#   ./publicar.sh                 usa a data da barra superior do index.html
-#   ./publicar.sh 2026-08-07      força a data da edição
+#   ./publicar.sh          build + commit + push
+#   ./publicar.sh --check   só valida content/, não escreve nem publica
 set -euo pipefail
 cd "$(dirname "$0")"
 
-DATA="${1:-$(python3 tools/arquivo.py data)}"
-
-python3 tools/arquivo.py arquivar "$DATA"
-
-git add -A
-if git diff --cached --quiet; then
-  echo "nada mudou — nenhuma edição publicada."
+if [[ "${1:-}" == "--check" ]]; then
+  python3 tools/build.py --check
   exit 0
 fi
 
-git commit -q -m "Publish Week In Review $DATA"
+python3 tools/build.py
+
+ATUAL=$(ls content 2>/dev/null | sort -r | head -1)
+
+git add -A
+if git diff --cached --quiet; then
+  echo "nada mudou — nada publicado."
+  exit 0
+fi
+
+git commit -q -m "Publish Week In Review $ATUAL"
 git push -q
 
 echo
 echo "no ar (leva ~1 min pra propagar):"
 echo "  https://hygoramorim.github.io/week-in-review/"
-echo "  https://hygoramorim.github.io/week-in-review/editions/$DATA.html"
+echo "  https://hygoramorim.github.io/week-in-review/editions/$ATUAL/"
+echo
+echo "resumo pro NotebookLM:  podcast/$ATUAL-brief.md"

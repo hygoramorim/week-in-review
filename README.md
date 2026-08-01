@@ -3,56 +3,67 @@
 Revista semanal montada a partir das transcrições que entram no Vault do Obsidian.
 No ar em **https://hygoramorim.github.io/week-in-review/**
 
-## Estrutura
+Cada edição traz cinco conteúdos. Cada conteúdo tem um card na home e um artigo
+próprio de ~1.100 palavras, aberto pelo botão **Leia o artigo**.
+
+## Como funciona
+
+Você escreve Markdown em `content/`. Um script gera todo o HTML.
 
 ```
-index.html            edição atual (é o que abre na home)
-arquivo.html          índice de todas as edições — GERADO, não editar à mão
-editions/
-  2026-07-31.html     cópias arquivadas, uma por semana
-publicar.sh           arquiva + commita + publica
-tools/arquivo.py      gerador do arquivo.html
-.nojekyll             o GitHub serve o HTML cru, sem passar pelo Jekyll
+content/2026-07-31/
+  edicao.json        capa, signals, os 5 conteúdos, tags e links
+  editorial.md       a carta editorial
+  artigos/
+    sam-harris.md    ~1.100 palavras, ~5 min de leitura
+    ratos-de-ia.md
 ```
-
-## Rotina de sexta
-
-1. Escreva a nova edição direto no `index.html`.
-   Atualize a data na barra superior (`<div class="right">`) e o número em
-   `<span class="pill">Issue 00N</span>` — o gerador lê esses dois campos.
-2. Rode:
-
-   ```bash
-   ./publicar.sh
-   ```
-
-   Isso copia o `index.html` para `editions/AAAA-MM-DD.html`, regenera o
-   `arquivo.html` com a edição nova no topo, commita e dá push.
-   O Pages republica em cerca de um minuto.
-
-Se a data da barra superior estiver errada ou você quiser forçar outra:
 
 ```bash
-./publicar.sh 2026-08-07
+./publicar.sh
 ```
 
-## Comandos avulsos
+Isso constrói `index.html`, `arquivo.html`, `editions/2026-07-31/` com uma página
+por artigo, e `podcast/2026-07-31-brief.md` — depois commita e publica.
+O Pages republica em cerca de um minuto.
+
+**Nada fora de `content/` deve ser editado à mão.** O build sobrescreve.
+
+## Rotina da semana
+
+1. Copie a pasta da edição anterior em `content/` e renomeie para a data nova.
+2. Atualize `edicao.json` e `editorial.md`.
+3. Escreva os cinco artigos a partir das transcrições.
+4. `./publicar.sh`
+5. Mande `podcast/AAAA-MM-DD-brief.md` para o NotebookLM gerar o episódio.
+
+Um artigo com menos de 200 palavras conta como rascunho: o botão "Leia o artigo"
+não aparece e a página mostra um aviso. É o controle de o que já está publicável.
+
+## Comandos
 
 ```bash
-python3 tools/arquivo.py build      # só regenera arquivo.html
-python3 tools/arquivo.py arquivar   # só arquiva o index atual
-python3 tools/arquivo.py data       # mostra a data lida do index.html
+./publicar.sh --check          # valida content/ sem escrever nem publicar
+python3 tools/build.py         # só o build, sem git
+python3 -m http.server 8000    # ver em http://localhost:8000
 ```
 
-## Ver localmente antes de publicar
+Só precisa do `python3` do sistema. Nenhuma dependência para instalar.
 
-```bash
-python3 -m http.server 8000
-# abre http://localhost:8000
-```
+## Podcast
 
-## Regras da publicação
+O build gera um resumo da edição em `podcast/AAAA-MM-DD-brief.md`, já com a
+direção de roteiro: 25 minutos, todos os conteúdos, orçamento de minutos por
+bloco e tom. Esse arquivo é o que vai para o NotebookLM.
 
-- Nenhuma imagem gerada por IA. Thumbnails oficiais do YouTube e bancos com
-  crédito (Unsplash) — o crédito vai no `<span class="credit">`.
-- Todo destaque leva pelo menos um link para a fonte original.
+A integração que envia o brief automaticamente roda no Mac Mini, onde ficam o
+Vault e o sistema conectado ao NotebookLM Studio.
+
+## Regras editoriais
+
+- Nenhuma imagem gerada por IA — thumbnails oficiais ou bancos com crédito.
+- Todo conteúdo leva pelo menos um link para a fonte original.
+- Artigo é análise e síntese a partir da transcrição, com tese própria — nunca a
+  transcrição reescrita.
+
+Detalhes de arquitetura e convenções: [CLAUDE.md](CLAUDE.md).

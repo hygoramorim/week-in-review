@@ -1,0 +1,6 @@
+# transcrições brutas do Vault: fonte de trabalho, nunca publicadas
+transcricoes/
+
+.DS_Store
+__pycache__/
+*.pyc

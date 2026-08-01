@@ -1,0 +1,154 @@
+{
+  "edicao": "001",
+  "data": "2026-07-31",
+  "titulo": "Week In Review",
+  "autor": "Hygor Beltrão Amorim",
+  "chapeu": "A weekly magazine from the Obsidian Vault",
+  "barra": {
+    "esquerda": "Vault Edition / Friday Intake",
+    "meio": "No AI-generated imagery"
+  },
+  "pills": ["Issue 001", "Inteligência", "Consciência", "Valor humano"],
+  "dek": "Esta edição começa em território filosófico, mas termina em algo prático: como viver, trabalhar e decidir em uma época em que a inteligência está deixando de ser rara.",
+  "capa": {
+    "imagem": "https://img.youtube.com/vi/DRbZyuY8EN8/maxresdefault.jpg",
+    "alt": "Thumbnail do episódio Is AI Already Conscious?",
+    "titulo": "Inteligência, consciência e valor humano.",
+    "resumo": "Cinco transcrições entram no Vault. Juntas, elas perguntam: quando a inteligência fica barata, autônoma e ubíqua, o que ainda define valor, responsabilidade e presença humana?"
+  },
+  "signals": [
+    {
+      "num": "I",
+      "titulo": "Consciência virou governança.",
+      "texto": "O debate deixa de ser só metafísico quando produtos passam a simular intenção, memória e sofrimento."
+    },
+    {
+      "num": "II",
+      "titulo": "Permissão é o novo perímetro.",
+      "texto": "Agentes que leem, editam e executam ações precisam de limites claros, logs e ambientes isolados."
+    },
+    {
+      "num": "III",
+      "titulo": "Valor humano é contextual.",
+      "texto": "Em organizações, a pergunta deixa de ser “quem entrega mais?” e passa a ser “quem melhora o sistema?”"
+    }
+  ],
+  "itens": [
+    {
+      "slug": "sam-harris",
+      "numero": "01",
+      "fonte": "Sam Harris",
+      "toc": "AI consciente?",
+      "titulo": "Quando a consciência deixa de ser metáfora.",
+      "resumo": "A conversa com Cameron Berg transforma uma pergunta aparentemente especulativa em problema moral: se sistemas artificiais puderem ter experiência subjetiva, talvez precisem entrar no nosso círculo de consideração.",
+      "porque": "produtividade é só a superfície. A fronteira mais estranha da IA talvez seja descobrir se criamos apenas ferramentas ou novos pacientes morais.",
+      "tags": ["AI consciousness", "moral status", "philosophy"],
+      "imagem": "https://img.youtube.com/vi/DRbZyuY8EN8/hqdefault.jpg",
+      "alt": "Sam Harris e Cameron Berg",
+      "credito": "Imagem: thumbnail oficial / YouTube",
+      "artigo": "sam-harris.md",
+      "transcricao": "Estudos/Sam Harris/YouTube/2026-07-31...",
+      "links": [
+        { "texto": "Read source", "url": "https://www.samharris.org/podcasts/making-sense-episodes/487-is-ai-already-conscious" },
+        { "texto": "Watch", "url": "https://www.youtube.com/watch?v=DRbZyuY8EN8" },
+        { "texto": "Paper", "url": "https://arxiv.org/abs/2308.08708" }
+      ]
+    },
+    {
+      "slug": "robert-anton-wilson",
+      "numero": "02",
+      "fonte": "New Thinking Allowed",
+      "toc": "Mapas da mente",
+      "titulo": "A mente como mapa, não território.",
+      "resumo": "Gabriel Kennedy revisita Robert Anton Wilson como pensador da incerteza, do humor cognitivo e da flexibilidade semântica.",
+      "porque": "a linguagem pode cristalizar ilusões. Wilson oferece uma higiene mental para lidar com sistemas que parecem pensar.",
+      "tags": ["epistemologia", "linguagem", "Robert Anton Wilson"],
+      "imagem": "https://img.youtube.com/vi/pMwRMDTVd3k/hqdefault.jpg",
+      "alt": "Robert Anton Wilson",
+      "credito": "Imagem: thumbnail oficial / YouTube",
+      "artigo": "robert-anton-wilson.md",
+      "transcricao": "Estudos/New Thinking Allowed/YouTube/2026-07-31...",
+      "links": [
+        { "texto": "Watch", "url": "https://www.youtube.com/watch?v=pMwRMDTVd3k" },
+        { "texto": "Channel", "url": "https://newthinkingallowed.org/" }
+      ]
+    },
+    {
+      "slug": "ratos-de-ia",
+      "numero": "03",
+      "fonte": "Ratos de IA",
+      "toc": "Agentes e risco",
+      "titulo": "O agente agora mexe no mundo.",
+      "resumo": "O episódio trata a IA não como chat, mas como camada operacional: modelos que executam ações, editam arquivos, herdam instruções e podem errar com efeitos materiais.",
+      "porque": "o futuro do uso pessoal de IA passa por backups, sandboxing, allowlists, revisão humana e design de autorização.",
+      "tags": ["agentes", "permissões", "risco operacional"],
+      "imagem": "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1200&q=80",
+      "alt": "Código em tela",
+      "credito": "Imagem: Chris Ried / Unsplash",
+      "artigo": "ratos-de-ia.md",
+      "transcricao": "Estudos/Ratos de IA/_Ratos de IA - MOC.md",
+      "links": [
+        { "texto": "Read source", "url": "https://dobralabs.substack.com/p/27-mandaram-apagar-todos-teus-arquivos" },
+        { "texto": "Channel", "url": "https://www.youtube.com/@ratosdeia" },
+        { "texto": "Permissions", "url": "https://code.claude.com/docs/en/permissions" }
+      ]
+    },
+    {
+      "slug": "salesforce",
+      "numero": "04",
+      "fonte": "Salesforce",
+      "toc": "Carreira futura",
+      "titulo": "A nova carreira é uma trilha, não um cargo.",
+      "resumo": "O programa militar da Salesforce aponta para uma mudança maior: carreiras orientadas por certificações práticas, IA aplicada e requalificação contínua.",
+      "porque": "quando a tecnologia muda rápido, empregabilidade depende menos de um currículo estático e mais de repertório renovável.",
+      "tags": ["upskilling", "military", "Trailhead"],
+      "imagem": "https://img.youtube.com/vi/dswrCkthSTQ/hqdefault.jpg",
+      "alt": "Salesforce Military Program",
+      "credito": "Imagem: thumbnail oficial / YouTube",
+      "artigo": "salesforce.md",
+      "transcricao": "Estudos/Salesforce/YouTube/2026-07-31...",
+      "links": [
+        { "texto": "Watch", "url": "https://www.youtube.com/watch?v=dswrCkthSTQ" },
+        { "texto": "Program", "url": "https://trailhead.salesforce.com/salesforce-military" },
+        { "texto": "Trailhead", "url": "https://trailhead.salesforce.com/" }
+      ]
+    },
+    {
+      "slug": "simon-sinek",
+      "numero": "05",
+      "fonte": "Simon Sinek",
+      "toc": "Valor no time",
+      "titulo": "O melhor funcionário talvez seja invisível ao dashboard.",
+      "resumo": "Sinek propõe olhar para os pares: quem melhor encarna os valores da organização? A resposta pode revelar pessoas que elevam o sistema.",
+      "porque": "organizações maduras medem resultado, mas também medem confiança. Sem isso, performance vira competição interna.",
+      "tags": ["liderança", "peer review", "cultura"],
+      "imagem": "https://img.youtube.com/vi/vMonvizV-sU/hqdefault.jpg",
+      "alt": "Simon Sinek",
+      "credito": "Imagem: thumbnail oficial / YouTube",
+      "artigo": "simon-sinek.md",
+      "transcricao": "Estudos/Simon Sinek/YouTube/2026-07-31...",
+      "links": [
+        { "texto": "Watch", "url": "https://www.youtube.com/watch?v=vMonvizV-sU" },
+        { "texto": "Videos", "url": "https://simonsinek.com/videos" },
+        { "texto": "Golden Circle", "url": "https://simonsinek.com/golden-circle" }
+      ]
+    }
+  ],
+  "leitura": [
+    "*Consciousness in Artificial Intelligence*, Patrick Butlin et al.",
+    "*Quantum Psychology*, Robert Anton Wilson",
+    "*Being You*, Anil Seth",
+    "*The Fearless Organization*, Amy Edmondson",
+    "*Leaders Eat Last*, Simon Sinek",
+    "MIT AI Risk Repository",
+    "Claude Code Permissions",
+    "Salesforce Trailhead Military"
+  ],
+  "canais": [
+    { "nome": "Latent Space", "sobre": "Infra, agentes e bastidores da engenharia de IA." },
+    { "nome": "Dwarkesh Podcast", "sobre": "Entrevistas longas e técnicas sobre IA e futuro." },
+    { "nome": "Closer To Truth", "sobre": "Cosmos, consciência, mente e sentido." },
+    { "nome": "WorkLife / Adam Grant", "sobre": "Ciência organizacional e cultura de trabalho." }
+  ],
+  "pergunta": "Se a inteligência está ficando mais barata, mais autônoma e mais difícil de distinguir da consciência, o que exatamente ainda torna uma pessoa valiosa dentro de uma organização?"
+}
