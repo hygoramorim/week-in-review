@@ -50,6 +50,13 @@ class TestFonteEAudio(unittest.TestCase):
             self.assertTrue(any(c[0] == "download" for c in chamadas))
             self.assertEqual(p, audio_dir / "2026-07-31.mp3")
 
+    def test_gerar_e_baixar_falha_com_source_vazio(self):
+        with tempfile.TemporaryDirectory() as d:
+            with self.assertRaises(RuntimeError):
+                nb.gerar_e_baixar("wir-1", "", "2026-07-31",
+                                  runner=lambda a, capture=True: "{}",
+                                  audio_dir=Path(d))
+
 class TestGravar(unittest.TestCase):
     def test_grava_campo_preservando_json(self):
         with tempfile.TemporaryDirectory() as d:

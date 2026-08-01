@@ -48,10 +48,12 @@ def adicionar_fonte(nb_id, brief_path, runner=_run):
 def gerar_e_baixar(nb_id, source_id, data, runner=_run, audio_dir=AUDIO):
     audio_dir = Path(audio_dir)
     audio_dir.mkdir(parents=True, exist_ok=True)
+    if not source_id:
+        raise RuntimeError(
+            "source_id vazio: geraria audio de todas as fontes do notebook. "
+            "Verifique adicionar_fonte / o --json do source add.")
     gen = ["generate", "audio", "--notebook", nb_id,
-           "--language", "pt-BR", "--wait"]
-    if source_id:
-        gen += ["-s", source_id]
+           "--language", "pt-BR", "--wait", "-s", source_id]
     runner(gen)
     destino = audio_dir / f"{data}.mp3"
     runner(["download", "audio", str(destino), "--notebook", nb_id, "--latest"])
