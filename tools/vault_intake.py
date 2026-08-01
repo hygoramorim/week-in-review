@@ -71,3 +71,98 @@ def descobrir_recentes(raiz_estudos, n=5):
         achados.append({"caminho": nota, "fm": fm, "data": data})
     achados.sort(key=lambda x: x["data"], reverse=True)
     return achados[:n]
+
+def proxima_issue(content_dir):
+    content_dir = Path(content_dir)
+    maior = 0
+    if content_dir.exists():
+        for pasta in content_dir.iterdir():
+            arq = pasta / "edicao.json"
+            if arq.exists():
+                try:
+                    n = int(json.loads(arq.read_text(encoding="utf-8")).get("edicao", 0))
+                    maior = max(maior, n)
+                except (ValueError, json.JSONDecodeError):
+                    pass
+    return f"{maior + 1:03d}"
+
+def montar_item(indice, achado):
+    fm = achado["fm"]
+    titulo = fm.get("title", achado["caminho"].stem)
+    vid = fm.get("video_id", "")
+    rel = achado["caminho"]
+    # caminho relativo ao Vault, para o campo "transcricao"
+    try:
+        transcricao = str(rel.relative_to(VAULT))
+    except ValueError:
+        transcricao = str(rel)
+    return {
+        "slug": slugificar(titulo),
+        "numero": f"{indice + 1:02d}",
+        "fonte": fm.get("channel", ""),
+        "toc": titulo[:24],
+        "titulo": titulo,
+        "resumo": "",   # Claude preenche na redacao
+        "porque": "",   # Claude preenche na redacao
+        "tags": fm.get("tags", []),
+        "imagem": f"https://img.youtube.com/vi/{vid}/hqdefault.jpg" if vid else "",
+        "alt": titulo,
+        "credito": "Imagem: thumbnail oficial / YouTube",
+        "artigo": f"{slugificar(titulo)}.md",
+        "transcricao": transcricao,
+        "links": [{"texto": "Watch", "url": fm.get("url", "")}] if fm.get("url") else [],
+    }
+
+def criar_edicao(achados, content_dir, force=False):
+    content_dir = Path(content_dir)
+    data = achados[0]["data"]
+    pasta = content_dir / data
+    if pasta.exists() and not force:
+        raise FileExistsError(f"{pasta} ja existe (use --force para sobrescrever)")
+    (pasta / "artigos").mkdir(parents=True, exist_ok=True)
+    itens = [montar_item(i, a) for i, a in enumerate(achados)]
+    edicao = {
+        "edicao": proxima_issue(content_dir),
+        "data": data,
+        "titulo": "Week In Review",
+        "autor": "Hygor Beltrão Amorim",
+        "chapeu": "A weekly magazine from the Obsidian Vault",
+        "barra": {"esquerda": "Vault Edition / Friday Intake",
+                  "meio": "No AI-generated imagery"},
+        "pills": [], "dek": "",
+        "capa": {"imagem": itens[0]["imagem"], "alt": itens[0]["alt"],
+                 "titulo": "", "resumo": ""},
+        "signals": [], "itens": itens, "leitura": [], "canais": [], "pergunta": "",
+    }
+    (pasta / "edicao.json").write_text(
+        json.dumps(edicao, ensure_ascii=False, indent=2), encoding="utf-8")
+    (pasta / "editorial.md").write_text(
+        "<!-- Editorial a escrever a partir das transcrições. -->\n", encoding="utf-8")
+    for it in itens:
+        (pasta / "artigos" / it["artigo"]).write_text(
+            f"# {it['titulo']}\n", encoding="utf-8")
+    return pasta
+
+def main():
+    args = sys.argv[1:]
+    estudos = VAULT / "Estudos"
+    if not estudos.exists():
+        sys.exit(f"Vault nao encontrado em {estudos}. Ajuste WIR_VAULT.")
+    achados = descobrir_recentes(estudos, n=5)
+    if len(achados) < 5:
+        print(f"  aviso: so {len(achados)} transcricoes com data encontradas.")
+    if not achados:
+        sys.exit("nenhuma transcricao com data no Vault.")
+    if "--dry-run" in args:
+        for a in achados:
+            print(f"  {a['data']}  {a['fm'].get('channel','?'):<22} {a['fm'].get('title','')}")
+        return
+    pasta = criar_edicao(achados, CONTENT, force="--force" in args)
+    print(f"  criado {pasta} com {len(achados)} itens. Agora escreva os artigos.")
+    print(json.dumps(
+        [{"slug": slugificar(a["fm"].get("title", "")),
+          "fonte": a["fm"].get("channel", ""),
+          "transcricao": str(a["caminho"])} for a in achados], ensure_ascii=False))
+
+if __name__ == "__main__":
+    main()

@@ -66,5 +66,42 @@ class TestDescoberta(unittest.TestCase):
             self.assertEqual(fm["title"], "Y")
             self.assertEqual(fm["tags"], ["x", "y"])
 
+class TestMontagem(unittest.TestCase):
+    def _achados(self):
+        with tempfile.TemporaryDirectory() as d:
+            estudos = TestDescoberta()._vault(d)
+            return vi.descobrir_recentes(estudos, n=5)
+
+    def test_proxima_issue(self):
+        with tempfile.TemporaryDirectory() as d:
+            content = Path(d)
+            self.assertEqual(vi.proxima_issue(content), "001")
+            (content / "2026-07-31").mkdir()
+            (content / "2026-07-31" / "edicao.json").write_text('{"edicao":"007"}')
+            self.assertEqual(vi.proxima_issue(content), "008")
+
+    def test_montar_item_usa_frontmatter(self):
+        achado = self._achados()[0]
+        item = vi.montar_item(0, achado)
+        self.assertEqual(item["numero"], "01")
+        self.assertEqual(item["fonte"], "Sam Harris")
+        self.assertEqual(item["slug"], "is-ai-conscious")
+        self.assertIn("img.youtube.com/vi/ABC123", item["imagem"])
+        self.assertTrue(item["artigo"].endswith(".md"))
+        self.assertIn("YouTube", item["transcricao"])
+
+    def test_criar_edicao_escreve_arquivos_e_valida(self):
+        achados = self._achados()
+        with tempfile.TemporaryDirectory() as d:
+            content = Path(d)
+            pasta = vi.criar_edicao(achados, content)
+            dados = json.loads((pasta / "edicao.json").read_text())
+            self.assertEqual(len(dados["itens"]), 5)
+            self.assertTrue((pasta / "editorial.md").exists())
+            for it in dados["itens"]:
+                self.assertTrue((pasta / "artigos" / it["artigo"]).exists())
+            with self.assertRaises(FileExistsError):
+                vi.criar_edicao(achados, content)
+
 if __name__ == "__main__":
     unittest.main()
