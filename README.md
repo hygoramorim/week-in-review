@@ -24,18 +24,24 @@ content/2026-07-31/
 ```
 
 Isso constrói `index.html`, `arquivo.html`, `editions/2026-07-31/` com uma página
-por artigo, e `podcast/2026-07-31-brief.md` — depois commita e publica.
+por artigo, e `podcast/2026-07-31-brief.md`: depois commita e publica.
 O Pages republica em cerca de um minuto.
 
 **Nada fora de `content/` deve ser editado à mão.** O build sobrescreve.
 
 ## Rotina da semana
 
-1. Copie a pasta da edição anterior em `content/` e renomeie para a data nova.
+Roda sozinha toda sexta às 15h30 no Mac Mini, via cron (`tools/sexta.sh`).
+
+Manual, se precisar montar uma edição na mão:
+
+1. Copie a pasta da edição anterior em `content/` e renomeie para a data nova
+   (ou rode `python3 tools/vault_intake.py` para montar o esqueleto a partir
+   das 5 transcrições mais recentes do Vault).
 2. Atualize `edicao.json` e `editorial.md`.
 3. Escreva os cinco artigos a partir das transcrições.
 4. `./publicar.sh`
-5. Mande `podcast/AAAA-MM-DD-brief.md` para o NotebookLM gerar o episódio.
+5. Rode `python3 tools/notebooklm_bridge.py AAAA-MM-DD` para gerar o episódio.
 
 Um artigo com menos de 200 palavras conta como rascunho: o botão "Leia o artigo"
 não aparece e a página mostra um aviso. É o controle de o que já está publicável.
@@ -56,14 +62,18 @@ O build gera um resumo da edição em `podcast/AAAA-MM-DD-brief.md`, já com a
 direção de roteiro: 25 minutos, todos os conteúdos, orçamento de minutos por
 bloco e tom. Esse arquivo é o que vai para o NotebookLM.
 
-A integração que envia o brief automaticamente roda no Mac Mini, onde ficam o
-Vault e o sistema conectado ao NotebookLM Studio.
+A ponte automática (`tools/notebooklm_bridge.py`) roda no Mac Mini usando a
+CLI do NotebookLM: ela gera o episódio em pt-BR a partir do brief, baixa o mp3
+para `podcast/audio/` e grava o campo `podcast_audio` em `edicao.json`. Quando
+esse campo existe, o build embute um player de áudio na página da edição.
+O mp3 fica versionado no próprio repo, com retenção dos 3 episódios mais
+recentes (os antigos são apagados a cada build).
 
 ## Regras editoriais
 
-- Nenhuma imagem gerada por IA — thumbnails oficiais ou bancos com crédito.
+- Nenhuma imagem gerada por IA: thumbnails oficiais ou bancos com crédito.
 - Todo conteúdo leva pelo menos um link para a fonte original.
-- Artigo é análise e síntese a partir da transcrição, com tese própria — nunca a
+- Artigo é análise e síntese a partir da transcrição, com tese própria, nunca a
   transcrição reescrita.
 
 Detalhes de arquitetura e convenções: [CLAUDE.md](CLAUDE.md).

@@ -26,6 +26,7 @@ RAIZ = Path(__file__).resolve().parent.parent
 CONTENT = RAIZ / "content"
 EDITIONS = RAIZ / "editions"
 PODCAST = RAIZ / "podcast"
+AUDIO = PODCAST / "audio"
 
 # um artigo com menos palavras que isso ainda e rascunho:
 # o botao "Leia o artigo" nao aparece e a pagina avisa.
@@ -128,7 +129,7 @@ def carregar_edicoes():
 
 # ------------------------------------------------------------- a edicao
 
-def render_edicao(ed, css, link_arquivo, link_artigo):
+def render_edicao(ed, css, link_arquivo, link_artigo, prefixo_audio="."):
     d = ed["data"]
     barra = ed.get("barra", {})
     partes = [cabeca(f"{ed.get('titulo', 'Week In Review')} — Issue {ed.get('edicao', '')}",
@@ -158,6 +159,16 @@ def render_edicao(ed, css, link_arquivo, link_artigo):
       <p>{e(capa.get('resumo', ''))}</p>
     </aside>
   </header>""")
+
+    audio = ed.get("podcast_audio")
+    if audio:
+        src = f"{prefixo_audio}/podcast/audio/{e(audio)}"
+        partes.append(f"""
+  <section class="podcast">
+    <div class="section-title"><h2>Ouça a edição</h2></div>
+    <audio controls preload="none" src="{src}"></audio>
+    <p class="podcast-nota">Episódio gerado no NotebookLM a partir do resumo da semana.</p>
+  </section>""")
 
     itens = ed.get("itens", [])
     toc = "".join(
@@ -430,6 +441,21 @@ def render_brief(ed):
 
 # ----------------------------------------------------------------- build
 
+def podar_audio(dir_audio, manter=3):
+    """Mantem os `manter` mp3 mais recentes (por nome AAAA-MM-DD.mp3), apaga o resto."""
+    dir_audio = Path(dir_audio)
+    if not dir_audio.exists():
+        return []
+    mp3s = sorted(dir_audio.glob("*.mp3"), key=lambda p: p.name, reverse=True)
+    apagados = []
+    for p in mp3s[manter:]:
+        p.unlink()
+        apagados.append(p.name)
+    for nome in apagados:
+        print(f"  áudio podado (retenção {manter}): {nome}")
+    return apagados
+
+
 def build(checar=False):
     edicoes = carregar_edicoes()
     escritos = 0
@@ -455,7 +481,7 @@ def build(checar=False):
 
         (pasta / "index.html").write_text(
             render_edicao(ed, "../../assets/revista.css", "../../arquivo.html",
-                          lambda slug: f"{slug}.html"),
+                          lambda slug: f"{slug}.html", prefixo_audio="../.."),
             encoding="utf-8")
         escritos += 1
 
@@ -476,9 +502,11 @@ def build(checar=False):
     atual = edicoes[0]
     (RAIZ / "index.html").write_text(
         render_edicao(atual, "assets/revista.css", "arquivo.html",
-                      lambda slug: f"editions/{atual['data']}/{slug}.html"),
+                      lambda slug: f"editions/{atual['data']}/{slug}.html",
+                      prefixo_audio="."),
         encoding="utf-8")
     (RAIZ / "arquivo.html").write_text(render_arquivo(edicoes), encoding="utf-8")
+    podar_audio(AUDIO, manter=3)
     print(f"  gerados {escritos + 2} arquivos · home aponta para a issue {atual.get('edicao', '')}")
 
 

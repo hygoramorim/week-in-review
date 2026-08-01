@@ -4,3 +4,6 @@ transcricoes/
 .DS_Store
 __pycache__/
 *.pyc
+
+# scratch da skill de desenvolvimento (SDD), nunca publicado
+.superpowers/
