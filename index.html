@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Week In Review — by Hygor Beltrão Amorim</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --paper:#f4eedf;--cream:#fff9ec;--ink:#161514;--muted:#625b4f;
+      --red:#c6462d;--navy:#112f45;--card:#fbf4e4;
+      --serif:'Libre Baskerville',Georgia,serif;
+      --sans:'IBM Plex Sans',Arial,sans-serif;
+      --cond:'Oswald',Impact,sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:
+        linear-gradient(90deg,rgba(22,21,20,.045) 1px,transparent 1px) 0 0/64px 64px,
+        radial-gradient(circle at 15% 2%,rgba(198,70,45,.16),transparent 36%),
+        radial-gradient(circle at 90% 6%,rgba(17,47,69,.13),transparent 34%),
+        var(--paper);
+      color:var(--ink);
+      font-family:var(--sans);
+      line-height:1.6;
+    }
+    a{color:inherit;text-underline-offset:4px}
+    img{display:block;width:100%;background:#ddd}
+    .page{max-width:1180px;margin:auto;padding:24px 18px 64px}
+    .top{
+      display:grid;grid-template-columns:1fr auto 1fr;gap:14px;
+      border-top:6px solid var(--ink);border-bottom:2px solid var(--ink);
+      padding:10px 0;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)
+    }
+    .top .mid{color:var(--red);font-weight:700;text-align:center}.top .right{text-align:right}
+    .hero{
+      display:grid;grid-template-columns:1.05fr .95fr;gap:28px;
+      padding:26px 0 32px;border-bottom:3px solid var(--ink)
+    }
+    .kicker{font-family:var(--cond);color:var(--red);letter-spacing:.13em;text-transform:uppercase}
+    h1{
+      font-family:var(--cond);font-size:clamp(66px,14vw,156px);
+      line-height:.82;margin:10px 0 0;text-transform:uppercase;letter-spacing:-.06em
+    }
+    .by{font-family:var(--serif);font-size:clamp(20px,3vw,29px);color:var(--navy);margin-top:16px}
+    .pills{display:flex;gap:9px;flex-wrap:wrap;margin-top:22px}
+    .pill{border:1px solid var(--ink);border-radius:999px;padding:7px 10px;font-size:12px;text-transform:uppercase;letter-spacing:.08em;background:rgba(255,249,236,.7)}
+    .cover{
+      background:var(--navy);color:var(--cream);padding:20px;position:relative;overflow:hidden;
+      box-shadow:0 18px 45px rgba(22,21,20,.13)
+    }
+    .cover:after{
+      content:"";position:absolute;top:18px;right:18px;width:70px;height:70px;
+      background:var(--red);clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%)
+    }
+    .cover img{height:260px;object-fit:cover;border:1px solid rgba(255,255,255,.25);filter:saturate(.88) contrast(1.05)}
+    .cover h2{font-family:var(--serif);font-size:clamp(32px,4vw,48px);line-height:1.06;margin:16px 0 10px}
+    .cover p{color:#eadfcb;margin:0}
+    .toc{display:grid;grid-template-columns:repeat(5,1fr);border-left:1px solid var(--ink);border-bottom:2px solid var(--ink);margin-top:18px}
+    .toc a{padding:14px 12px;min-height:86px;border-right:1px solid var(--ink);text-decoration:none;background:rgba(251,244,228,.65)}
+    .toc b{font-family:var(--cond);font-size:30px;color:var(--red);display:block;line-height:1}
+    .toc span{font-size:12px;text-transform:uppercase;letter-spacing:.07em}
+    .section-title{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;margin:44px 0 18px}
+    .section-title h2{font-family:var(--cond);font-size:42px;text-transform:uppercase;margin:0;letter-spacing:-.02em}
+    .section-title:after{content:"";height:2px;background:var(--ink)}
+    .editorial{display:grid;grid-template-columns:280px 1fr;gap:32px;border-bottom:2px solid var(--ink);padding-bottom:34px}
+    .dek{border-top:9px solid var(--red);padding-top:16px;font-family:var(--serif);font-size:20px;color:var(--navy)}
+    .editorial article{columns:2 330px;column-gap:36px;font-size:18px}
+    .editorial p{margin-top:0}
+    .drop:first-letter{float:left;font-family:var(--cond);font-size:92px;line-height:.72;padding:9px 9px 0 0;color:var(--red)}
+    .signals{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .signal{border:1px solid var(--ink);background:var(--card);padding:18px;min-height:205px}
+    .signal .num{font-family:var(--cond);font-size:48px;color:var(--red);line-height:1}
+    .signal h3{font-family:var(--serif);font-size:21px;margin:6px 0 8px}
+    .signal p{color:var(--muted);margin:0}
+    .features{display:grid;gap:22px}
+    .feature{
+      display:grid;grid-template-columns:42% 1fr;background:var(--card);
+      border:1px solid var(--ink);box-shadow:0 18px 45px rgba(22,21,20,.12)
+    }
+    .feature:nth-child(even){grid-template-columns:1fr 42%}
+    .feature:nth-child(even) .media{order:2}
+    .media{position:relative;min-height:330px;overflow:hidden}
+    .media img{height:100%;object-fit:cover;filter:saturate(.8) contrast(1.06)}
+    .credit{position:absolute;left:10px;bottom:10px;background:rgba(22,21,20,.78);color:white;padding:5px 8px;font-size:11px}
+    .copy{padding:24px 26px}
+    .number{font-family:var(--cond);font-size:13px;letter-spacing:.14em;color:var(--red);text-transform:uppercase}
+    .feature h3{font-family:var(--serif);font-size:clamp(28px,3vw,42px);line-height:1.08;margin:6px 0 12px}
+    .meta{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+    .tag{font-size:11px;text-transform:uppercase;letter-spacing:.08em;border:1px solid var(--muted);padding:5px 8px;color:var(--muted)}
+    .why{border-left:5px solid var(--red);padding-left:14px;font-weight:600;color:var(--navy)}
+    .links{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+    .btn{font-size:12px;text-transform:uppercase;letter-spacing:.09em;text-decoration:none;border:1px solid var(--ink);padding:9px 12px;background:var(--cream);font-weight:700}
+    .btn.primary{background:var(--ink);color:var(--paper)}
+    .matrix{display:grid;grid-template-columns:1.25fr .75fr;gap:22px}
+    .box{border:1px solid var(--ink);background:var(--cream);padding:22px}
+    .box h3{font-family:var(--cond);font-size:34px;text-transform:uppercase;margin:0 0 10px}
+    .box ul{columns:2 230px;padding-left:18px}
+    .channels{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .channel{background:var(--card);border:1px solid rgba(22,21,20,.25);padding:14px}
+    .channel b{font-family:var(--serif)}
+    .channel p{margin:6px 0 0;color:var(--muted);font-size:14px}
+    .question{margin:40px 0;background:var(--red);color:var(--cream);padding:34px;display:grid;grid-template-columns:220px 1fr;gap:24px;align-items:center}
+    .question b{font-family:var(--cond);font-size:44px;text-transform:uppercase;line-height:1}
+    .question p{font-family:var(--serif);font-size:clamp(24px,4vw,43px);line-height:1.18;margin:0}
+    footer{border-top:4px solid var(--ink);padding-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:20px;color:var(--muted);font-size:13px}
+    .brand{font-family:var(--cond);color:var(--red);letter-spacing:.04em}
+    code{font-size:12px;background:rgba(255,255,255,.4);padding:2px 4px}
+    @media(max-width:860px){
+      .top,.hero,.editorial,.feature,.feature:nth-child(even),.matrix,.question,footer{grid-template-columns:1fr}
+      .top .mid,.top .right{text-align:left}
+      .feature:nth-child(even) .media{order:0}
+      .toc{grid-template-columns:1fr 1fr}
+      .signals{grid-template-columns:1fr}
+      .editorial article{columns:1}
+      .media{min-height:260px}
+      .cover img{height:220px}
+      .channels{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+<main class="page">
+  <div class="top">
+    <div>Vault Edition / Friday Intake</div>
+    <div class="mid">No AI-generated imagery</div>
+    <div class="right">31 July 2026</div>
+  </div>
+
+  <header class="hero">
+    <section>
+      <div class="kicker">A weekly magazine from the Obsidian Vault</div>
+      <h1>Week<br>In Review</h1>
+      <div class="by">by Hygor Beltrão Amorim</div>
+      <div class="pills">
+        <span class="pill">Issue 001</span>
+        <span class="pill">Inteligência</span>
+        <span class="pill">Consciência</span>
+        <span class="pill">Valor humano</span>
+      </div>
+    </section>
+    <aside class="cover">
+      <img src="https://img.youtube.com/vi/DRbZyuY8EN8/maxresdefault.jpg" alt="Thumbnail do episódio Is AI Already Conscious?">
+      <h2>Inteligência, consciência e valor humano.</h2>
+      <p>Cinco transcrições entram no Vault. Juntas, elas perguntam: quando a inteligência fica barata, autônoma e ubíqua, o que ainda define valor, responsabilidade e presença humana?</p>
+    </aside>
+  </header>
+
+  <nav class="toc">
+    <a href="#sam"><b>01</b><span>AI consciente?</span></a>
+    <a href="#raw"><b>02</b><span>Mapas da mente</span></a>
+    <a href="#ratos"><b>03</b><span>Agentes e risco</span></a>
+    <a href="#salesforce"><b>04</b><span>Carreira futura</span></a>
+    <a href="#sinek"><b>05</b><span>Valor no time</span></a>
+  </nav>
+
+  <section>
+    <div class="section-title"><h2>Carta editorial</h2></div>
+    <div class="editorial">
+      <aside class="dek">Esta edição começa em território filosófico, mas termina em algo prático: como viver, trabalhar e decidir em uma época em que a inteligência está deixando de ser rara.</aside>
+      <article>
+        <p class="drop">Sam Harris e Cameron Berg colocam a pergunta mais difícil da semana: uma IA já pode ser consciente? A questão parece especulativa, mas tem consequências concretas. Se um sistema artificial pudesse sofrer, ter experiências subjetivas ou desenvolver estados internos moralmente relevantes, nossa relação com máquinas deixaria de ser apenas instrumental.</p>
+        <p>Robert Anton Wilson aparece como contraponto e expansão. Em <em>Quantum Psychology</em>, a pergunta não é apenas “a máquina é consciente?”, mas “o que chamamos de consciência quando nossa linguagem já distorce a experiência?” Wilson nos lembra que percebemos o mundo através de modelos, mapas, filtros semânticos e hábitos mentais.</p>
+        <p>O Ratos de IA traz a camada operacional: agentes capazes de agir sobre arquivos, código, permissões e sistemas reais. O risco não é só uma IA “pensar errado”; é ela ter acesso demais, autonomia demais e supervisão de menos.</p>
+        <p>Salesforce desloca a conversa para carreira. Se ferramentas inteligentes executam partes crescentes do trabalho, o valor profissional migra para adaptação, aprendizado contínuo e capacidade de traduzir tecnologia em impacto.</p>
+        <p>Simon Sinek fecha a semana recolocando o humano no centro. Bons profissionais não são apenas os que entregam mais individualmente, mas os que elevam o time.</p>
+        <p><strong>Tese da edição:</strong> o futuro não premiará apenas quem usa IA, mas quem souber desenhar bons critérios para inteligência, autonomia e valor.</p>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-title"><h2>Signals</h2></div>
+    <div class="signals">
+      <div class="signal"><div class="num">I</div><h3>Consciência virou governança.</h3><p>O debate deixa de ser só metafísico quando produtos passam a simular intenção, memória e sofrimento.</p></div>
+      <div class="signal"><div class="num">II</div><h3>Permissão é o novo perímetro.</h3><p>Agentes que leem, editam e executam ações precisam de limites claros, logs e ambientes isolados.</p></div>
+      <div class="signal"><div class="num">III</div><h3>Valor humano é contextual.</h3><p>Em organizações, a pergunta deixa de ser “quem entrega mais?” e passa a ser “quem melhora o sistema?”</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-title"><h2>Os vídeos</h2></div>
+    <div class="features">
+
+      <article class="feature" id="sam">
+        <div class="media">
+          <img src="https://img.youtube.com/vi/DRbZyuY8EN8/hqdefault.jpg" alt="Sam Harris e Cameron Berg">
+          <span class="credit">Imagem: thumbnail oficial / YouTube</span>
+        </div>
+        <div class="copy">
+          <div class="number">01 / Sam Harris</div>
+          <h3>Quando a consciência deixa de ser metáfora.</h3>
+          <div class="meta"><span class="tag">AI consciousness</span><span class="tag">moral status</span><span class="tag">philosophy</span></div>
+          <p>A conversa com Cameron Berg transforma uma pergunta aparentemente especulativa em problema moral: se sistemas artificiais puderem ter experiência subjetiva, talvez precisem entrar no nosso círculo de consideração.</p>
+          <p class="why">Por que importa: produtividade é só a superfície. A fronteira mais estranha da IA talvez seja descobrir se criamos apenas ferramentas ou novos pacientes morais.</p>
+          <div class="links">
+            <a class="btn primary" href="https://www.samharris.org/podcasts/making-sense-episodes/487-is-ai-already-conscious" target="_blank">Read source</a>
+            <a class="btn" href="https://www.youtube.com/watch?v=DRbZyuY8EN8" target="_blank">Watch</a>
+            <a class="btn" href="https://arxiv.org/abs/2308.08708" target="_blank">Paper</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="feature" id="raw">
+        <div class="media">
+          <img src="https://img.youtube.com/vi/pMwRMDTVd3k/hqdefault.jpg" alt="Robert Anton Wilson">
+          <span class="credit">Imagem: thumbnail oficial / YouTube</span>
+        </div>
+        <div class="copy">
+          <div class="number">02 / New Thinking Allowed</div>
+          <h3>A mente como mapa, não território.</h3>
+          <div class="meta"><span class="tag">epistemologia</span><span class="tag">linguagem</span><span class="tag">Robert Anton Wilson</span></div>
+          <p>Gabriel Kennedy revisita Robert Anton Wilson como pensador da incerteza, do humor cognitivo e da flexibilidade semântica.</p>
+          <p class="why">Por que importa: a linguagem pode cristalizar ilusões. Wilson oferece uma higiene mental para lidar com sistemas que parecem pensar.</p>
+          <div class="links">
+            <a class="btn primary" href="https://www.youtube.com/watch?v=pMwRMDTVd3k" target="_blank">Watch</a>
+            <a class="btn" href="https://newthinkingallowed.org/" target="_blank">Channel</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="feature" id="ratos">
+        <div class="media">
+          <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1200&q=80" alt="Código em tela">
+          <span class="credit">Imagem: Chris Ried / Unsplash</span>
+        </div>
+        <div class="copy">
+          <div class="number">03 / Ratos de IA</div>
+          <h3>O agente agora mexe no mundo.</h3>
+          <div class="meta"><span class="tag">agentes</span><span class="tag">permissões</span><span class="tag">risco operacional</span></div>
+          <p>O episódio trata a IA não como chat, mas como camada operacional: modelos que executam ações, editam arquivos, herdam instruções e podem errar com efeitos materiais.</p>
+          <p class="why">Por que importa: o futuro do uso pessoal de IA passa por backups, sandboxing, allowlists, revisão humana e design de autorização.</p>
+          <div class="links">
+            <a class="btn primary" href="https://dobralabs.substack.com/p/27-mandaram-apagar-todos-teus-arquivos" target="_blank">Read source</a>
+            <a class="btn" href="https://www.youtube.com/@ratosdeia" target="_blank">Channel</a>
+            <a class="btn" href="https://code.claude.com/docs/en/permissions" target="_blank">Permissions</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="feature" id="salesforce">
+        <div class="media">
+          <img src="https://img.youtube.com/vi/dswrCkthSTQ/hqdefault.jpg" alt="Salesforce Military Program">
+          <span class="credit">Imagem: thumbnail oficial / YouTube</span>
+        </div>
+        <div class="copy">
+          <div class="number">04 / Salesforce</div>
+          <h3>A nova carreira é uma trilha, não um cargo.</h3>
+          <div class="meta"><span class="tag">upskilling</span><span class="tag">military</span><span class="tag">Trailhead</span></div>
+          <p>O programa militar da Salesforce aponta para uma mudança maior: carreiras orientadas por certificações práticas, IA aplicada e requalificação contínua.</p>
+          <p class="why">Por que importa: quando a tecnologia muda rápido, empregabilidade depende menos de um currículo estático e mais de repertório renovável.</p>
+          <div class="links">
+            <a class="btn primary" href="https://www.youtube.com/watch?v=dswrCkthSTQ" target="_blank">Watch</a>
+            <a class="btn" href="https://trailhead.salesforce.com/salesforce-military" target="_blank">Program</a>
+            <a class="btn" href="https://trailhead.salesforce.com/" target="_blank">Trailhead</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="feature" id="sinek">
+        <div class="media">
+          <img src="https://img.youtube.com/vi/vMonvizV-sU/hqdefault.jpg" alt="Simon Sinek">
+          <span class="credit">Imagem: thumbnail oficial / YouTube</span>
+        </div>
+        <div class="copy">
+          <div class="number">05 / Simon Sinek</div>
+          <h3>O melhor funcionário talvez seja invisível ao dashboard.</h3>
+          <div class="meta"><span class="tag">liderança</span><span class="tag">peer review</span><span class="tag">cultura</span></div>
+          <p>Sinek propõe olhar para os pares: quem melhor encarna os valores da organização? A resposta pode revelar pessoas que elevam o sistema.</p>
+          <p class="why">Por que importa: organizações maduras medem resultado, mas também medem confiança. Sem isso, performance vira competição interna.</p>
+          <div class="links">
+            <a class="btn primary" href="https://www.youtube.com/watch?v=vMonvizV-sU" target="_blank">Watch</a>
+            <a class="btn" href="https://simonsinek.com/videos" target="_blank">Videos</a>
+            <a class="btn" href="https://simonsinek.com/golden-circle" target="_blank">Golden Circle</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="section-title"><h2>Para expandir</h2></div>
+    <div class="matrix">
+      <div class="box">
+        <h3>Reading list da edição</h3>
+        <ul>
+          <li><em>Consciousness in Artificial Intelligence</em>, Patrick Butlin et al.</li>
+          <li><em>Quantum Psychology</em>, Robert Anton Wilson</li>
+          <li><em>Being You</em>, Anil Seth</li>
+          <li><em>The Fearless Organization</em>, Amy Edmondson</li>
+          <li><em>Leaders Eat Last</em>, Simon Sinek</li>
+          <li>MIT AI Risk Repository</li>
+          <li>Claude Code Permissions</li>
+          <li>Salesforce Trailhead Military</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>Novos canais</h3>
+        <div class="channels">
+          <div class="channel"><b>Latent Space</b><p>Infra, agentes e bastidores da engenharia de IA.</p></div>
+          <div class="channel"><b>Dwarkesh Podcast</b><p>Entrevistas longas e técnicas sobre IA e futuro.</p></div>
+          <div class="channel"><b>Closer To Truth</b><p>Cosmos, consciência, mente e sentido.</p></div>
+          <div class="channel"><b>WorkLife / Adam Grant</b><p>Ciência organizacional e cultura de trabalho.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="question">
+    <b>Pergunta da semana</b>
+    <p>Se a inteligência está ficando mais barata, mais autônoma e mais difícil de distinguir da consciência, o que exatamente ainda torna uma pessoa valiosa dentro de uma organização?</p>
+  </section>
+
+  <footer>
+    <div><strong class="brand">Week In Review</strong><br>by Hygor Beltrão Amorim. Edição piloto criada a partir das transcrições novas adicionadas ao Vault em 31/07/2026.</div>
+    <div><strong>Fontes no Vault:</strong><br>
+      <code>Estudos/Sam Harris/YouTube/2026-07-31...</code><br>
+      <code>Estudos/New Thinking Allowed/YouTube/2026-07-31...</code><br>
+      <code>Estudos/Ratos de IA/_Ratos de IA - MOC.md</code><br>
+      <code>Estudos/Salesforce/YouTube/2026-07-31...</code><br>
+      <code>Estudos/Simon Sinek/YouTube/2026-07-31...</code>
+    </div>
+  </footer>
+</main>
+</body>
+</html>
