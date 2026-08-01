@@ -128,7 +128,7 @@ def carregar_edicoes():
 
 # ------------------------------------------------------------- a edicao
 
-def render_edicao(ed, css, link_arquivo, link_artigo):
+def render_edicao(ed, css, link_arquivo, link_artigo, prefixo_audio="."):
     d = ed["data"]
     barra = ed.get("barra", {})
     partes = [cabeca(f"{ed.get('titulo', 'Week In Review')} — Issue {ed.get('edicao', '')}",
@@ -158,6 +158,16 @@ def render_edicao(ed, css, link_arquivo, link_artigo):
       <p>{e(capa.get('resumo', ''))}</p>
     </aside>
   </header>""")
+
+    audio = ed.get("podcast_audio")
+    if audio:
+        src = f"{prefixo_audio}/podcast/audio/{e(audio)}"
+        partes.append(f"""
+  <section class="podcast">
+    <div class="section-title"><h2>Ouça a edição</h2></div>
+    <audio controls preload="none" src="{src}"></audio>
+    <p class="podcast-nota">Episódio gerado no NotebookLM a partir do resumo da semana.</p>
+  </section>""")
 
     itens = ed.get("itens", [])
     toc = "".join(
@@ -455,7 +465,7 @@ def build(checar=False):
 
         (pasta / "index.html").write_text(
             render_edicao(ed, "../../assets/revista.css", "../../arquivo.html",
-                          lambda slug: f"{slug}.html"),
+                          lambda slug: f"{slug}.html", prefixo_audio="../.."),
             encoding="utf-8")
         escritos += 1
 
