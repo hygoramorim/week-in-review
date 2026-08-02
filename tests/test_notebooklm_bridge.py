@@ -19,15 +19,22 @@ class TestNotebookSemana(unittest.TestCase):
         self.assertEqual(nb.nome_notebook("2026-01-05"), "week in review 05 01 26")
 
     def test_cria_sempre_novo(self):
-        r = FakeRunner({"create": json.dumps({"id": "novo-1"})})
+        # formato aninhado do notebooklm-py >= 0.7: {"notebook": {"id": ...}}
+        r = FakeRunner({"create": json.dumps({"notebook": {"id": "novo-1"}})})
         self.assertEqual(nb.criar_notebook_semana("2026-07-31", runner=r), "novo-1")
         # sempre chama create, nunca list
         self.assertIn("create", [c[0] for c in r.chamadas])
         self.assertNotIn("list", [c[0] for c in r.chamadas])
 
+    def test_cria_formato_plano_antigo(self):
+        # tolera o formato plano de versoes antigas da CLI
+        r = FakeRunner({"create": json.dumps({"id": "plano-1"})})
+        self.assertEqual(nb.criar_notebook_semana("2026-07-31", runner=r), "plano-1")
+
 class TestFonteEAudio(unittest.TestCase):
     def test_adicionar_fonte_devolve_id(self):
-        r = FakeRunner({"source": json.dumps({"source_id": "src-9"})})
+        # formato aninhado do 0.7: {"source": {"id": ...}}
+        r = FakeRunner({"source": json.dumps({"source": {"id": "src-9"}})})
         with tempfile.TemporaryDirectory() as d:
             brief = Path(d) / "b.md"; brief.write_text("x")
             self.assertEqual(nb.adicionar_fonte("wir-1", brief, runner=r), "src-9")

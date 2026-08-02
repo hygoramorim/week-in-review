@@ -23,6 +23,24 @@ def _run(args, capture=True):
         raise RuntimeError(f"notebooklm {' '.join(args)} falhou: {r.stderr or r.stdout}")
     return r.stdout if capture else ""
 
+def _extrair_id(payload, *chaves_aninhadas):
+    """Extrai um id do --json da CLI, no nivel de cima ou aninhado.
+
+    O notebooklm-py >= 0.7 aninha o resultado (ex. {"notebook": {"id": ...}},
+    {"source": {"id": ...}}); versoes antigas devolviam plano. Cobre os dois.
+    """
+    try:
+        d = json.loads(payload)
+    except (json.JSONDecodeError, TypeError):
+        return ""
+    if not isinstance(d, dict):
+        return ""
+    for chave in chaves_aninhadas:
+        interno = d.get(chave)
+        if isinstance(interno, dict) and (interno.get("id") or interno.get("notebook_id") or interno.get("source_id")):
+            return interno.get("id") or interno.get("notebook_id") or interno.get("source_id")
+    return d.get("id") or d.get("notebook_id") or d.get("source_id") or ""
+
 def nome_notebook(data):
     """Nome do notebook da semana: 'week in review DD MM AA' a partir de AAAA-MM-DD."""
     aaaa, mm, dd = data.split("-")
@@ -30,19 +48,14 @@ def nome_notebook(data):
 
 def criar_notebook_semana(data, runner=_run):
     """Cria SEMPRE um notebook novo para a semana e devolve o id."""
-    criado = json.loads(runner(["create", nome_notebook(data), "--json"]))
-    return criado.get("id") or criado.get("notebook_id")
+    return _extrair_id(runner(["create", nome_notebook(data), "--json"]), "notebook")
 
 def adicionar_fonte(nb_id, brief_path, runner=_run):
     # CLI real: o caminho do .md e' argumento posicional (CONTENT), tipo auto-detectado.
     # NAO existe flag --file. Ver `notebooklm source add --help`.
     saida = runner(["source", "add", str(brief_path),
                     "--notebook", nb_id, "--type", "text", "--json"])
-    try:
-        d = json.loads(saida)
-        return d.get("source_id") or d.get("id")
-    except json.JSONDecodeError:
-        return ""
+    return _extrair_id(saida, "source")
 
 def gerar_e_baixar(nb_id, source_id, data, runner=_run, audio_dir=AUDIO):
     audio_dir = Path(audio_dir)
@@ -52,7 +65,7 @@ def gerar_e_baixar(nb_id, source_id, data, runner=_run, audio_dir=AUDIO):
             "source_id vazio: geraria audio de todas as fontes do notebook. "
             "Verifique adicionar_fonte / o --json do source add.")
     gen = ["generate", "audio", "--notebook", nb_id,
-           "--language", "pt-BR", "--wait", "-s", source_id]
+           "--language", "pt_BR", "--wait", "-s", source_id]
     runner(gen)
     destino = audio_dir / f"{data}.mp3"
     runner(["download", "audio", str(destino), "--notebook", nb_id, "--latest"])
