@@ -96,6 +96,12 @@ fonte (`-s <source_id>`), baixar o mp3 para `podcast/audio/` e gravar o campo
 `podcast_audio` em `edicao.json`. A partir daí o build embute um player na
 página da edição automaticamente.
 
+**CRÍTICO:** o brief é enviado com `--type file` (o CLI lê o arquivo e manda o
+conteúdo). NUNCA `--type text`, que trata o argumento como texto literal e faz o
+caminho do arquivo virar a "fonte", gerando um podcast vazio. Há teste travando
+isso. Idioma é `pt_BR` (underscore). A geração de áudio tem cota diária no Google.
+Lições completas em [docs/APRENDIZADOS.md](docs/APRENDIZADOS.md).
+
 O mp3 fica hospedado no próprio repo (`podcast/audio/AAAA-MM-DD.mp3`,
 committed), com retenção de 3 episódios: a cada `build.py`, os mais antigos
 são apagados.
