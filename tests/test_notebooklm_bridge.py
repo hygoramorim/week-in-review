@@ -38,7 +38,13 @@ class TestFonteEAudio(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             brief = Path(d) / "b.md"; brief.write_text("x")
             self.assertEqual(nb.adicionar_fonte("wir-1", brief, runner=r), "src-9")
-            self.assertEqual(r.chamadas[0][0], "source")
+            chamada = r.chamadas[0]
+            self.assertEqual(chamada[0], "source")
+            # CRITICO: precisa ser --type file (le o arquivo). Com --type text
+            # o caminho vira a fonte e o podcast sai vazio.
+            self.assertIn("--type", chamada)
+            self.assertEqual(chamada[chamada.index("--type") + 1], "file")
+            self.assertIn(str(brief), chamada)
 
     def test_gerar_e_baixar_usa_source_e_idioma(self):
         chamadas = []

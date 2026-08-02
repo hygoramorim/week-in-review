@@ -51,10 +51,11 @@ def criar_notebook_semana(data, runner=_run):
     return _extrair_id(runner(["create", nome_notebook(data), "--json"]), "notebook")
 
 def adicionar_fonte(nb_id, brief_path, runner=_run):
-    # CLI real: o caminho do .md e' argumento posicional (CONTENT), tipo auto-detectado.
-    # NAO existe flag --file. Ver `notebooklm source add --help`.
+    # CRITICO: usar --type file para o CLI LER O ARQUIVO e enviar o CONTEUDO.
+    # Com --type text o CLI trata o argumento como texto literal (o proprio
+    # caminho vira a "fonte", e o podcast sai vazio). Ver `source add --help`.
     saida = runner(["source", "add", str(brief_path),
-                    "--notebook", nb_id, "--type", "text", "--json"])
+                    "--notebook", nb_id, "--type", "file", "--json"])
     return _extrair_id(saida, "source")
 
 def gerar_e_baixar(nb_id, source_id, data, runner=_run, audio_dir=AUDIO):
