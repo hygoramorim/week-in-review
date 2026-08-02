@@ -100,6 +100,14 @@ O mp3 fica hospedado no próprio repo (`podcast/audio/AAAA-MM-DD.mp3`,
 committed), com retenção de 3 episódios: a cada `build.py`, os mais antigos
 são apagados.
 
+**Auth do NotebookLM:** usar a conta Google **pessoal**, não a Workspace da Oz
+(o SSO da Oz não completa no navegador de perfil isolado do CLI). Ao rodar
+`notebooklm login`, depois de logar navegue manualmente para
+`notebooklm.google.com` (com "lm") e espere carregar os notebooks antes de
+apertar ENTER no terminal. Se o aviso mostrar a URL sem "lm", responda `N` e
+repita. Confirme com `notebooklm list`. A sessão expira periodicamente; quando
+o pipeline de sexta falhar no passo do podcast, é sinal de refazer o login.
+
 ## Onde as coisas rodam
 
 - **MacBook Air:** edição do projeto, build, publicação. Não tem o Vault.
@@ -109,3 +117,12 @@ são apagados.
   com acesso direto às transcrições e onde o episódio é gerado e baixado.
 
 O git é o que sincroniza os dois. Antes de começar em qualquer máquina: `git pull`.
+
+## Segurança do cron
+
+`tools/sexta.sh` roda o pipeline via `claude -p` sem supervisão, então NÃO usa
+`--permission-mode bypassPermissions` (libera comando demais). Usa `acceptEdits`
+mais uma allowlist estrita via `--allowedTools` (só `git`, `python3`,
+`notebooklm`, e as ferramentas de arquivo) e `--add-dir` apontando só para o
+Vault. No modo `--ensaio`, o `publicar.sh` fica fora da allowlist, então é
+impossível publicar durante um teste. Ao mexer no `sexta.sh`, preserve isso.
