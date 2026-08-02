@@ -119,7 +119,13 @@ def criar_edicao(achados, content_dir, force=False):
     pasta = content_dir / data
     if pasta.exists() and not force:
         raise FileExistsError(f"{pasta} ja existe (use --force para sobrescrever)")
-    (pasta / "artigos").mkdir(parents=True, exist_ok=True)
+    artigos_dir = pasta / "artigos"
+    # com --force a pasta pode ter artigos de uma montagem anterior com outros
+    # slugs; limpa os .md orfaos antes de recriar para nao acumular lixo.
+    if artigos_dir.exists():
+        for antigo in artigos_dir.glob("*.md"):
+            antigo.unlink()
+    artigos_dir.mkdir(parents=True, exist_ok=True)
     itens = [montar_item(i, a) for i, a in enumerate(achados)]
     edicao = {
         "edicao": proxima_issue(content_dir),

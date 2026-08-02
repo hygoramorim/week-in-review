@@ -103,5 +103,22 @@ class TestMontagem(unittest.TestCase):
             with self.assertRaises(FileExistsError):
                 vi.criar_edicao(achados, content)
 
+    def test_force_limpa_artigos_orfaos(self):
+        achados = self._achados()
+        with tempfile.TemporaryDirectory() as d:
+            content = Path(d)
+            pasta = vi.criar_edicao(achados, content)
+            # simula um artigo orfao de uma montagem anterior (slug antigo)
+            orfao = pasta / "artigos" / "slug-antigo-que-nao-existe-mais.md"
+            orfao.write_text("# velho\n")
+            self.assertTrue(orfao.exists())
+            vi.criar_edicao(achados, content, force=True)
+            # o orfao some; so ficam os artigos referenciados no edicao.json
+            self.assertFalse(orfao.exists())
+            dados = json.loads((pasta / "edicao.json").read_text())
+            refs = {it["artigo"] for it in dados["itens"]}
+            no_disco = {p.name for p in (pasta / "artigos").glob("*.md")}
+            self.assertEqual(no_disco, refs)
+
 if __name__ == "__main__":
     unittest.main()
