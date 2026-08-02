@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A regra do 1%: o teste que Jeff Dean usa para saber se vale a pena construir em IA — Week In Review</title>
+  <meta name="description" content="Jeff Dean, cientista chefe do Google, oferece um teste simples: o modelo geral resolve seu problema 20 por cento das vezes, ou perto de 0? Se já acerta 20, a escala vai te alcançar e você constrói sobre areia movediça. Se erra quase tudo, ali há uma capacidade ausente onde um time pequeno pode abrir vantagem real.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/revista.css">
+</head>
+<body>
+<main class="page">
+  <div class="top">
+    <div><a href="index.html">← Voltar para a edição</a></div>
+    <div class="mid">Issue 003</div>
+    <div class="right"><a href="../../arquivo.html">Arquivo</a> · 30 de julho de 2026</div>
+  </div>
+
+  <header class="artigo-head">
+    <div class="kicker">03 / Ycombinator</div>
+    <h1>A regra do 1%: o teste que Jeff Dean usa para saber se vale a pena construir em IA</h1>
+    <div class="artigo-meta"><span class="tag">engenharia de IA</span><span class="tag">Jeff Dean</span><span class="tag">estratégia de produto</span>
+      <span class="tempo">6 min de leitura</span>
+    </div>
+  </header>
+
+  <div class="artigo-corpo">
+<p>Existe uma pergunta simples que separa quem está perdendo tempo de quem está prestes a construir algo relevante em inteligência artificial: o modelo geral resolve esse problema 20% das vezes, ou 0% a 1%? A resposta parece contraintuitiva. Jeff Dean, cientista chefe do Google e uma das pessoas que desenhou a infraestrutura que roda a internet moderna (MapReduce, BigTable, TensorFlow, TPU, Gemini), disse isso numa conversa recente com Diana Hu, da Y Combinator, na Startup School 2026. Se um modelo já acerta 20% de um problema, ele vai continuar melhorando ali com mais dados e mais escala, e qualquer empresa que aposte nesse nicho está construindo em cima de areia movediça. Mas se o modelo erra quase tudo, isso é sinal de uma capacidade ainda ausente, um território onde um time pequeno, com dados certos ou um modelo especializado, pode abrir uma vantagem real.</p>
+<p>Essa regra do 1% não é só uma dica de posicionamento de produto. É a lente que Dean usa desde os anos 2000 para escolher em que apostar, e a mesma lente que produziu o MapReduce, o TPU e a técnica de destilação de modelos que hoje sustenta praticamente toda a indústria de IA.</p>
+<h2>O napkin math como disciplina, não como sorte</h2>
+<p>Dean é famoso por suas contas de guardanapo, e a entrevista traz dois exemplos que não são anedotas de sorte: são metodologia repetível.</p>
+<p>Em 2001, ele e Sanjay Ghemawat perceberam que o índice de busca do Google, que até então rodava em disco, logo caberia inteiro na memória RAM de todos os servidores da empresa. Fizeram a conta, viram que o momento estava próximo, e em poucos dias colocaram em produção uma versão inteiramente nova da busca, agora rodando em RAM. Foi esse salto que tornou o Google rápido do jeito que conhecemos.</p>
+<p>Em 2013, outra conta de guardanapo: se cada usuário do Google usasse reconhecimento de voz por apenas três minutos por dia, a empresa precisaria dobrar sua frota inteira de servidores só para sustentar a demanda. Os novos modelos de fala baseados em deep learning eram tão melhores (o equivalente a vinte anos de avanço em poucos meses) que Dean sabia que, se funcionassem bem, o uso explodiria. Rodar isso em CPU seria financeiramente inviável. A resposta foi construir um chip especializado só para álgebra linear densa de baixa precisão, o núcleo de praticamente todo algoritmo de machine learning. Nasceu o TPU, de 30 a 80 vezes mais eficiente em energia e de 20 a 30 vezes mais rápido que CPUs e GPUs da época.</p>
+<p>O padrão que conecta os dois casos é o mesmo: não é prever o futuro, é fazer a aritmética do presente até ela ficar desconfortável. Quando a conta mostra que a demanda vai superar a capacidade por uma ou duas ordens de grandeza, ali mora a oportunidade de construir algo consequente. É o oposto de acompanhar hype: é sentar com os números reais de uso, custo e energia e deixá-los apontar o problema.</p>
+<h2>Energia é a métrica que ninguém está olhando</h2>
+<p>Um dos pontos mais reveladores da conversa é quando Dean explica por que, hoje, a unidade de medida que realmente importa em sistemas de IA não é FLOPs nem número de parâmetros: é energia. Fazer uma operação matemática custa cerca de um picojoule. Mover esse mesmo dado da memória de alta largura de banda (HBM) até o processador para computá-lo custa mil vezes mais.</p>
+<p>Essa diferença de mil vezes não é um detalhe técnico obscuro, ela dita decisões de produto inteiras. É por isso que existe batching (agrupar exemplos ou tokens antes de processar): sem agrupar, se paga o custo total de mover dados a cada operação; agrupando, esse custo se diluí pelo tamanho do lote. O problema é que batching também aumenta latência, e para aplicações que exigem resposta instantânea, esse é um trade-off direto entre custo de energia e experiência do usuário.</p>
+<p>Dean está pessoalmente obcecado com o lado da inferência desse problema, não o de treinamento. Treinamento tolera alguma latência; inferência, cada vez mais, não tolera nenhuma. Se você souber exatamente qual precisão numérica seu sistema precisa, pode construir um chip que só faz aquilo, sem generalidade nenhuma, e ganhar ordens de magnitude em eficiência: foi essa mesma aposta que criou o TPU original. A profecia dele para os próximos anos é hardware de inferência especializado, com latência até 50 vezes menor que a atual, uma mudança capaz de tornar viáveis produtos que hoje não fazem sentido econômico.</p>
+<h2>Context engineering: a democratização que ninguém percebeu</h2>
+<p>Se treinar modelos exige GPUs, dados em escala e capital que só um punhado de empresas possui, existe uma camada inteira do problema que qualquer pessoa com acesso a uma API pode disputar: o que Dean chama de "context engineering". É tudo que envolve dar ao modelo as ferramentas certas, a memória certa, os documentos certos no momento certo, e ensinar a ele, por meio de instruções bem escritas ("skills", no vocabulário dele), como sequenciar chamadas de ferramentas para resolver um problema complexo.</p>
+<p>O exemplo que ele dá é revelador pela simplicidade: ele e Sanjay Ghemawat escreveram uma "skill" que ensina um agente a fazer, sozinho, o ciclo completo de otimização de performance que os dois fariam manualmente (medir benchmark, alterar código, remedir, comparar footprint de cache, iterar). Não mudaram o modelo. Deram a ele, em texto, o método que dois dos melhores engenheiros de sistemas do mundo usam. Esse documento, batizado de "performance hints", tem cerca de trinta páginas e está publicamente disponível.</p>
+<p>Essa é talvez a virada mais prática da entrevista: a vantagem competitiva não está mais garantida só a quem treina o modelo maior, está também disponível a quem escreve o contexto mais preciso, sem esperar pela próxima rodada de investimento em GPUs.</p>
+<h2>Onde o pequeno ainda vence o Google</h2>
+<p>Perguntado diretamente sobre em que camadas um time de duas ou três pessoas ainda consegue competir com uma empresa que controla desde o processador até o produto, Dean foi específico: modelos gerais como o Gemini são otimizados para fazer quase tudo razoavelmente bem, o que deixa espaço para quem constrói algo estreito, bem desenhado e extremamente preciso num domínio específico. Duas rotas concretas: produtos com acesso a dados que o modelo geral simplesmente não enxerga (as informações pessoais de um usuário, por exemplo), ou modelos especializados e baratos de treinar para um problema estreito. Ele cita o AlphaFold, da própria Google DeepMind, como exemplo canônico de um modelo não generalista que resolveu uma classe de problema (dobra de proteínas) melhor que qualquer modelo geral jamais faria.</p>
+<p>A ressalva importante: isso é uma corrida contra o tempo. Antes de investir num nicho, é preciso perguntar se os modelos de fronteira vão engolir aquela capacidade em seis meses, doze meses, ou se é algo que resiste por dois ou três anos. É a mesma regra do 1% aplicada ao horizonte temporal, não só à taxa de acerto atual.</p>
+<h2>O fio que une tudo</h2>
+<p>Há uma ironia no fato de que o mesmo homem que ajudou a construir a infraestrutura mais centralizada e poderosa da história da computação está, nessa conversa, ensinando fundadores a encontrar as frestas onde essa infraestrutura ainda não chega. Mas faz sentido: Dean não fala como quem defende o tamanho do Google, fala como quem passou a carreira caçando o lugar exato onde a aritmética simples revela um problema que ninguém mais está vendo. O MapReduce nasceu de espremer a complexidade de paralelização para fora do código de negócio. A destilação de modelos, hoje onipresente na indústria (inclusive nos próprios modelos "flash" do Gemini), nasceu de um paper rejeitado por um revisor que achou que não teria "impacto significativo". A lição prática, para quem constrói produtos de IA em 2026, não é copiar as ferramentas do Google. É copiar o método: fazer a conta, respeitar a energia como métrica final, escrever o contexto com o mesmo rigor de quem escreveria código, e procurar os lugares onde o modelo geral ainda falha quase por completo.</p>
+  </div>
+
+  <section class="artigo-fontes">
+    <h2>Fontes</h2>
+    <p>Dá um critério concreto pra fundadores e times decidirem em que apostar na era da IA: fugir do que os modelos gerais já fazem bem e mirar as lacunas reais.</p>
+    <div class="links">
+      <a class="btn" href="https://www.youtube.com/watch?v=CxXgV54KzpQ" target="_blank" rel="noopener">Watch</a>
+    </div>
+  </section>
+
+  <nav class="artigo-nav">
+    <a class="" href="the-next-50-years-humanity-ai-power-yuval-noah-harari.html"><small>Anterior</small><b>A IA não vai nos dominar com robôs, e sim com planilhas.</b></a>
+    <a class="dir" href="ray-dalio-i-predicted-the-2008-crash-i-know-what-comes-next.html"><small>Próximo</small><b>A bolha de IA e o fim de um ciclo de 80 anos.</b></a>
+  </nav>
+</main>
+</body>
+</html>

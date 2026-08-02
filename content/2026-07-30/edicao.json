@@ -1,0 +1,156 @@
+{
+  "edicao": "003",
+  "data": "2026-07-30",
+  "titulo": "Week In Review",
+  "autor": "Hygor Beltrão Amorim",
+  "chapeu": "A weekly magazine from the Obsidian Vault",
+  "barra": {
+    "esquerda": "Vault Edition / Friday Intake",
+    "meio": "No AI-generated imagery"
+  },
+  "pills": [
+    "Issue 003",
+    "Poder",
+    "Ciclos",
+    "Trabalho"
+  ],
+  "dek": "De quem decide dentro das organizações a quem decide dentro dos algoritmos: a semana anterior já perguntava onde mora o poder quando a inteligência deixa de ser escassa, no time, no mercado e na ordem mundial.",
+  "capa": {
+    "imagem": "https://img.youtube.com/vi/vMonvizV-sU/hqdefault.jpg",
+    "alt": "Thumbnail do episódio de Yuval Noah Harari",
+    "titulo": "Onde mora o poder quando a máquina decide.",
+    "resumo": "Harari, Dalio, Jeff Dean, Sinek e a jornada dos veteranos: cinco olhares sobre poder, ciclos e valor humano numa economia que a IA está reescrevendo."
+  },
+  "signals": [],
+  "itens": [
+    {
+      "slug": "the-unexpected-way-to-identify-the-best-employees",
+      "numero": "01",
+      "fonte": "Simon Sinek",
+      "toc": "Valor no time",
+      "titulo": "O melhor funcionário é o que os outros querem imitar.",
+      "resumo": "Simon Sinek argumenta que avaliações baseadas em métricas ou no julgamento de um único gestor ignoram o efeito multiplicador que certas pessoas têm sobre o time. Ele descreve o modelo de indicação por pares da Barry-Wehmiller, onde colegas nomeiam quem melhor exemplifica os valores da empresa.",
+      "porque": "Empresas que só medem performance individual tendem a promover as pessoas erradas: quem eleva o desempenho coletivo raramente lidera o ranking de métricas pessoais.",
+      "tags": [
+        "liderança",
+        "cultura organizacional",
+        "avaliação de desempenho"
+      ],
+      "imagem": "https://img.youtube.com/vi/vMonvizV-sU/hqdefault.jpg",
+      "alt": "The Unexpected Way To Identify the Best Employees",
+      "credito": "Imagem: thumbnail oficial / YouTube",
+      "artigo": "the-unexpected-way-to-identify-the-best-employees.md",
+      "transcricao": "Estudos/Simon Sinek/YouTube/2026-07-31 - The Unexpected Way To Identify the Best Employees.md",
+      "links": [
+        {
+          "texto": "Watch",
+          "url": "https://www.youtube.com/watch?v=vMonvizV-sU"
+        }
+      ]
+    },
+    {
+      "slug": "the-next-50-years-humanity-ai-power-yuval-noah-harari",
+      "numero": "02",
+      "fonte": "Yuval Noah Harari",
+      "toc": "IA e poder",
+      "titulo": "A IA não vai nos dominar com robôs, e sim com planilhas.",
+      "resumo": "Yuval Noah Harari desmonta a imagem hollywoodiana do risco da IA. A tomada de poder não virá como invasão armada, mas dentro da burocracia: relatórios, sentenças, aprovações de crédito. Ele distingue ferramenta de agente e mostra por que a IA que decide, e não a que só executa, é a virada histórica.",
+      "porque": "Se o risco mora na burocracia e não nos robôs, a governança de IA precisa mirar onde decisões automatizadas já afetam vidas: crédito, justiça, contratação, e não só cenários de ficção científica.",
+      "tags": [
+        "IA e poder",
+        "Yuval Harari",
+        "governança"
+      ],
+      "imagem": "https://img.youtube.com/vi/_V_ed5fuexA/hqdefault.jpg",
+      "alt": "The next 50 years: humanity, AI, power | Yuval Noah Harari",
+      "credito": "Imagem: thumbnail oficial / YouTube",
+      "artigo": "the-next-50-years-humanity-ai-power-yuval-noah-harari.md",
+      "transcricao": "Estudos/Yuval Noah Harari/YouTube/2026-07-30 - The next 50 years- humanity, AI, power  Yuval Noah Harari.md",
+      "links": [
+        {
+          "texto": "Watch",
+          "url": "https://www.youtube.com/watch?v=_V_ed5fuexA"
+        }
+      ]
+    },
+    {
+      "slug": "jeff-dean-the-1-rule-for-building-in-ai",
+      "numero": "03",
+      "fonte": "Ycombinator",
+      "toc": "Onde construir",
+      "titulo": "A regra do 1% para saber onde vale construir em IA.",
+      "resumo": "Jeff Dean, cientista chefe do Google, oferece um teste simples: o modelo geral resolve seu problema 20 por cento das vezes, ou perto de 0? Se já acerta 20, a escala vai te alcançar e você constrói sobre areia movediça. Se erra quase tudo, ali há uma capacidade ausente onde um time pequeno pode abrir vantagem real.",
+      "porque": "Dá um critério concreto pra fundadores e times decidirem em que apostar na era da IA: fugir do que os modelos gerais já fazem bem e mirar as lacunas reais.",
+      "tags": [
+        "engenharia de IA",
+        "Jeff Dean",
+        "estratégia de produto"
+      ],
+      "imagem": "https://img.youtube.com/vi/CxXgV54KzpQ/hqdefault.jpg",
+      "alt": "Jeff Dean: The 1% Rule for Building in AI",
+      "credito": "Imagem: thumbnail oficial / YouTube",
+      "artigo": "jeff-dean-the-1-rule-for-building-in-ai.md",
+      "transcricao": "Estudos/Ycombinator/YouTube/2026-07-30 - Jeff Dean- The 1% Rule for Building in AI.md",
+      "links": [
+        {
+          "texto": "Watch",
+          "url": "https://www.youtube.com/watch?v=CxXgV54KzpQ"
+        }
+      ]
+    },
+    {
+      "slug": "ray-dalio-i-predicted-the-2008-crash-i-know-what-comes-next",
+      "numero": "04",
+      "fonte": "The Diary of a CEO",
+      "toc": "Dívida e declínio",
+      "titulo": "A bolha de IA e o fim de um ciclo de 80 anos.",
+      "resumo": "Ray Dalio explica por que a euforia com IA tem a mecânica clássica de toda bolha financeira, e conecta isso a um ciclo maior de 80 anos de dívida, conflito interno e disputa de poder que, segundo ele, já colocou EUA e Reino Unido em declínio. Detalha como bolhas estouram, por que caixa é o pior investimento de longo prazo, e por que vê o mundo caminhando para blocos regionais.",
+      "porque": "Se a leitura de Dalio estiver certa, decisões de caixa, portfólio e de onde construir negócios precisam considerar não só o ciclo de mercado de curto prazo, mas uma reconfiguração profunda da ordem econômica e geopolítica.",
+      "tags": [
+        "economia",
+        "geopolítica",
+        "Ray Dalio"
+      ],
+      "imagem": "https://img.youtube.com/vi/Bu0xNDLNORU/hqdefault.jpg",
+      "alt": "Ray Dalio: I Predicted The 2008 CRASH, I Know What Comes Next!",
+      "credito": "Imagem: thumbnail oficial / YouTube",
+      "artigo": "ray-dalio-i-predicted-the-2008-crash-i-know-what-comes-next.md",
+      "transcricao": "Estudos/The Diary of a CEO/YouTube/2026-07-30 - Ray Dalio- I Predicted The 2008 CRASH, I Know What Comes Next!.md",
+      "links": [
+        {
+          "texto": "Watch",
+          "url": "https://www.youtube.com/watch?v=Bu0xNDLNORU"
+        }
+      ]
+    },
+    {
+      "slug": "salesforce-military-from-service-to-salesforce-careers",
+      "numero": "05",
+      "fonte": "Salesforce",
+      "toc": "Transição de carreira",
+      "titulo": "De fardas a certificações: a jornada dos veteranos.",
+      "resumo": "Depoimentos de veteranos e cônjuges no programa Salesforce Military revelam que a transição da carreira militar para tech não é só treinamento técnico: é reconstrução identitária, tradução de competências e mentoria por pares. O artigo analisa a jornada emocional e prática por trás da requalificação.",
+      "porque": "Qualquer empresa que lida com recolocação ou reconversão de equipe aprende aqui que treinamento técnico resolve a lacuna de habilidade, mas não a de identidade e confiança que toda transição de carreira exige.",
+      "tags": [
+        "carreira",
+        "veteranos",
+        "requalificação"
+      ],
+      "imagem": "https://img.youtube.com/vi/IPtTOxyogDA/hqdefault.jpg",
+      "alt": "Salesforce Military: From Service to Salesforce Careers",
+      "credito": "Imagem: thumbnail oficial / YouTube",
+      "artigo": "salesforce-military-from-service-to-salesforce-careers.md",
+      "transcricao": "Estudos/Salesforce/YouTube/2026-07-30 - Salesforce Military- From Service to Salesforce Careers.md",
+      "links": [
+        {
+          "texto": "Watch",
+          "url": "https://www.youtube.com/watch?v=IPtTOxyogDA"
+        }
+      ]
+    }
+  ],
+  "leitura": [],
+  "canais": [],
+  "pergunta": "Quando a inteligência fica abundante, o poder migra pra quem decide. Você está do lado de quem desenha as decisões, ou de quem apenas as executa?",
+  "podcast_audio": "2026-07-30.mp3"
+}
