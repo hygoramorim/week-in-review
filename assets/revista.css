@@ -39,9 +39,16 @@ img{display:block;width:100%;background:#ddd}
   padding:26px 0 32px;border-bottom:3px solid var(--ink)
 }
 .kicker{font-family:var(--cond);color:var(--red);letter-spacing:.13em;text-transform:uppercase}
-h1{
+.hero h1{
   font-family:var(--cond);font-size:clamp(66px,14vw,156px);
   line-height:.82;margin:10px 0 0;text-transform:uppercase;letter-spacing:-.06em
+}
+/* h1 vindo de markdown (ex.: 1a linha do editorial) NAO herda o tamanho do hero.
+   O tamanho display gigante e exclusivo do .hero; qualquer outro h1 fica contido. */
+.editorial article h1{
+  font-family:var(--cond);font-size:clamp(28px,5vw,42px);
+  line-height:1.02;margin:0 0 14px;text-transform:uppercase;letter-spacing:-.02em;
+  color:var(--ink);break-after:avoid
 }
 .by{font-family:var(--serif);font-size:clamp(20px,3vw,29px);color:var(--navy);margin-top:16px}
 .pills{display:flex;gap:9px;flex-wrap:wrap;margin-top:22px}
