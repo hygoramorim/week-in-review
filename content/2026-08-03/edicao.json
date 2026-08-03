@@ -1,0 +1,157 @@
+{
+  "edicao": "004",
+  "data": "2026-08-03",
+  "titulo": "Week In Review",
+  "autor": "Hygor Beltrão Amorim",
+  "chapeu": "Edição Extra / A weekly magazine from the Obsidian Vault",
+  "barra": {
+    "esquerda": "Vault Edition / Edição Extra",
+    "meio": "No AI-generated imagery"
+  },
+  "pills": [
+    "Issue 004",
+    "Edição Extra",
+    "Inteligência",
+    "Consciência",
+    "Liderança"
+  ],
+  "dek": "Uma edição extra que coloca a fronteira da IA no seu momento mais eufórico ao lado das perguntas mais antigas que temos: o que delegamos a máquinas que decidem, e o que, em nós, não se automatiza.",
+  "capa": {
+    "imagem": "https://img.youtube.com/vi/sJ4VJWycX9M/hqdefault.jpg",
+    "alt": "Thumbnail do episódio de Alexandr Wang",
+    "titulo": "A máquina no auge, a pergunta no fundo.",
+    "resumo": "Wang e a arquitetura dos agentes de IA de um lado; Thurman, Lattin e Sinek do outro: cinco conversas sobre inteligência, consciência e o que sobra de humano quando a execução fica barata."
+  },
+  "signals": [],
+  "itens": [
+    {
+      "slug": "alexandr-wang-once-in-a-civilization-opportunity",
+      "numero": "01",
+      "fonte": "Y Combinator",
+      "toc": "Wang e a superinteligência",
+      "titulo": "Quando a inteligência vira commodity, o que fica escasso é ter visão",
+      "resumo": "Na Startup School 2026, Alexandr Wang (fundador da Scale AI, hoje à frente do laboratório de superinteligência da Meta) argumenta que o gargalo da IA não é mais o progresso dos modelos, e sim a difusão da tecnologia pelo mundo. Ele defende que inteligência e agência estão ficando abundantes, e conta a história da Scale para ilustrar a convicção antes do consenso.",
+      "porque": "Se a execução fica barata e abundante, o diferencial competitivo migra da capacidade técnica para quem tem visão clara do que construir e teimosia para bancá-la antes de virar consenso.",
+      "tags": [
+        "inteligência artificial",
+        "empreendedorismo",
+        "superinteligência"
+      ],
+      "imagem": "https://img.youtube.com/vi/sJ4VJWycX9M/hqdefault.jpg",
+      "alt": "Alexandr Wang: This is a Once-in-a-Civilization Opportunity",
+      "credito": "Imagem: thumbnail oficial / YouTube",
+      "artigo": "alexandr-wang-once-in-a-civilization-opportunity.md",
+      "transcricao": "Estudos/Ycombinator/YouTube/2026-07-29 - Alexandr Wang- \"This is a Once-in-a-Civilization Opportunity\".md",
+      "links": [
+        {
+          "texto": "Watch",
+          "url": "https://www.youtube.com/watch?v=sJ4VJWycX9M"
+        }
+      ]
+    },
+    {
+      "slug": "enterprise-agentic-ai-architecture",
+      "numero": "02",
+      "fonte": "Salesforce",
+      "toc": "Arquitetura de IA agêntica",
+      "titulo": "Por que a maioria dos pilotos de IA morre antes da produção (e o que a arquitetura agêntica corrige)",
+      "resumo": "A partir de um vídeo da Salesforce com Tiff in Tech, o artigo destrincha as cinco camadas de uma arquitetura de IA agêntica corporativa: engajamento, insight, agência, trabalho e contexto. A tese é que IA agêntica é um problema de arquitetura de confiança, não de capacidade do modelo, já que quatro das cinco camadas existem para tornar o agente confiável o bastante para agir sozinho.",
+      "porque": "Dá ao leitor uma grade de diagnóstico camada a camada para descobrir por que seu piloto de IA travou, geralmente por falta das camadas invisíveis de insight e contexto, e alerta para o trade-off de dependência de plataforma.",
+      "tags": [
+        "IA agêntica",
+        "arquitetura corporativa",
+        "governança de dados"
+      ],
+      "imagem": "https://img.youtube.com/vi/XjQfm2618t4/hqdefault.jpg",
+      "alt": "Enterprise Agentic AI Architecture Explained with Tiff in Tech",
+      "credito": "Imagem: thumbnail oficial / YouTube",
+      "artigo": "enterprise-agentic-ai-architecture.md",
+      "transcricao": "Estudos/Salesforce/YouTube/2026-07-29 - Enterprise Agentic AI Architecture Explained with Tiff in Tech.md",
+      "links": [
+        {
+          "texto": "Watch",
+          "url": "https://www.youtube.com/watch?v=XjQfm2618t4"
+        }
+      ]
+    },
+    {
+      "slug": "liberation-death-rebirth-robert-thurman",
+      "numero": "03",
+      "fonte": "New Thinking Allowed",
+      "toc": "Morte como porta",
+      "titulo": "A morte como uma porta: Robert Thurman e a ciência budista da continuidade",
+      "resumo": "Análise da conversa republicada em que Robert Thurman (falecido em 2026) relê o Livro Tibetano dos Mortos como manual de aprendizado nas transições, e não como mapa do além. A tese central é a ausência de morte: a consciência como continuum sem começo nem fim, ilustrada pela imagem da porta sem largura entre dois cômodos.",
+      "porque": "Ao retirar o medo da aniquilação, Thurman desloca todo o peso da questão para o presente: a pergunta budista e a pergunta ética viram a mesma, sem exigir crença em doutrina.",
+      "tags": [
+        "budismo tibetano",
+        "morte e consciência",
+        "Robert Thurman"
+      ],
+      "imagem": "https://img.youtube.com/vi/B84NiURS5s8/hqdefault.jpg",
+      "alt": "Liberation Between Death and Rebirth with Robert Thurman (1941-2026)",
+      "credito": "Imagem: thumbnail oficial / YouTube",
+      "artigo": "liberation-death-rebirth-robert-thurman.md",
+      "transcricao": "Estudos/New Thinking Allowed/YouTube/2026-07-29 - Liberation Between Death and Rebirth with Robert Thurman (1941-2026) (4K Reboot).md",
+      "links": [
+        {
+          "texto": "Watch",
+          "url": "https://www.youtube.com/watch?v=B84NiURS5s8"
+        }
+      ]
+    },
+    {
+      "slug": "psychedelic-pioneers-don-lattin",
+      "numero": "04",
+      "fonte": "New Thinking Allowed",
+      "toc": "Pioneiros dos psicodélicos",
+      "titulo": "Antes de Leary: os pioneiros esquecidos que ligaram psicodélicos, religião e ciência",
+      "resumo": "O jornalista Don Lattin recupera a geração anterior a Timothy Leary (Aldous Huxley, Gerald Heard e Bill Wilson, fundador dos Alcoólicos Anônimos) que nos anos 1950 explorava psicodélicos como ferramenta espiritual e objeto de ciência séria. A análise gira em torno do critério de Huston Smith (o que importa não são os estados alterados, mas os traços alterados).",
+      "porque": "Desloca o foco do consumo para o significado cultural e filosófico, mostrando que existiu um modo mais cauteloso e adulto de tratar essas experiências antes de virarem bandeira geracional, lição pertinente à atual renascença psicodélica.",
+      "tags": [
+        "psicodélicos",
+        "história das ideias",
+        "espiritualidade"
+      ],
+      "imagem": "https://img.youtube.com/vi/S7GWI3EueSA/hqdefault.jpg",
+      "alt": "Psychedelic Pioneers with Don Lattin",
+      "credito": "Imagem: thumbnail oficial / YouTube",
+      "artigo": "psychedelic-pioneers-don-lattin.md",
+      "transcricao": "Estudos/New Thinking Allowed/YouTube/2026-07-30 - Psychedelic Pioneers with Don Lattin (4K Reboot).md",
+      "links": [
+        {
+          "texto": "Watch",
+          "url": "https://www.youtube.com/watch?v=S7GWI3EueSA"
+        }
+      ]
+    },
+    {
+      "slug": "if-i-could-tell-every-leader-one-thing",
+      "numero": "05",
+      "fonte": "Simon Sinek",
+      "toc": "Gente ainda é gente",
+      "titulo": "A única coisa que Simon Sinek diria a todo líder: gente ainda é gente",
+      "resumo": "Perguntado o que diria ao próprio Simon de 2009, Sinek responde que não mudaria nada: sua mensagem sempre foi um lembrete de humanidade, não uma tese sobre tecnologia. Ele alerta que os tecnólogos se apaixonam pela ferramenta e esquecem as pessoas, e cita internet, fax e email como disrupções antes anunciadas como definitivas.",
+      "porque": "Na era da IA a tentação de deixar a ferramenta definir estratégia e cultura fica maior, então entender de gente (que não se terceiriza) volta a ser o pré-requisito da liderança, não uma habilidade acessória.",
+      "tags": [
+        "liderança",
+        "cultura organizacional",
+        "tecnologia e pessoas"
+      ],
+      "imagem": "https://img.youtube.com/vi/3okwSL856kY/hqdefault.jpg",
+      "alt": "If I Could Tell Every Leader One Thing | Simon Sinek",
+      "credito": "Imagem: thumbnail oficial / YouTube",
+      "artigo": "if-i-could-tell-every-leader-one-thing.md",
+      "transcricao": "Estudos/Simon Sinek/YouTube/2026-07-29 - If I Could Tell Every Leader One Thing  Simon Sinek.md",
+      "links": [
+        {
+          "texto": "Watch",
+          "url": "https://www.youtube.com/watch?v=3okwSL856kY"
+        }
+      ]
+    }
+  ],
+  "leitura": [],
+  "canais": [],
+  "pergunta": "Quando a inteligência das máquinas fica abundante, o que sobra como tarefa insubstituível dos humanos: decidir, cuidar, ou dar sentido?",
+  "podcast_audio": "2026-08-03.mp3"
+}
