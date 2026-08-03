@@ -94,6 +94,11 @@ Formato de cada item: **o que aconteceu**, **por que**, **como evitar/o que faze
 
 ## Fluxo de edição
 
+- **Subagente pode falhar silenciosamente: confira o ARQUIVO no disco, não o texto de retorno** (2026-08-03). Ao escrever os 5 artigos da Issue 004 em paralelo (um subagente por vídeo), um deles retornou em ~8s com 0 tool_uses e um texto corrompido, sem ter escrito o arquivo. Os outros 4 escreveram de verdade. Regra: depois de fan-out de subagentes que escrevem arquivos, SEMPRE validar no disco (`ls`, `wc -w`, primeira linha = `# Titulo`, grep de travessão) antes de montar o edicao.json. Não confiar no JSON/resumo que o agente devolve. O que falhou foi refeito à mão (transcrição pequena, mais rápido que respawnar).
+
+- **Anti-repetição e filtro temático: por ID de vídeo, e data pelo NOME do arquivo** (2026-08-03). Para a "edição extra" (5 vídeos novos de IA/Filosofia/Liderança, sem repetir os já usados): a chave confiável de repetição é o `video_id` (11 chars), extraído do frontmatter ou do link, comparado com os IDs já em `content/*/edicao.json` (campo `imagem`, `/vi/<id>/`). CUIDADO: `find -mtime -7` traz milhares de arquivos (mtime é toque no disco, não data do vídeo) e há CÓPIAS do mesmo vídeo com datas diferentes no nome (original 2021/2023 e republicação 2026). A data de "últimos 7 dias" tem que sair do NOME do arquivo (`AAAA-MM-DD - Titulo.md`), não do mtime. O intake não faz nada disso: é processo manual (curadoria + aprovação do Hygor antes de escrever).
+
+
 - **Edição retroativa (fora da mais recente) não é suportada pelo intake**
   (2026-08-02). `vault_intake.py` só pega as 5 MAIS recentes. Montar uma edição
   de conteúdo antigo exige processo manual. CUIDADO: a data da edição vira o nome
