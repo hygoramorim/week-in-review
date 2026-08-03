@@ -49,6 +49,17 @@ Formato de cada item: **o que aconteceu**, **por que**, **como evitar/o que faze
   Sintoma alternativo do mesmo limite: o artefato "disappeared from list /
   treating as removed" durante o `--wait` (não é erro de rede, é a cota).
 
+- **Colisão de nome ao rebaixar o mp3 por cima do antigo** (2026-08-02). Ao
+  regerar o áudio de uma edição cujo mp3 antigo ainda existia em `podcast/audio/`,
+  o download do NotebookLM salvou como `AAAA-MM-DD (2).mp3` em vez de sobrescrever.
+  O `edicao.json` seguia apontando pro nome sem `(2)`, ou seja, pro áudio VELHO
+  (bugado). Aconteceu nas duas edições (002 e 003). Sintoma: publica "com sucesso"
+  mas o player toca o áudio antigo; um `(2).mp3` sobra na pasta. Correção manual:
+  `mv -f "podcast/audio/AAAA-MM-DD (2).mp3" "podcast/audio/AAAA-MM-DD.mp3"`,
+  rebuild, republicar. A fazer: o `notebooklm_bridge.py` devia apagar o mp3
+  antigo da mesma data antes de baixar (ou baixar pra nome temporário e mover por
+  cima), pra nunca gerar o `(2)`.
+
 - **A sessão do NotebookLM expira no meio de um batch** (2026-08-02). Ao regerar
   os dois áudios em sequência, o primeiro (003) passou e o segundo (002) falhou
   com "Authentication expired or invalid. Redirected to accounts.google.com". Não
