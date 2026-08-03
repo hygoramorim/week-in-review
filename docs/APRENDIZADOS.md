@@ -21,6 +21,27 @@ Formato de cada item: **o que aconteceu**, **por que**, **como evitar/o que faze
 
 ## NotebookLM (o que mais deu trabalho)
 
+- **Auth durável: master token, não cookies de navegador** (2026-08-03). O modo
+  `--browser-cookies` (cookies do Chrome) caduca em POUCAS HORAS, então o login
+  vivia expirando e o pipeline de sexta corria risco de sair sem podcast. A
+  solução certa (o que o Hygor lembrava de outra integração): **master token**,
+  o modo de auth do `notebooklm-py` feito pra servidor/CI. Uma credencial durável
+  (vale meses) que re-minta os cookies sozinha, sem navegador. Requer CLI 0.8.0
+  com o extra `[headless]`. Setup (uma vez, abre o browser):
+  `notebooklm login --master-token --account <conta>`. Re-mint manual sem browser:
+  `notebooklm login --master-token-refresh`. Vive em
+  `~/.notebooklm/profiles/default/master_token.json` (0600). CUIDADO: é credencial
+  de conta INTEIRA ("infostealer-grade"), a doc recomenda conta dedicada; usamos
+  a Oz por escolha consciente (praticidade + cota). Nunca committar/logar o token.
+
+- **Upgrade 0.7.x -> 0.8.0 é seguro pra quem usa o CLI por subprocess** (2026-08-03).
+  O guia `upgrading-to-0.8.0.md` lista muitas quebras, mas TODAS são na API Python
+  (`.get()` que agora levanta, `.share()` removido etc.). Nosso `notebooklm_bridge.py`
+  chama o CLI por subprocess (`source add --type file --json`, `generate audio
+  --language pt_BR --wait -s`, `delete -n -y`), e esses flags não mudaram. Os 19
+  testes passaram após o upgrade. Regra: ao subir versão do CLI, rodar
+  `python3 -m unittest discover -s tests` antes de confiar.
+
 - **Manter o CLI atualizado** (2026-08-02). O `notebooklm-py` 0.3.4 não reconhecia
   o NotebookLM renomeado pelo Google (a URL perdeu o "lm", virou
   `notebook.google.com`). Sintoma: login salva cookies mas `list` dá

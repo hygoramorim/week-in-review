@@ -106,13 +106,20 @@ O mp3 fica hospedado no próprio repo (`podcast/audio/AAAA-MM-DD.mp3`,
 committed), com retenção de 3 episódios: a cada `build.py`, os mais antigos
 são apagados.
 
-**Auth do NotebookLM:** usar a conta Google **pessoal**, não a Workspace da Oz
-(o SSO da Oz não completa no navegador de perfil isolado do CLI). Ao rodar
-`notebooklm login`, depois de logar navegue manualmente para
-`notebooklm.google.com` (com "lm") e espere carregar os notebooks antes de
-apertar ENTER no terminal. Se o aviso mostrar a URL sem "lm", responda `N` e
-repita. Confirme com `notebooklm list`. A sessão expira periodicamente; quando
-o pipeline de sexta falhar no passo do podcast, é sinal de refazer o login.
+**Auth do NotebookLM (master token, não precisa relogar):** desde 2026-08-03 a
+auth usa **master token** na conta Oz `hygor@ozprodutora.com.br`, com o CLI
+`notebooklm-py` **0.8.0** (extra `[headless]`). É uma credencial durável (vale
+meses) que re-minta a sessão sozinha, sem navegador, quando os cookies expiram.
+O pipeline de sexta não precisa mais de relogin manual.
+
+O token vive em `~/.notebooklm/profiles/default/master_token.json` (`0600`,
+**nunca committar nem logar**, é credencial de conta inteira). Forçar re-mint na
+mão (sem browser): `notebooklm login --master-token-refresh`. Confirmar com
+`notebooklm list`. Se um dia o token parar (raro), refazer o bootstrap:
+`cd ~/projetos/notebooklm-skill && .venv/bin/python -m notebooklm login
+--master-token --account hygor@ozprodutora.com.br` (abre o navegador uma vez).
+O `tools/checar_auth.py` (cron de quinta 10h) segue como rede de segurança e
+avisa no Telegram se a sessão cair mesmo assim.
 
 ## Onde as coisas rodam
 
