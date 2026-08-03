@@ -46,6 +46,19 @@ Formato de cada item: **o que aconteceu**, **por que**, **como evitar/o que faze
 - **Cota diária de geração de áudio** (2026-08-02). O Google limita gerações de
   Audio Overview por dia ("Audio generation rate limited... try again in 1-24h").
   Gerar várias edições no mesmo dia estoura. Não é bug: espaçar, ou usar `--retry`.
+  Sintoma alternativo do mesmo limite: o artefato "disappeared from list /
+  treating as removed" durante o `--wait` (não é erro de rede, é a cota).
+
+- **A sessão do NotebookLM expira no meio de um batch** (2026-08-02). Ao regerar
+  os dois áudios em sequência, o primeiro (003) passou e o segundo (002) falhou
+  com "Authentication expired or invalid. Redirected to accounts.google.com". Não
+  é bug de conteúdo nem cota: a sessão (cookies do Chrome) caducou entre uma
+  geração e outra. Login via `--browser-cookies` dura pouco. Como destravar:
+  `cd ~/projetos/notebooklm-skill && .venv/bin/python -m notebooklm login
+  --browser-cookies chrome --account hygor@ozprodutora.com.br`, conferir com
+  `notebooklm list`. Regra prática: antes de um batch, rodar `notebooklm list`
+  para validar a sessão; e não confiar que ela sobrevive a várias gerações
+  seguidas com esperas longas.
 
 ## Fluxo de edição
 
