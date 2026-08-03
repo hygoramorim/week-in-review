@@ -44,5 +44,34 @@ class TestPodarAudio(unittest.TestCase):
             (dir_audio / "2026-07-31.mp3").write_bytes(b"x")
             self.assertEqual(build.podar_audio(dir_audio, manter=3), [])
 
+class TestCssEditorialNaoSobrepoe(unittest.TestCase):
+    """Trava a regressão do título gigante do editorial sobrepondo o texto.
+
+    Causa raiz do bug (2026-08-03): uma regra global `h1{ font-size:clamp(...) }`
+    feita pro hero vazava pro `<h1>` que o markdown do editorial gera. O conserto
+    foi escopar pra `.hero h1` e dar ao editorial um tamanho contido. Estes testes
+    garantem que ninguém reintroduza a regra global."""
+
+    def _css(self):
+        import re
+        css = (Path(__file__).resolve().parent.parent / "assets" / "revista.css").read_text(encoding="utf-8")
+        return css, re
+
+    def test_nao_ha_regra_global_h1_com_font_size(self):
+        css, re = self._css()
+        # procura um seletor que seja exatamente `h1` (não `.hero h1`, `.x h1`)
+        # abrindo um bloco. Ex.: "h1{" ou "h1 {" no começo de regra.
+        globais = re.findall(r'(?:^|[},])\s*h1\s*\{', css)
+        self.assertEqual(globais, [],
+            "Regra global `h1{...}` reintroduzida: escope pra `.hero h1` "
+            "senão o tamanho display vaza pro título do editorial e o sobrepõe.")
+
+    def test_hero_h1_existe_e_editorial_h1_contido(self):
+        css, re = self._css()
+        self.assertRegex(css, r'\.hero\s+h1\s*\{', "faltou a regra `.hero h1`")
+        self.assertRegex(css, r'\.editorial\s+article\s+h1\s*\{',
+            "faltou a regra que contém o h1 do editorial")
+
+
 if __name__ == "__main__":
     unittest.main()

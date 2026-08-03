@@ -110,6 +110,22 @@ Formato de cada item: **o que aconteceu**, **por que**, **como evitar/o que faze
   remontar (corrigido: agora limpa). O build só lê os artigos referenciados no
   `edicao.json`, mas órfãos poluem o repo.
 
+## Design / CSS
+
+- **Nunca estilizar tags cruas (`h1`, `h2`, `p`) globalmente: escopar por classe**
+  (2026-08-03). BUG: o título da carta editorial apareceu GIGANTE, sobrepondo o
+  corpo do texto (ilegível), no desktop e no mobile. Causa raiz: havia uma regra
+  global `h1{ font-size:clamp(66px,14vw,156px) }` feita só pro título do hero
+  ("WEEK IN REVIEW"). Mas o editorial vem de markdown cuja 1a linha é `# Titulo`,
+  que vira um `<h1>` e HERDOU o tamanho do hero. Correção: escopar a regra pra
+  `.hero h1` e dar ao editorial `.editorial article h1` um tamanho contido
+  (clamp 28-42px). Regra pra não repetir: **todo conteúdo vindo de markdown
+  (editorial, artigos) pode emitir `h1..h3`; qualquer estilo display exagerado
+  DEVE ser escopado à sua classe (`.hero h1`, `.artigo-head h1`), nunca à tag
+  solta.** Ao mexer no CSS, checar visualmente o editorial em desktop E mobile
+  (a newsletter é mobile-first; o editorial vira 2 colunas no desktop, onde o
+  overflow do título é mais violento). Servir local e olhar antes de publicar.
+
 ## Segurança e operação
 
 - **Cron nunca com `bypassPermissions`** (2026-08-02). Security review reprovou.

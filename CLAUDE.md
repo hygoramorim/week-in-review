@@ -33,6 +33,12 @@ tools/sexta.sh               wrapper do cron: roda tools/pipeline.md toda sexta
 Nunca edite `index.html`, `arquivo.html`, `editions/` ou `podcast/` diretamente:
 o próximo `./publicar.sh` apaga a alteração.
 
+**CSS (mobile-first):** o editorial e os artigos vêm de markdown, então emitem
+`h1..h3` crus. Nunca estilize tags soltas (`h1{...}`) com tamanhos display: escope
+por classe (`.hero h1`, `.artigo-head h1`), senão o estilo vaza pro título do
+editorial e o sobrepõe (já aconteceu, ver [docs/APRENDIZADOS.md](docs/APRENDIZADOS.md)).
+Ao mexer no CSS, cheque o editorial em desktop E mobile antes de publicar.
+
 ## Comandos
 
 ```bash
