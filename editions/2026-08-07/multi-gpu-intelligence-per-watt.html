@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inteligência por watt: o gargalo da IA virou física, não modelo — Week In Review</title>
+  <meta name="description" content="Num Paper Club da Y Combinator, pesquisadores de Stanford, Cursor, PyTorch e NVIDIA mostraram que a fronteira competitiva da IA saiu do treino para a inferência. Um estudo mediu que até 88,7% das consultas de hoje poderiam rodar em hardware local de consumo, com ganho de 18x em inteligência por joule em 16 meses. A inferência é heterogênea: cada fase (prefill, decode) estressa o hardware de forma oposta e pede chips diferentes.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/revista.css">
+</head>
+<body>
+<main class="page">
+  <div class="top">
+    <div><a href="index.html">← Voltar para a edição</a></div>
+    <div class="mid">Issue 005</div>
+    <div class="right"><a href="../../arquivo.html">Arquivo</a> · 7 de agosto de 2026</div>
+  </div>
+
+  <header class="artigo-head">
+    <div class="kicker">04 / Y Combinator</div>
+    <h1>Inteligência por watt: o gargalo da IA virou física, não modelo</h1>
+    <div class="artigo-meta"><span class="tag">inteligência artificial</span><span class="tag">eficiência energética</span><span class="tag">infraestrutura</span>
+      <span class="tempo">5 min de leitura</span>
+    </div>
+  </header>
+
+  <div class="artigo-corpo">
+<p>Houve um tempo em que a pergunta que movia a inteligência artificial era simples: dá pra fazer o modelo ficar mais esperto. Num encontro recente do Paper Club da Y Combinator, versão especial em Mountain View apelidada de "clube do kernel e do chip", ficou claro que essa pergunta mudou de lugar. Pesquisadores de Stanford, da Cursor, do PyTorch e da NVIDIA se revezaram para falar de uma coisa só, ainda que por ângulos diferentes: quanto de inteligência você consegue entregar por unidade de energia gasta. O modelo esperto já existe. O problema agora é rodar esse modelo bilhões de vezes por dia sem quebrar a conta de luz do planeta.</p>
+<p>A tese que atravessa a conversa toda, e que vale destacar, é esta: a fronteira competitiva da IA se deslocou do treino para a inferência, e a inferência é um problema de engenharia física, não de arquitetura de rede neural. Quem entender isso primeiro ganha uma vantagem de custo difícil de copiar.</p>
+<h2>O que significa "inteligência por watt"</h2>
+<p>Jon Saad-Falcon, de Stanford, apresentou o conceito de forma direta. Pense numa fração. Em cima, no numerador, está a "inteligência": a capacidade do modelo de responder uma pergunta, escrever código, raciocinar. Embaixo, no denominador, está a energia: os watts que o hardware consome de fato para entregar aquela resposta. Inteligência por watt é essa divisão. Não é quão bom o modelo é no papel, é quanta capacidade útil sai de cada unidade de energia que entra.</p>
+<p>Por que isso virou a métrica que importa. Saad-Falcon usa uma comparação histórica boa: estamos na "era do mainframe" da IA. Nos anos 50 e 60, os computadores da IBM ocupavam andares inteiros, e só grandes empresas tinham acesso. Hoje os data centers de GPU e TPU são exatamente isso, galpões gigantes que fazem treino e inferência para todo mundo ao mesmo tempo. E a conta está ficando absurda. Ele cita que os Estados Unidos gastam hoje entre 2% e 3% do PIB nessa expansão, algo que exige 250 gigawatts de novos data centers, com nova geração de energia, nova terra, nova água. É comparável, nas palavras dele, à construção das ferrovias que cortaram o continente.</p>
+<h2>O desperdício que ninguém vê</h2>
+<p>Aqui está o ponto que deveria incomodar. A maioria dos pedidos que fazemos a um modelo de IA não precisa da inteligência de ponta. Como diz um dos apresentadores logo na abertura: se eu pergunto quanto é um mais um, por que preciso acionar o modelo pesado e gastar a mesma quantidade absurda de operações que gastaria numa questão difícil? Boa parte do tráfego real é tarefa simples: organizar pastas, escrever um teste unitário, varrer uma planilha. Mandar tudo isso para o modelo gigante na nuvem é como pegar um caminhão para buscar pão na padaria.</p>
+<p>O estudo de Saad-Falcon mediu isso com rigor. Foram mais de 20 modelos locais de código aberto (Gemma, GPT-OSS, Qwen, IBM Granite, de 1 a 200 bilhões de parâmetros) rodando em aceleradores que cabem numa mesa: Mac com chip M4 Max, GPUs de consumo da NVIDIA e da AMD. O resultado: até 88,7% das consultas de hoje poderiam ser atendidas localmente, sem passar pela nuvem, com precisão suficiente. E a curva está subindo rápido. Em dois anos, a inteligência entregue por watt triplicou. Olhando por energia total do trabalho de ponta a ponta (inteligência por joule), o salto foi de 18 vezes em cerca de 16 meses, puxado sobretudo por hardware melhor e mais memória nos chips de consumo.</p>
+<p>A conclusão prática muda a economia inteira. Um roteador perfeito, que mandasse cada pergunta para o hardware certo, economizaria de 80% a 90% de energia, computação e dinheiro. Mesmo um roteador imperfeito salvaria de 50% a 70%. Não é uma otimização de margem, é uma reconfiguração de onde a IA precisa morar. Como projeto seguinte, o grupo lançou o Open Jarvis, para rodar o stack pessoal de IA inteiro no seu laptop, sem pagar a nuvem.</p>
+<h2>Por que inferência é tão difícil de otimizar</h2>
+<p>Se a economia é tão clara, por que não fizeram antes. Porque inferência não é uma coisa só. Misha Smelyanskiy, que rodou a infraestrutura de IA da NVIDIA por duas décadas, mostrou que um único pedido passa por fases que estressam o hardware de maneiras opostas. Ele separa duas delas: o prefill (quando o modelo lê e processa o seu prompt inteiro de uma vez) e o decode (quando ele gera a resposta, um token por vez).</p>
+<p>O prefill é "compute bound": há muita conta para fazer, e o chip fica ocupado. O decode é o inverso, "memory bandwidth bound": para cada palavrinha gerada, o chip precisa buscar os pesos do modelo na memória de novo, e passa mais tempo esperando dados chegarem do que calculando. São perfis tão diferentes que otimizar um piora o outro. O gargalo, nas palavras dele, nunca fica parado.</p>
+<p>A resposta que ele defende é inferência heterogênea: em vez de usar o mesmo tipo de chip para tudo, usar hardware diferente para cada fase. GPU para o prefill, onde ela brilha; e, para o decode, máquinas de memória interna ao chip (SRAM), que oferecem muito mais banda e latência menor justamente para essa etapa faminta por memória. A conta que decide se vale a pena ele resume numa métrica: tokens por segundo por watt. Separar as fases só compensa quando a energia extra do hardware novo é paga pela velocidade que ele traz.</p>
+<h2>O terceiro andar: espremer o silício</h2>
+<p>E há ainda o trabalho de baixo nível. Stuart Sul, de Stanford e da Cursor, apresentou o Parallel Kittens, um conjunto de abstrações para escrever kernels (os programas que fazem os chips conversarem) que rodam em muitas GPUs ao mesmo tempo. A obsessão ali é manter cada unidade de processamento sempre ocupada, sobrepondo a comunicação entre chips com o cálculo, de modo que nenhum núcleo fique de braços cruzados esperando dados de um vizinho. Com 50 a 100 linhas de código, o Parallel Kittens iguala ou supera kernels feitos à mão com milhares de linhas, e já é usado pela Cursor para treinar em dezenas de milhares de GPUs.</p>
+<h2>O que fica</h2>
+<p>Junte as três camadas: qual modelo rodar, em qual hardware, com qual código no metal. Todas apontam para a mesma direção. A IA parou de ser só uma corrida de quem tem o modelo mais inteligente e virou uma corrida de eficiência energética, um problema de física e de engenharia de sistemas. Para quem constrói produto, a mensagem é concreta: nem toda pergunta merece o modelo de bilhões de dólares, e mandar a tarefa certa para o lugar certo pode cortar mais da metade do custo. A inteligência ficou barata de criar. Cara ficou a energia de usá-la.</p>
+  </div>
+
+  <section class="artigo-fontes">
+    <h2>Fontes</h2>
+    <p>Roteando cada pergunta para o hardware certo dá pra cortar de 50% a 90% de energia, computação e custo, o que reconfigura a economia de rodar IA em escala.</p>
+    <div class="links">
+      <a class="btn" href="https://www.youtube.com/watch?v=n8dz2FX0_uY" target="_blank" rel="noopener">Watch</a>
+    </div>
+  </section>
+
+  <nav class="artigo-nav">
+    <a class="" href="ia-prestes-a-escapar-do-controle.html"><small>Anterior</small><b>Quando a metafísica encontra o alarme certo: a IA fora de controle segundo Jan Val Ellam</b></a>
+    <a class="dir" href="elon-musk-economist-interview.html"><small>Próximo</small><b>O otimista fatalista: o que Elon Musk revela quando fala do futuro</b></a>
+  </nav>
+</main>
+</body>
+</html>

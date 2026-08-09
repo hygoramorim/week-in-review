@@ -1,0 +1,218 @@
+/* Week In Review — folha de estilo única da revista.
+   Usada pela edição, pelos artigos e pelo arquivo. */
+
+:root{
+  --paper:#f4eedf;--cream:#fff9ec;--ink:#161514;--muted:#625b4f;
+  --red:#c6462d;--navy:#112f45;--card:#fbf4e4;
+  --serif:'Libre Baskerville',Georgia,serif;
+  --sans:'IBM Plex Sans',Arial,sans-serif;
+  --cond:'Oswald',Impact,sans-serif;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:
+    linear-gradient(90deg,rgba(22,21,20,.045) 1px,transparent 1px) 0 0/64px 64px,
+    radial-gradient(circle at 15% 2%,rgba(198,70,45,.16),transparent 36%),
+    radial-gradient(circle at 90% 6%,rgba(17,47,69,.13),transparent 34%),
+    var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  line-height:1.6;
+}
+a{color:inherit;text-underline-offset:4px}
+img{display:block;width:100%;background:#ddd}
+.page{max-width:1180px;margin:auto;padding:24px 18px 64px}
+
+/* ---------- barra superior ---------- */
+.top{
+  display:grid;grid-template-columns:1fr;gap:14px;
+  border-top:6px solid var(--ink);border-bottom:2px solid var(--ink);
+  padding:10px 0;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)
+}
+.top .mid{color:var(--red);font-weight:700;text-align:left}
+.top .right{text-align:left}
+
+/* ---------- capa da edição ---------- */
+.hero{
+  display:grid;grid-template-columns:1fr;gap:28px;
+  padding:26px 0 32px;border-bottom:3px solid var(--ink)
+}
+.kicker{font-family:var(--cond);color:var(--red);letter-spacing:.13em;text-transform:uppercase}
+.hero h1{
+  font-family:var(--cond);font-size:clamp(66px,14vw,156px);
+  line-height:.82;margin:10px 0 0;text-transform:uppercase;letter-spacing:-.06em
+}
+/* h1 vindo de markdown (ex.: 1a linha do editorial) NAO herda o tamanho do hero.
+   O tamanho display gigante e exclusivo do .hero; qualquer outro h1 fica contido. */
+.editorial article h1{
+  font-family:var(--cond);font-size:clamp(28px,5vw,42px);
+  line-height:1.02;margin:0 0 14px;text-transform:uppercase;letter-spacing:-.02em;
+  color:var(--ink);break-after:avoid
+}
+.by{font-family:var(--serif);font-size:clamp(20px,3vw,29px);color:var(--navy);margin-top:16px}
+.pills{display:flex;gap:9px;flex-wrap:wrap;margin-top:22px}
+.pill{border:1px solid var(--ink);border-radius:999px;padding:7px 10px;font-size:12px;text-transform:uppercase;letter-spacing:.08em;background:rgba(255,249,236,.7)}
+.cover{
+  background:var(--navy);color:var(--cream);padding:20px;position:relative;overflow:hidden;
+  box-shadow:0 18px 45px rgba(22,21,20,.13)
+}
+.cover:after{
+  content:"";position:absolute;top:18px;right:18px;width:70px;height:70px;
+  background:var(--red);clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%)
+}
+.cover img{height:220px;object-fit:cover;border:1px solid rgba(255,255,255,.25);filter:saturate(.88) contrast(1.05)}
+.cover h2{font-family:var(--serif);font-size:clamp(32px,4vw,48px);line-height:1.06;margin:16px 0 10px}
+.cover p{color:#eadfcb;margin:0}
+
+/* ---------- sumário ---------- */
+.toc{display:grid;grid-template-columns:1fr 1fr;border-left:1px solid var(--ink);border-bottom:2px solid var(--ink);margin-top:18px}
+.toc a{padding:14px 12px;min-height:86px;border-right:1px solid var(--ink);text-decoration:none;background:rgba(251,244,228,.65)}
+.toc b{font-family:var(--cond);font-size:30px;color:var(--red);display:block;line-height:1}
+.toc span{font-size:12px;text-transform:uppercase;letter-spacing:.07em}
+
+/* ---------- seções ---------- */
+.section-title{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;margin:44px 0 18px}
+.section-title h2{font-family:var(--cond);font-size:42px;text-transform:uppercase;margin:0;letter-spacing:-.02em}
+.section-title:after{content:"";height:2px;background:var(--ink)}
+.editorial{display:grid;grid-template-columns:1fr;gap:32px;border-bottom:2px solid var(--ink);padding-bottom:34px}
+.dek{border-top:9px solid var(--red);padding-top:16px;font-family:var(--serif);font-size:20px;color:var(--navy)}
+.editorial article{columns:1;column-gap:36px;font-size:18px}
+.editorial p{margin-top:0}
+.editorial p:first-child:first-letter{float:left;font-family:var(--cond);font-size:92px;line-height:.72;padding:9px 9px 0 0;color:var(--red)}
+.signals{display:grid;grid-template-columns:1fr;gap:14px}
+.signal{border:1px solid var(--ink);background:var(--card);padding:18px;min-height:205px}
+.signal .num{font-family:var(--cond);font-size:48px;color:var(--red);line-height:1}
+.signal h3{font-family:var(--serif);font-size:21px;margin:6px 0 8px}
+.signal p{color:var(--muted);margin:0}
+
+/* ---------- cards dos conteúdos ---------- */
+.features{display:grid;gap:22px}
+.feature{
+  display:grid;grid-template-columns:1fr;background:var(--card);
+  border:1px solid var(--ink);box-shadow:0 18px 45px rgba(22,21,20,.12)
+}
+.feature:nth-child(even){grid-template-columns:1fr}
+.feature:nth-child(even) .media{order:0}
+.media{position:relative;min-height:260px;overflow:hidden}
+.media img{height:100%;object-fit:cover;filter:saturate(.8) contrast(1.06)}
+.credit{position:absolute;left:10px;bottom:10px;background:rgba(22,21,20,.78);color:white;padding:5px 8px;font-size:11px}
+.copy{padding:24px 26px}
+.number{font-family:var(--cond);font-size:13px;letter-spacing:.14em;color:var(--red);text-transform:uppercase}
+.feature h3{font-family:var(--serif);font-size:clamp(28px,3vw,42px);line-height:1.08;margin:6px 0 12px}
+.meta{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+.tag{font-size:11px;text-transform:uppercase;letter-spacing:.08em;border:1px solid var(--muted);padding:5px 8px;color:var(--muted)}
+.why{border-left:5px solid var(--red);padding-left:14px;font-weight:600;color:var(--navy)}
+.links{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;align-items:center}
+.btn{font-size:12px;text-transform:uppercase;letter-spacing:.09em;text-decoration:none;border:1px solid var(--ink);padding:9px 12px;background:var(--cream);font-weight:700}
+.btn.primary{background:var(--ink);color:var(--paper)}
+.btn.artigo{background:var(--red);color:var(--cream);border-color:var(--red)}
+.tempo{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+
+/* ---------- caixas finais ---------- */
+.matrix{display:grid;grid-template-columns:1fr;gap:22px}
+.box{border:1px solid var(--ink);background:var(--cream);padding:22px}
+.box h3{font-family:var(--cond);font-size:34px;text-transform:uppercase;margin:0 0 10px}
+.box ul{columns:2 230px;padding-left:18px}
+.channels{display:grid;grid-template-columns:1fr;gap:12px}
+.channel{background:var(--card);border:1px solid rgba(22,21,20,.25);padding:14px}
+.channel b{font-family:var(--serif)}
+.channel p{margin:6px 0 0;color:var(--muted);font-size:14px}
+.question{margin:40px 0;background:var(--red);color:var(--cream);padding:34px;display:grid;grid-template-columns:1fr;gap:24px;align-items:center}
+.question b{font-family:var(--cond);font-size:44px;text-transform:uppercase;line-height:1}
+.question p{font-family:var(--serif);font-size:clamp(24px,4vw,43px);line-height:1.18;margin:0}
+footer{border-top:4px solid var(--ink);margin-top:48px;padding-top:18px;display:grid;grid-template-columns:1fr;gap:20px;color:var(--muted);font-size:13px}
+.brand{font-family:var(--cond);color:var(--red);letter-spacing:.04em}
+code{font-size:12px;background:rgba(255,255,255,.4);padding:2px 4px}
+
+/* ---------- página de artigo ---------- */
+.artigo-head{padding:30px 0 26px;border-bottom:3px solid var(--ink);max-width:74ch}
+.artigo-head h1{
+  font-family:var(--serif);text-transform:none;letter-spacing:-.01em;
+  font-size:clamp(34px,5.4vw,62px);line-height:1.06;margin:12px 0 0
+}
+.artigo-meta{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:20px}
+.artigo-corpo{
+  max-width:68ch;margin:38px 0 0;font-family:var(--serif);
+  font-size:18px;line-height:1.78
+}
+.artigo-corpo p{margin:0 0 1.25em}
+.artigo-corpo h2{
+  font-family:var(--cond);text-transform:uppercase;letter-spacing:-.01em;
+  font-size:clamp(26px,3.2vw,36px);line-height:1.1;margin:2em 0 .6em;
+  padding-top:.5em;border-top:2px solid var(--ink)
+}
+.artigo-corpo h3{font-family:var(--cond);font-size:22px;text-transform:uppercase;letter-spacing:.02em;margin:1.8em 0 .5em}
+.artigo-corpo blockquote{
+  margin:1.8em 0;padding:2px 0 2px 20px;border-left:5px solid var(--red);
+  color:var(--navy);font-size:22px;line-height:1.5
+}
+.artigo-corpo blockquote p:last-child{margin-bottom:0}
+.artigo-corpo ul,.artigo-corpo ol{padding-left:22px;margin:0 0 1.25em}
+.artigo-corpo li{margin-bottom:.5em}
+.artigo-corpo hr{border:0;border-top:2px solid var(--ink);margin:2.4em 0}
+.artigo-corpo a{text-decoration-color:var(--red)}
+.artigo-fontes{max-width:68ch;margin-top:44px;border-top:2px solid var(--ink);padding-top:20px}
+.artigo-fontes h2{font-family:var(--cond);font-size:26px;text-transform:uppercase;margin:0 0 12px}
+.artigo-nav{display:grid;grid-template-columns:1fr;gap:14px;margin-top:40px}
+.artigo-nav a{
+  border:1px solid var(--ink);background:var(--card);padding:16px 18px;text-decoration:none;
+  display:block;min-height:92px
+}
+.artigo-nav .dir{text-align:left}
+.artigo-nav small{font-family:var(--cond);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--red)}
+.artigo-nav b{font-family:var(--serif);font-weight:400;display:block;margin-top:6px;line-height:1.25}
+.rascunho{
+  border:1px dashed var(--red);background:rgba(198,70,45,.06);color:var(--navy);
+  padding:20px 22px;max-width:68ch;margin-top:32px;font-family:var(--sans);font-size:16px
+}
+
+/* ---------- página de arquivo ---------- */
+.arquivo-head{padding:26px 0 30px;border-bottom:3px solid var(--ink)}
+.arquivo-head h1{font-size:clamp(56px,11vw,116px);letter-spacing:-.05em}
+.lede{font-family:var(--serif);font-size:clamp(18px,2.4vw,24px);color:var(--navy);margin-top:16px;max-width:60ch}
+.lista{display:grid;gap:18px;margin-top:34px}
+.edicao{
+  display:grid;grid-template-columns:1fr;gap:24px;align-items:start;
+  border:1px solid var(--ink);background:var(--card);padding:22px 24px;
+  text-decoration:none;box-shadow:0 14px 34px rgba(22,21,20,.10)
+}
+.edicao .num{font-family:var(--cond);font-size:52px;color:var(--red);line-height:.9}
+.edicao .quando{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-top:4px}
+.edicao h2{font-family:var(--serif);font-size:clamp(21px,2.4vw,28px);line-height:1.14;margin:0 0 8px}
+.edicao p{margin:0;color:var(--muted)}
+.abrir{font-family:var(--cond);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--red);white-space:nowrap;padding-top:0}
+.atual{border-left:9px solid var(--red)}
+.selo{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--red);font-weight:700}
+.vazio{border:1px dashed var(--ink);padding:34px;text-align:center;color:var(--muted);margin-top:34px}
+
+/* ---------- podcast player ---------- */
+.podcast{margin:2rem 0}
+.podcast audio{width:100%;margin-top:.75rem}
+.podcast-nota{font-size:.85rem;opacity:.7;margin-top:.5rem}
+
+/* ---------- desktop (grades multi-coluna) ---------- */
+@media (min-width:861px){
+  .top{grid-template-columns:1fr auto 1fr}
+  .top .mid{text-align:center}
+  .top .right{text-align:right}
+  .hero{grid-template-columns:1.05fr .95fr}
+  .cover img{height:260px}
+  .toc{grid-template-columns:repeat(5,1fr)}
+  .editorial{grid-template-columns:280px 1fr}
+  .editorial article{columns:2 330px}
+  .signals{grid-template-columns:repeat(3,1fr)}
+  .feature{grid-template-columns:42% 1fr}
+  .feature:nth-child(even){grid-template-columns:1fr 42%}
+  .feature:nth-child(even) .media{order:2}
+  .media{min-height:330px}
+  .matrix{grid-template-columns:1.25fr .75fr}
+  .channels{grid-template-columns:repeat(2,1fr)}
+  .question{grid-template-columns:220px 1fr}
+  footer{grid-template-columns:1fr 1fr}
+  .edicao{grid-template-columns:150px 1fr auto}
+  .abrir{padding-top:8px}
+  .artigo-corpo{font-size:19px}
+  .artigo-nav{grid-template-columns:1fr 1fr}
+  .artigo-nav .dir{text-align:right}
+}

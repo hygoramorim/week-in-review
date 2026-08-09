@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Por que a maioria dos pilotos de IA morre antes da produção (e o que a arquitetura agêntica corrige) — Week In Review</title>
+  <meta name="description" content="A partir de um vídeo da Salesforce com Tiff in Tech, o artigo destrincha as cinco camadas de uma arquitetura de IA agêntica corporativa: engajamento, insight, agência, trabalho e contexto. A tese é que IA agêntica é um problema de arquitetura de confiança, não de capacidade do modelo, já que quatro das cinco camadas existem para tornar o agente confiável o bastante para agir sozinho.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/revista.css">
+</head>
+<body>
+<main class="page">
+  <div class="top">
+    <div><a href="index.html">← Voltar para a edição</a></div>
+    <div class="mid">Issue 004</div>
+    <div class="right"><a href="../../arquivo.html">Arquivo</a> · 3 de agosto de 2026</div>
+  </div>
+
+  <header class="artigo-head">
+    <div class="kicker">02 / Salesforce</div>
+    <h1>Por que a maioria dos pilotos de IA morre antes da produção (e o que a arquitetura agêntica corrige)</h1>
+    <div class="artigo-meta"><span class="tag">IA agêntica</span><span class="tag">arquitetura corporativa</span><span class="tag">governança de dados</span>
+      <span class="tempo">6 min de leitura</span>
+    </div>
+  </header>
+
+  <div class="artigo-corpo">
+<p>Existe uma pergunta desconfortável rondando quase toda empresa que passou o último ano brincando com IA: quantos daqueles projetos brilhantes de fato chegaram à produção? A resposta honesta, na maioria dos casos, é constrangedora. Os protótipos ficaram parados como conceitos, nunca entraram no mundo real. E o mais revelador é que, por mais diferentes que os casos de uso pareçam na superfície, todos esbarram exatamente no mesmo muro.</p>
+<p>Esse diagnóstico abre um vídeo da Salesforce com Tiff (do canal Tiff in Tech) sobre arquitetura de IA agêntica corporativa, e é o ponto de partida certo para uma discussão que interessa a qualquer um que dirige um negócio hoje. Porque o problema não é a inteligência do modelo. É a arquitetura em volta dele.</p>
+<h2>O muro é sempre o mesmo</h2>
+<p>Segundo o vídeo, os pilotos morrem por três razões que aparecem juntas: são construídos sobre <em>ferramentas desconectadas</em>, não compartilham uma <em>camada de dados unificada</em> e não têm a <em>governança</em> necessária para que alguém confie neles. A frase que resume tudo é direta: você não pode simplesmente pregar uma janela de chat em cima de um banco de dados velho e chamar isso de IA agêntica.</p>
+<p>Aqui vale uma leitura própria. O que o mercado vendeu no último ano foi majoritariamente a camada de conversa: o chatbot que responde bonito na demo. Mas conversa é a parte fácil e barata. O que separa o brinquedo da ferramenta de trabalho é tudo o que está <em>embaixo</em> da conversa, e é justamente essa parte que ninguém filmou nas apresentações de venda. A tese da Salesforce, e o motivo de o vídeo ser útil, é transformar esse "embaixo" em um sistema de camadas nomeadas. Quando você consegue nomear as camadas, consegue diagnosticar em qual delas seu piloto está falhando.</p>
+<h2>As cinco camadas, e o que cada uma realmente resolve</h2>
+<p>A arquitetura proposta tem cinco sistemas. Vale ler cada um menos como um produto Salesforce e mais como uma <em>função</em> que qualquer arquitetura agêntica séria precisa ter, independente de fornecedor.</p>
+<p><strong>Sistema de engajamento (a superfície).</strong> É a camada onde humanos e agentes de fato trabalham lado a lado, em tempo real. No desenho da Salesforce, essa superfície é o Slack, com o Slackbot atuando como agente pessoal que dispara fluxos e conversa com outros agentes. O ponto forte do vídeo não é o Slack em si, é a observação sobre <em>contexto</em>: um agente que ajuda a preparar uma reunião mas não lembra que você já falou com aquela pessoa no ano passado, ou não sabe que ela trocou de empresa, entrega um resultado inútil. Manter contexto contínuo ao longo de um handoff é, nas palavras do vídeo, "a literal diferença" entre uma demo descartável e uma ferramenta que muda como você trabalha.</p>
+<p><strong>Sistema de insight (o entendimento compartilhado).</strong> Aqui entra o Tableau, mas o argumento é mais fino do que dashboard bonito. Humanos olham um gráfico limpo e "entendem na hora", por intuição. Um agente não tem intuição: ele precisa de <em>definições de dados estruturadas e padronizadas</em> que consiga parsear. Sem uma camada semântica que governe o que cada métrica significa, o agente fica, literalmente, voando às cegas, adivinhando. E adivinhação é a última coisa que você quer de um agente autônomo agindo sobre os dados do seu negócio.</p>
+<p><strong>Sistema de agência (o cérebro que executa).</strong> É onde a IA para de só ajudar a escrever e-mails e começa a <em>executar tarefas sozinha</em>. No desenho, isso é o Agentforce: um lugar único para construir, testar, implantar e governar agentes de forma rastreável. A imagem que o vídeo usa é ótima: quem já montou um agente de atendimento por conta própria sabe como ele é imprevisível, num minuto responde ao cliente, no outro está "falando como pirata" por causa de um prompt estranho. Ter um <em>control plane</em> dedicado é a diferença entre uma IA que você empurra para produção com confiança e uma que você precisa ficar vigiando o tempo todo.</p>
+<p><strong>Sistema de trabalho (a lógica de negócio).</strong> É onde os agentes de fato fazem as coisas: os apps centrais, processos, workflows e regras que a empresa refinou por anos. No caso, o Customer 360. O critério aqui é de eliminação: se a nova ferramenta de IA não <em>herda exatamente</em> a mesma segurança, permissões e governança de compliance que a empresa levou décadas construindo, é <em>deal breaker</em>. A analogia é a do funcionário novo, você não entrega as chaves da empresa inteira no primeiro dia e diz "vai lá, faz o que quiser". Ele segue o manual, pede aprovação para decisões grandes, acessa só os arquivos de que precisa. Com IA é idêntico: ela não precisa de um conjunto especial de regras, segue as mesmas cercas que o time já segue.</p>
+<p><strong>Sistema de contexto (a fundação).</strong> Debaixo de tudo está a camada que faz o resto funcionar: o Data 360. Quando um agente recomenda algo ou dispara uma ação, ele precisa entender a <em>relação</em> entre clientes, produtos, políticas e regras de negócio. Isso é mais do que dado bruto: é metadados, governança, linhagem (<em>lineage</em>) e definições de negócio embrulhando o dado, de modo que o contexto esteja sempre presente, dentro ou fora da Salesforce. A metáfora do vídeo é dirigir numa cidade nova sem GPS: você vê as ruas e as placas, mas boa sorte para saber qual faixa pegar ou se está indo na direção certa. O contexto é o mapa que diz ao agente o que existe, o que significa e se ele deve confiar naquilo.</p>
+<h2>A tese por trás das camadas</h2>
+<p>Se eu tivesse que destilar o argumento em uma frase, seria esta: <strong>IA agêntica é um problema de arquitetura de confiança, não de capacidade do modelo.</strong> Repare que quatro das cinco camadas (insight, agência, trabalho e contexto) existem basicamente para responder a uma única pergunta: <em>posso confiar no que esse agente vai fazer sozinho?</em> Semântica compartilhada, control plane rastreável, herança de permissões e linhagem de dados são todos mecanismos de confiança. A camada de engajamento, a única que o mercado costuma mostrar, é a menos crítica das cinco.</p>
+<p>Há uma consequência prática que o vídeo, sendo material da Salesforce, não sublinha mas que merece atenção: essa arquitetura é deliberadamente <em>centralizadora</em>. A promessa de contexto contínuo e governança herdada é real, e é exatamente o que falta nos pilotos que morrem. Mas ela também empurra a empresa para um fornecedor que já detém as cinco camadas. Não é crítica, é o trade-off honesto: a mesma unificação que resolve o problema técnico aumenta a dependência de plataforma. Quem for desenhar sua própria arquitetura agêntica, com ou sem Salesforce, faria bem em tratar essas cinco funções como um <em>checklist independente de fornecedor</em>, garantindo que cada uma exista antes de escolher quem a fornece.</p>
+<h2>O que fazer com isso na segunda-feira</h2>
+<p>O valor prático imediato é usar as cinco camadas como grade de diagnóstico. Pegue seu piloto de IA travado e pergunte, camada por camada: os agentes e as pessoas trabalham na mesma superfície com contexto contínuo? Existe uma definição única e legível por máquina do que cada métrica significa? Há um único lugar para construir, testar e <em>auditar</em> agentes? A IA herda as permissões que já governam seu time, ou inventou as próprias? E existe uma camada de contexto dizendo ao agente de onde cada dado veio e se ele é confiável?</p>
+<p>Na maioria dos pilotos travados, pelo menos duas dessas respostas serão "não", e quase sempre serão as camadas invisíveis, insight e contexto, as que faltam. O recado final do vídeo é que juntar esses componentes numa arquitetura unificada é o que permite a transição para uma <em>empresa agêntica</em>, entregando resultados prontos para produção em vez de pilotos legais presos no desenvolvimento. A parte que fica é mais simples e mais dura: a IA que muda o negócio não é a mais inteligente, é a que você consegue confiar o suficiente para tirar as mãos do volante.</p>
+  </div>
+
+  <section class="artigo-fontes">
+    <h2>Fontes</h2>
+    <p>Dá ao leitor uma grade de diagnóstico camada a camada para descobrir por que seu piloto de IA travou, geralmente por falta das camadas invisíveis de insight e contexto, e alerta para o trade-off de dependência de plataforma.</p>
+    <div class="links">
+      <a class="btn" href="https://www.youtube.com/watch?v=XjQfm2618t4" target="_blank" rel="noopener">Watch</a>
+    </div>
+  </section>
+
+  <nav class="artigo-nav">
+    <a class="" href="alexandr-wang-once-in-a-civilization-opportunity.html"><small>Anterior</small><b>Quando a inteligência vira commodity, o que fica escasso é ter visão</b></a>
+    <a class="dir" href="liberation-death-rebirth-robert-thurman.html"><small>Próximo</small><b>A morte como uma porta: Robert Thurman e a ciência budista da continuidade</b></a>
+  </nav>
+</main>
+</body>
+</html>
