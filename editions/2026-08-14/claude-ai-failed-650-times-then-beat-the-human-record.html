@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A IA que precisou de 650 tentativas e de um treinador motivacional — Week In Review</title>
+  <meta name="description" content="Uma versão não lançada do Claude falhou 650 vezes e melhorou um limite técnico ligado à função zeta de Riemann, superando a melhor marca humana naquele valor específico. Não provou a hipótese de Riemann, e a própria fonte citada pelo vídeo (Scientific American) existe para conter o exagero. O avanço real é de escala e persistência verificável, não de genialidade, e o bordão do treinador de IA antropomorfiza um mecanismo estatístico.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/revista.css">
+</head>
+<body>
+<main class="page">
+  <div class="top">
+    <div><a href="index.html">← Voltar para a edição</a></div>
+    <div class="mid">Issue 006</div>
+    <div class="right"><a href="../../arquivo.html">Arquivo</a> · 14 de agosto de 2026</div>
+  </div>
+
+  <header class="artigo-head">
+    <div class="kicker">03 / Two Minute Papers</div>
+    <h1>A IA que precisou de 650 tentativas e de um treinador motivacional</h1>
+    <div class="artigo-meta"><span class="tag">inteligência artificial</span><span class="tag">matemática</span><span class="tag">hype de IA</span>
+      <span class="tempo">5 min de leitura</span>
+    </div>
+  </header>
+
+  <div class="artigo-corpo">
+<p>O título viraliza sozinho: uma versão ainda não lançada do Claude falhou 650 vezes, recebeu mensagens de "continue" e "acredite em você", e no fim bateu um recorde que nenhum humano tinha alcançado. O vídeo do canal Two Minute Papers embala tudo isso no bordão de sempre ("que época para estar vivo") e sugere que os grandes teoremas do futuro serão escritos não por gênios, mas por coaches. É uma história boa demais. E, como quase toda história boa demais sobre IA, o mais interessante está exatamente no que ela omite.</p>
+<h2>O que realmente aconteceu (e o que não aconteceu)</h2>
+<p>Primeiro, o desmentido que o próprio vídeo é forçado a fazer logo no começo: <strong>a IA não provou a hipótese de Riemann.</strong> A hipótese de Riemann é uma afirmação sobre a distribuição dos números primos, aberta desde 1859, um dos problemas do milênio com um prêmio de um milhão de dólares associado. Ninguém a provou. O Claude também não.</p>
+<p>O que o modelo fez foi melhorar um <em>limite</em> (um "bound") num problema técnico vizinho, associado à função zeta de Riemann. Traduzindo para linguagem de gente: existe uma família de resultados que dizem "tal quantidade é no máximo X". Matemáticos vinham empurrando esse X para baixo ao longo de décadas, ganhando terreno aos poucos. O sistema da Anthropic empurrou um pouco mais, superando a melhor marca humana conhecida para aquele valor específico. É um avanço real e verificável, mas é um avanço incremental num canto especializado da teoria analítica dos números, não a queda do castelo.</p>
+<p>Essa diferença não é implicância acadêmica. O próprio link que o vídeo cita nas fontes é um artigo da <em>Scientific American</em> com o título "Não, a IA não acabou de resolver o problema mais espinhoso da matemática". Ou seja: a peça jornalística que embasa o vídeo existe justamente para conter o exagero que o vídeo depois amplifica. O canal mostra a fonte que o contradiz e mesmo assim escolhe a manchete sensacionalista. Guarde isso.</p>
+<p>Há um detalhe que joga a favor do resultado, e é importante ser justo: existe uma <strong>versão formalizada da prova, verificável automaticamente por máquina.</strong> Isso muda o jogo em relação ao "confie em mim". Quando um resultado matemático é formalizado num assistente de prova, ele deixa de depender da reputação de quem afirma e passa a ser checável por qualquer um. É a parte mais sólida da história, e, ironicamente, a que menos rende bordão.</p>
+<h2>As 650 falhas e o "coach": o que o hype esconde</h2>
+<p>O núcleo viral é a imagem do humano (chamado Jared) que, segundo o relato, se limitou a mandar mensagens de encorajamento ao Claude, variações de "continue" e "acredite em você", enquanto o modelo tentava 650 vezes até acertar. A leitura sedutora é: não precisa nem saber matemática, basta ser um bom motivador de IA.</p>
+<p>Vale desmontar isso com calma, porque é aqui que a narrativa engana.</p>
+<p><strong>Primeiro:</strong> 650 tentativas não é sinal de genialidade, é sinal de força bruta. Um humano que erra 650 vezes o mesmo problema em geral está preso; um sistema que pode gerar milhares de tentativas quase de graça está fazendo outra coisa, busca massiva num espaço de possibilidades. O que impressiona não é a "persistência", é a escala barata da tentativa e erro. São regimes de trabalho diferentes, e comparar os dois como se fossem a mesma coragem é o truque retórico central do vídeo.</p>
+<p><strong>Segundo:</strong> o "acredite em você" não é magia motivacional. Quando um prompt de encorajamento muda o comportamento de um modelo de linguagem, o que está acontecendo é mundano: aquelas palavras reposicionam o texto dentro dos padrões que o modelo aprendeu, empurram para um modo de resposta mais "vá em frente, detalhe o próximo passo" em vez de "isso é difícil, talvez não dê". Não é que o Claude ganhou ânimo. É que a instrução mudou a distribuição de saídas prováveis. Chamar isso de "coach de IA" é poético e falso ao mesmo tempo.</p>
+<p><strong>Terceiro,</strong> e o vídeo até tem a honestidade de dizer isso de passagem: quando o relato afirma que "o próprio Claude ficou surpreso" com o resultado, ou que o achou "forte demais para ser novo", isso não é surpresa no sentido humano. É o modelo reproduzindo padrões de linguagem de cautela e ceticismo que ele viu em textos de matemáticos durante o treino. Descrever um sistema estatístico como "surpreso" e "cético" é conveniente para a narrativa, mas antropomorfiza um mecanismo que não tem estados internos desse tipo.</p>
+<h2>Onde está o avanço de verdade</h2>
+<p>Tirado o exagero, sobra algo que ainda merece atenção, e é mais interessante do que o bordão.</p>
+<p>O que o episódio mostra não é uma IA "criativa como um gênio". É uma IA capaz de: percorrer muitos caminhos errados, reconhecer que eram becos sem saída, recuar e tentar outra rota, e sustentar isso por tempo suficiente para chegar a um resultado inédito e checável. O relato menciona que o primeiro resultado crucial só apareceu depois de cerca de 37 minutos de "silêncio", e que o modelo não precisou nem consultar a internet no momento da virada. Isso descreve uma capacidade de <em>exploração sustentada e recuperação de erro</em> dentro de um domínio formal, que é diferente de responder perguntas soltas.</p>
+<p>A tese que proponho é esta: <strong>o resultado importa apesar do enquadramento, não por causa dele.</strong> O canal vende um salto de inteligência quase mística; o que os dados sustentam é um ganho de escala e de persistência automatizada num nicho verificável. Essas duas leituras levam a decisões práticas opostas. A primeira convida a acreditar que a matemática pesada está prestes a ser terceirizada para modelos, com humanos virando torcedores. A segunda, mais sóbria, sugere um papel real e mais modesto: a IA como um colaborador incansável para <em>empurrar limites</em> em problemas onde o critério de acerto é claro e a checagem é automatizável, com o humano ainda decidindo qual problema vale a pena atacar e o que o resultado significa.</p>
+<p>Para quem lidera com IA no dia a dia, a lição é operacional e transferível. O valor não veio de um prompt genial nem de motivação: veio de um problema bem posto, de um verificador confiável que separa acerto de alucinação, e da disposição de deixar o sistema errar centenas de vezes barato até acertar. Reproduza esse arranjo (objetivo claro, verificação automática, muitas tentativas) e você captura o que há de sólido aqui. Compre o bordão do "coach de IA" e você vai esperar mágica onde há, na verdade, método. Que época para estar vivo, sim, mas de olhos abertos.</p>
+  </div>
+
+  <section class="artigo-fontes">
+    <h2>Fontes</h2>
+    <p>Separar o avanço real (busca massiva barata com verificação automática) do hype mostra como usar IA de fato: problema bem posto, verificador confiável e muitas tentativas, com o humano decidindo o que importa.</p>
+    <div class="links">
+      <a class="btn" href="https://www.youtube.com/watch?v=QnGNF8k_uoc" target="_blank" rel="noopener">Watch</a>
+    </div>
+  </section>
+
+  <nav class="artigo-nav">
+    <a class="" href="14-8-2026-pensamento-do-dia-thought-of-the-day-pensamiento-del-dia-trigueirinho.html"><small>Anterior</small><b>A fé como método: por que o caminho interior trabalha mesmo quando você não sente</b></a>
+    <a class="dir" href="seeing-the-unseen-part-ii-with-christopher-laprath.html"><small>Próximo</small><b>O intuitivo que pede para você parar de entender</b></a>
+  </nav>
+</main>
+</body>
+</html>
