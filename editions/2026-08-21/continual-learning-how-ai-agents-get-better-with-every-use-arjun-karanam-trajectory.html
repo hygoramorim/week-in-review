@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>O agente que esquece tudo ao amanhecer — Week In Review</title>
+  <meta name="description" content="Arjun Karanam, da Trajectory, chama de experience gap o vão entre modelos que ganham QI a cada semana mas nunca ganham tempo de casa, e propõe fechar isso com continual learning: aprender dos trilhões de tokens que os agentes geram e descartam. O artigo defende que o gargalo real não é o algoritmo de aprendizado, e sim a instrumentação que quase nenhuma empresa tem: rastrear a árvore inteira, capturar correções em vez de joinhas, avaliar no harness real e fazer ferramentas responderem com substância.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/revista.css">
+</head>
+<body>
+<main class="page">
+  <div class="top">
+    <div><a href="index.html">← Voltar para a edição</a></div>
+    <div class="mid">Issue 007</div>
+    <div class="right"><a href="../../arquivo.html">Arquivo</a> · 21 de agosto de 2026</div>
+  </div>
+
+  <header class="artigo-head">
+    <div class="kicker">05 / Sequoia Capital</div>
+    <h1>O agente que esquece tudo ao amanhecer</h1>
+    <div class="artigo-meta"><span class="tag">continual-learning</span><span class="tag">agentes-de-ia</span><span class="tag">produto</span>
+      <span class="tempo">6 min de leitura</span>
+    </div>
+  </header>
+
+  <div class="artigo-corpo">
+<p>Arjun Karanam, cofundador da Trajectory, tem uma imagem que gruda. Coloque Terence Tao, um dos maiores matemáticos vivos, na cadeira de contador de uma firma no primeiro dia de trabalho. Ele não será o melhor contador da sala. Dê a ele alguns dias, talvez algumas horas, e será imbatível. Os modelos de IA de hoje, diz Karanam, são vários Terence Tao no seu bolso, todos presos eternamente no primeiro dia. Ficam mais inteligentes a cada semana, ganham QI, mas nunca ganham tempo de casa. A isso ele chama de "experience gap", o vão entre inteligência e experiência, e é o que a Trajectory quer fechar com uma plataforma de continual learning: transformar os trilhões de tokens que os agentes geram e jogam fora em sinal que faz o agente melhorar a cada uso.</p>
+<p>A tese que eu quero defender aqui é desconfortável para quem vende a promessa: o gargalo do continual learning não é o algoritmo de aprendizado, é a instrumentação da empresa que usa o agente. Karanam basicamente admite isso, ainda que embrulhado em quatro "desejos de Aladdin". Quando ele lista o que gostaria de ver no ecossistema (rastreabilidade completa, evals de tráfego real, harnesses que soltam o agente, conforto com pesos abertos), não está descrevendo pesquisa de ponta. Está descrevendo higiene de dados que quase ninguém tem. O aprendizado contínuo é a parte fácil. A parte difícil é ter o que aprender.</p>
+<h2>O que a maioria joga fora é justamente o sinal</h2>
+<p>O primeiro desejo é rastrear a árvore inteira do que aconteceu, incluindo sub-agentes e chamadas de ferramenta. Karanam observa que a maioria das empresas rastreia só a ação principal e descarta o resto. Parece detalhe de engenharia. Não é. É a diferença entre ter um dataset e ter um log de marketing.</p>
+<p>O ponto mais afiado vem no segundo sub-desejo, e é aqui que a conversa sai do óbvio. A intuição de todo mundo sobre feedback é o joinha, thumbs up e thumbs down. Karanam desmonta isso com um exemplo que qualquer um que usou um agente de código reconhece na hora: você aceita tudo que o agente faz, aceita, aceita, aceita, e só cinco commits depois percebe que algo quebrou e volta para desfazer. O joinha é ruído. O sinal de verdade está no comportamento corretivo, nas edições, nos desfazer, nas retentativas. É ali que o usuário revela, sem querer, o que era certo e o que era errado.</p>
+<p>Isso inverte uma premissa cara de produto. A indústria passou anos tratando feedback explícito como o ouro e comportamento implícito como poluição a ser filtrada. Karanam diz o contrário: o explícito é barulhento e o implícito, quando você captura a correção inteira, é preciso. Só que capturar a correção inteira exige que o produto tenha sido desenhado para isso desde o começo. Você não retroencaixa rastreabilidade de sub-agentes num sistema que já os descarta. É arquitetura, não plugin.</p>
+<h2>O harness deixou de ser cerca e virou palco</h2>
+<p>O terceiro desejo é o mais revelador sobre onde estamos no ciclo. Karanam diz que a maioria dos harnesses foi construída em torno de modelos de um ano, um ano e meio atrás, quando a função principal do harness era impedir o agente de fazer besteira: travar formatos, forçar fluxos, conter o modelo que surtava. Isso fazia sentido quando os agentes quebravam sozinhos. Agora, diz ele, estamos num mundo de "let the agents cook", deixa o agente cozinhar.</p>
+<p>A recomendação prática é parar de pensar o harness como sequência de passos obrigatórios e passar a pensá-lo como um conjunto de primitivas (ferramentas de busca, informação privada) que o agente orquestra à vontade. E há um corolário que soa banal mas é o mais acionável da palestra: torne as respostas das ferramentas informativas. Uma chamada que grava no banco e responde só "done, finished" é inútil para treino. O agente não sabe o que foi escrito nem o que aconteceu. Não há sinal de aprendizado ali. É um erro que praticamente todo backend comete, porque para um humano lendo o log "done" basta, e ninguém projetou a ferramenta pensando que um modelo iria aprender com a resposta dela depois.</p>
+<p>Some os três desejos e aparece um padrão: nenhum deles é sobre o modelo. São sobre como você registra, avalia e expõe o trabalho. O quarto e último, sim, toca o modelo (ficar confortável rodando pesos abertos, experimentar routers), mas o próprio Karanam trata isso como pré-condição de posse, não como o miolo do problema. A mensagem embutida é que a maior parte do valor do continual learning está travada atrás de decisões de engenharia mundanas que ninguém achou que importavam.</p>
+<p>Vale destacar a resposta mais elegante da sessão de perguntas. Perguntado qual é o "objeto treinável" (pesos, harness, contexto), Karanam recusa a pergunta. A inteligência do produto é um sistema com muitos componentes, e continual learning de verdade é otimizar através deles, decidindo automaticamente o que atualizar em cada peça. A analogia dele: hoje ninguém decide se salva um arquivo na RAM ou no disco, isso foi abstraído. Um fato como "essa empresa foi deslistada" vai para o contexto do harness, não para o peso do modelo. Uma ferramenta que falha para todo mundo vira treino no modelo. Um usuário que odeia sub-agentes vira contexto daquele cliente. A decisão do que aprender onde deveria ser científica, diz ele, não intuição de pesquisador.</p>
+<h2>O contraditório</h2>
+<p>O melhor argumento contra a minha tese é que estou confundindo o pré-requisito com o produto. Sim, a instrumentação é chata e quase ninguém a tem. Mas a Trajectory sabe disso e desenhou a empresa exatamente ao redor dessa realidade. Karanam diz, quase de passagem, que boa parte da pesquisa deles é assumir o pior: e se o cliente não tem eval nenhuma? E se a rastreabilidade está desligada? Como aprender do pouco sinal que existe? Se a mágica de verdade é justamente extrair aprendizado de dados sujos e incompletos, então o gargalo não é a instrumentação do cliente, é o algoritmo que sobrevive à falta dela. E isso é pesquisa difícil, não higiene.</p>
+<p>Há reforço nisso na resposta sobre privacidade. Perguntado como treinar sem tocar em dados do cliente, Karanam descreve amostrar distribuições dos dados, gerar dados sintéticos próprios e comparar distribuições de forma quase criptográfica, sem treinar direto no dado real. Se isso funciona, resolve o obstáculo político que na prática mata a maioria dos projetos de continual learning: nenhum cliente sério de aplicação vai deixar você treinar nos dados dele. O valor real da Trajectory, por essa leitura, não é a plataforma de rastreabilidade que qualquer um poderia construir, é o conjunto de truques que faz o aprendizado acontecer apesar da bagunça e das restrições contratuais. Meu argumento estaria mirando o andaime e ignorando o prédio.</p>
+<h2>O que fica de pé</h2>
+<p>A tese sobrevive, com uma correção importante. É verdade que a Trajectory está investindo pesquisa em aprender de dados ruins, e isso é genuinamente difícil. Mas repare no que o próprio Karanam diz que faz ao entrar num cliente: uma auditoria de rastreabilidade, evals e harness, seguida de meses de trabalho para construir o que falta. O sonho declarado dele é chegar numa empresa que já tenha tudo montado, e ele admite que isso quase nunca acontece. Ou seja, mesmo a empresa mais otimista sobre aprender do caos passa a maior parte do tempo arrumando o caos primeiro. A pesquisa de "aprender do pouco" existe para amortecer a queda, não para dispensar o chão.</p>
+<p>Para quem constrói produto de IA, o veredito é operacional e vale independente da Trajectory vingar ou não. Antes de sonhar com agentes que compõem valor a cada uso, faça o trabalho ingrato: rastreie a árvore inteira incluindo sub-agentes, capture as correções e não os joinhas, avalie no harness real de produção e faça suas ferramentas responderem com substância, não com "feito". Nada disso é continual learning. Tudo isso é o que decide se o continual learning terá o que comer quando chegar. O agente que esquece tudo ao amanhecer não sofre por falta de inteligência. Sofre porque ninguém guardou a lição da véspera num formato do qual dê para aprender.</p>
+  </div>
+
+  <section class="artigo-fontes">
+    <h2>Fontes</h2>
+    <p>Antes de sonhar com agentes que melhoram a cada uso, times de produto de IA precisam fazer o trabalho ingrato de rastreabilidade, evals de tráfego real e respostas de ferramenta informativas, senão o continual learning não terá dado do qual aprender.</p>
+    <div class="links">
+      <a class="btn" href="https://www.youtube.com/watch?v=eYrMF9Cht8A" target="_blank" rel="noopener">Watch</a>
+    </div>
+  </section>
+
+  <nav class="artigo-nav">
+    <a class="" href="you-have-been-fighting-the-wrong-thing-eckhart-tolle.html"><small>Anterior</small><b>A geladeira que você parou de ouvir</b></a>
+    <a class="dir" href="previewing-ultrafast-mode-gpt5-6-sol-at-up-to-14x-the-speed.html"><small>Próximo</small><b>O dia em que a velocidade virou o produto</b></a>
+  </nav>
+</main>
+</body>
+</html>

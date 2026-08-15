@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>O dia em que a velocidade virou o produto — Week In Review</title>
+  <meta name="description" content="A OpenAI apresentou o Ultrafast mode, um tier da API que serve o GPT-5.6 Sol sobre chips da Cerebras a até 14x a velocidade padrao, sem prometer um modelo mais inteligente. O ensaio argumenta que a fronteira competitiva da IA esta deslizando da inteligencia bruta para a latencia, e mostra como separar o que e vitrine de marketing do que e avanco real de produto.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/revista.css">
+</head>
+<body>
+<main class="page">
+  <div class="top">
+    <div><a href="index.html">← Voltar para a edição</a></div>
+    <div class="mid">Issue 007</div>
+    <div class="right"><a href="../../arquivo.html">Arquivo</a> · 21 de agosto de 2026</div>
+  </div>
+
+  <header class="artigo-head">
+    <div class="kicker">06 / OpenAI</div>
+    <h1>O dia em que a velocidade virou o produto</h1>
+    <div class="artigo-meta"><span class="tag">OpenAI</span><span class="tag">latencia</span><span class="tag">hype vs avanco</span>
+      <span class="tempo">4 min de leitura</span>
+    </div>
+  </header>
+
+  <div class="artigo-corpo">
+<p>Um vídeo de noventa e três segundos, um número redondo na miniatura ("até 14x mais rápido") e três funcionários da OpenAI descrevendo o alívio de esperar menos. É esse o formato do preview do Ultrafast mode, um novo tier de serviço na API para o GPT-5.6 Sol, rodando sobre chips da Cerebras a até 750 tokens de saída por segundo. A peça não anuncia um modelo mais inteligente. Anuncia o mesmo modelo servido mais depressa. E é exatamente aí que mora a tese: a fronteira competitiva da IA está deslizando da inteligência bruta para a latência, e esse deslizamento diz mais sobre o estágio do mercado do que sobre a engenharia.</p>
+<p>Vale começar pelo que "14x" de fato mede. Não é o tempo total até você ter a resposta que queria. É throughput de geração: quantos tokens o modelo cospe por segundo depois que começa a responder. É uma métrica real e útil, mas parcial. Ela não captura o tempo de fila quando a capacidade está saturada (e a própria OpenAI admite que o acesso é restrito a "um grupo seleto" e vai crescer "conforme a capacidade"), não captura a latência de rede, e não captura o retrabalho quando a primeira resposta veloz sai errada. Um número de vitrine escolhido porque é o mais favorável não é mentira. É curadoria. E a função de um preview de marketing é justamente essa: escolher a régua que mais impressiona e deixar as outras fora do quadro.</p>
+<h2>Quando rápido o bastante muda o comportamento</h2>
+<p>Há, no vídeo, uma frase que sobrevive ao filtro do ceticismo. Um dos funcionários repete um velho ditado de engenharia: performance pode ser uma feature, porque quando algo fica rápido o suficiente, muda o comportamento. Isso é verdadeiro e importante. Uma investigação de incidente que levava uma a duas horas caindo para dez a quinze minutos não é a mesma tarefa feita mais rápido: é outra tarefa. Perto do tempo real, você para de "rodar uma consulta e ir tomar café" e passa a interrogar o sistema em diálogo, buscando várias pistas em paralelo sem fragmentar a atenção. O salto qualitativo não está no modelo. Está no laço entre a pergunta e a resposta ficando curto o bastante para o humano permanecer em fluxo.</p>
+<p>Só que essa mesma virtude expõe o que o preview esconde. Todos os exemplos são de fluxo, não de veredito: monitorar um canal, refatorar código, vasculhar logs, "ficar em fluxo escrevendo código". São tarefas onde muitas respostas boas e rápidas valem mais que uma resposta lenta e perfeita, e onde o humano continua no circuito para pegar o erro. Ninguém no vídeo usa o Ultrafast para uma decisão irreversível, um diagnóstico final, um número que vai para o balanço. A velocidade é vendida onde a velocidade é barata de errar. É um recorte honesto do caso de uso, e um recorte conveniente da promessa.</p>
+<h2>Por que a corrida virou de velocidade</h2>
+<p>O detalhe estratégico mais revelador é o silêncio sobre inteligência. O bordão do fim ("sempre queremos a máxima inteligência na maior velocidade, e com o 5.6 Ultra Fast não precisamos abrir mão de nenhuma") confirma pela negativa: a inteligência é tratada como constante, não como o argumento de venda. Quando o eixo da disputa deixa de ser "quem é mais capaz" e passa a ser "quem entrega o mesmo mais rápido", isso costuma sinalizar um patamar onde os ganhos de capacidade viraram marginais e difíceis de comunicar, e onde a experiência (latência, custo por tarefa, permanência em fluxo) vira o campo onde ainda dá para se diferenciar. Terceirizar a aceleração para a Cerebras reforça a leitura: a vantagem aqui é de infraestrutura e servício, não de um novo salto do modelo.</p>
+<h2>O contraditório</h2>
+<p>O argumento mais forte contra tratar isso como "só marketing" é que a latência não é cosmética: é o que separa a IA de ser ferramenta de consulta de ser tecido do trabalho. Abaixo de um certo tempo de resposta, o custo cognitivo de esperar desaparece, e aí você delega dez vezes mais tarefas do que delegaria, porque perguntar deixou de ter atrito. Isso não é uma melhora incremental na experiência, é uma mudança de regime de uso, e mudanças de regime de uso são o que de fato move mercados, não benchmarks. A história da computação está cheia de casos em que a mesma capacidade, servida rápido o bastante, criou categorias inteiras (a busca instantânea, o autocomplete, a planilha que recalcula ao vivo). Descartar velocidade como truque de vitrine é subestimar a única variável que o usuário sente no corpo a cada interação. E se latência é o gargalo real do trabalho com IA hoje, atacá-la de frente é engenharia séria, não teatro.</p>
+<h2>O que fica de pé</h2>
+<p>O preview é as duas coisas ao mesmo tempo, e é intelectualmente preguiçoso fingir que precisa escolher. É marketing (número selecionado, acesso escasso, inteligência varrida para debaixo do tapete) e é um avanço real de produto (latência importa, e cair para tempo quase real muda de fato o que o humano faz). O que fica de pé é o critério para separar um do outro: desconfie do "14x" como promessa e observe o comportamento que ele habilita. Se a velocidade só serve para você gerar mais rápido o que já gerava, é vitrine. Se ela muda quais tarefas você entrega à máquina, e principalmente se permite manter o humano no circuito onde o erro é barato, é feature. O anúncio não prova qual dos dois será. Só marca o momento em que a indústria decidiu que, capacidade dada como resolvida, a próxima disputa é pelo relógio.</p>
+  </div>
+
+  <section class="artigo-fontes">
+    <h2>Fontes</h2>
+    <p>Quando a disputa entre modelos deixa de ser sobre capacidade e passa a ser sobre velocidade de entrega, muda o criterio de compra: o que importa nao e mais o benchmark, e se a baixa latencia habilita voce a delegar tarefas novas mantendo o humano no circuito onde o erro e barato.</p>
+    <div class="links">
+      <a class="btn" href="https://www.youtube.com/watch?v=EDWbX_-RYws" target="_blank" rel="noopener">Watch</a>
+    </div>
+  </section>
+
+  <nav class="artigo-nav">
+    <a class="" href="continual-learning-how-ai-agents-get-better-with-every-use-arjun-karanam-trajectory.html"><small>Anterior</small><b>O agente que esquece tudo ao amanhecer</b></a>
+    <span></span>
+  </nav>
+</main>
+</body>
+</html>
