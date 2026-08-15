@@ -118,9 +118,6 @@ img{display:block;width:100%;background:#ddd}
 .channel{background:var(--card);border:1px solid rgba(22,21,20,.25);padding:14px}
 .channel b{font-family:var(--serif)}
 .channel p{margin:6px 0 0;color:var(--muted);font-size:14px}
-.question{margin:40px 0;background:var(--red);color:var(--cream);padding:34px;display:grid;grid-template-columns:1fr;gap:24px;align-items:center}
-.question b{font-family:var(--cond);font-size:44px;text-transform:uppercase;line-height:1}
-.question p{font-family:var(--serif);font-size:clamp(24px,4vw,43px);line-height:1.18;margin:0}
 footer{border-top:4px solid var(--ink);margin-top:48px;padding-top:18px;display:grid;grid-template-columns:1fr;gap:20px;color:var(--muted);font-size:13px}
 .brand{font-family:var(--cond);color:var(--red);letter-spacing:.04em}
 code{font-size:12px;background:rgba(255,255,255,.4);padding:2px 4px}
@@ -208,11 +205,32 @@ code{font-size:12px;background:rgba(255,255,255,.4);padding:2px 4px}
   .media{min-height:330px}
   .matrix{grid-template-columns:1.25fr .75fr}
   .channels{grid-template-columns:repeat(2,1fr)}
-  .question{grid-template-columns:220px 1fr}
   footer{grid-template-columns:1fr 1fr}
   .edicao{grid-template-columns:150px 1fr auto}
   .abrir{padding-top:8px}
   .artigo-corpo{font-size:19px}
   .artigo-nav{grid-template-columns:1fr 1fr}
   .artigo-nav .dir{text-align:right}
+}
+
+/* ---------- espinha (sintese da semana) ---------- */
+/* A espinha: sintese primeiro, escaneavel. */
+.espinha .linhas{display:grid;grid-template-columns:1fr;gap:0;border-top:2px solid var(--ink)}
+.espinha .linha{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;padding:16px 4px;border-bottom:1px solid var(--ink);text-decoration:none;color:inherit}
+.espinha .linha b{font-family:var(--cond);font-size:26px;color:var(--red);grid-row:span 2;line-height:1}
+.espinha .tese{font-family:var(--serif);font-size:19px;color:var(--navy)}
+.espinha .pq{font-size:14px;opacity:.85}
+.espinha-pergunta{font-family:var(--serif);font-size:22px;color:var(--navy);border-top:9px solid var(--red);padding-top:16px;margin-top:22px}
+
+/* ---------- mapa de fios (arquivo) ---------- */
+.mapa-fios .fios{display:grid;grid-template-columns:1fr;gap:16px}
+.mapa-fios .fio{border:1px solid var(--ink);background:var(--card);padding:16px}
+.mapa-fios .fio h3{font-family:var(--cond);text-transform:uppercase;letter-spacing:.04em;margin:0 0 10px}
+.mapa-fios .fio a{display:block;padding:6px 0;text-decoration:none;color:inherit;border-top:1px solid rgba(0,0,0,.08)}
+.mapa-fios .fio a b{color:var(--red);font-family:var(--cond)}
+
+@media(min-width:720px){
+  .espinha .linha{grid-template-columns:auto 1fr 1.3fr;align-items:baseline}
+  .espinha .linha b{grid-row:auto}
+  .mapa-fios .fios{grid-template-columns:1fr 1fr}
 }
