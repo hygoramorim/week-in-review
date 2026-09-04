@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>O associado ficou barato. O sócio, não. — Week In Review</title>
+  <meta name="description" content="Jeffrey Morgan, da Ollama, prevê que 80 a 90% dos tokens de uma empresa passarão por modelos abertos, e completa: eles consumirão 10 a 20% do orçamento. Volume e dinheiro se separaram. Em 57 minutos não aparece um único preço, e a métrica que provaria valor entregue, custo por tarefa concluída, é citada de passagem e abandonada.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/revista.css">
+</head>
+<body>
+<main class="page">
+  <div class="top">
+    <div><a href="index.html">← Voltar para a edição</a></div>
+    <div class="mid">Issue 009</div>
+    <div class="right"><a href="../../arquivo.html">Arquivo</a> · 4 de setembro de 2026</div>
+  </div>
+
+  <header class="artigo-head">
+    <div class="kicker">01 / Ycombinator</div>
+    <h1>O associado ficou barato. O sócio, não.</h1>
+    <div class="artigo-meta"><span class="tag">modelos-abertos</span><span class="tag">economia-da-ia</span><span class="tag">custo-por-tarefa</span><span class="tag">infraestrutura</span><span class="tag">commoditizacao</span>
+      <span class="tempo">6 min de leitura</span>
+    </div>
+  </header>
+
+  <div class="artigo-corpo">
+<p>Jeffrey Morgan, CEO da Ollama, foi ao podcast Lightcone da Y Combinator com números que parecem resolver a discussão. Nove milhões de desenvolvedores. Cento e setenta e oito mil estrelas no GitHub. Oitenta e cinco por cento da Fortune 500. E o gráfico que ele levou: o consumo de tokens por desenvolvedor na nuvem da Ollama cresceu cerca de 150 vezes desde o começo do ano, com duas inflexões, uma puxada por agentes de código e outra em abril, puxada por agentes de trabalho geral.</p>
+<p>A previsão que ele tira daí é a manchete que circulou: no estado estacionário, 80 a 90% dos tokens de uma empresa vão passar por modelos abertos.</p>
+<p>Só que a frase seguinte é a que interessa, e quase ninguém a repetiu. Esses 80 a 90% dos tokens vão consumir, na conta dele, <strong>10 a 20% do orçamento</strong>. O resto do dinheiro continua indo para os modelos fechados de fronteira, reservados para as tarefas difíceis. E o host confirma o dado incômodo: o gasto com a Anthropic está crescendo ao mesmo tempo em que o consumo de modelos abertos explode. As duas curvas sobem.</p>
+<p>Isso não é a história de uma commodity engolindo um mercado. É a história de um mercado que se partiu ao meio, e cuja metade barata é justamente a que não decide nada.</p>
+<h2>O volume e o dinheiro se separaram</h2>
+<p>A analogia está no próprio episódio, e é melhor do que o discurso que a envolve: o escritório de advocacia. O associado ficou barato. O sócio, não. Você pode gerar dez vezes mais parecer por um décimo do preço, e ainda assim a assinatura que importa, a que carrega risco, continua custando o que custava.</p>
+<p>O que barateou não foi "a inteligência". Foi o trabalho braçal da inteligência: o loop agêntico, a varredura de repositório, a primeira versão do texto, o rascunho de código que alguém vai revisar. Morgan é explícito sobre a classe de modelos que provocou isso, a chamada "flash": custo por token baixíssimo e, nas palavras dele, "good enough for 80% of the tasks".</p>
+<p>Note a construção. Ninguém diz quais 80%, nem quem decide o que é uma tarefa fácil. Isso passa como detalhe operacional e não é.</p>
+<h2>Quem está barateando, e por quê</h2>
+<p>O episódio trata o colapso de preço como progresso técnico neutro, produzido por uma "comunidade" empenhada em reduzir custo. Mas o gráfico que eles mesmos exibem conta outra história. Nos modelos rodando localmente, americanos e chineses estão empatados. Na nuvem, um dos hosts descreve o gráfico com todas as letras: praticamente 100% de modelos chineses, com os Estados Unidos "recolorindo o eixo x". Kimi, GLM, MiniMax, DeepSeek. A cadência de release, que era semestral, virou trimestral ou menos.</p>
+<p>E há a jogada da NVIDIA, que o próprio host lê em voz alta: soltar modelos abertos grandes, como o Nemotron, não é filantropia. O fosso da NVIDIA não está em vender token, está em vender silício. Quem vende a pá tem todo o interesse em que o ouro seja de graça.</p>
+<p>Isso muda a natureza do fato. Preço em queda livre não é um dado da física. É uma decisão de alguém que ganha em outro lugar da cadeia. Tratar isso como maré é confortável e é errado: marés não têm dono, e essa tem vários.</p>
+<h2>A métrica que ele solta e não desenvolve</h2>
+<p>No meio da conversa, Morgan diz de passagem que o importante não é o custo por token, é o custo por tarefa. É a frase mais útil do episódio e ela morre ali.</p>
+<p>Porque é exatamente aí que a conta pode virar. Um modelo barato que precisa de mais passos, mais tentativas e mais orquestração para concluir a mesma tarefa pode sair mais caro do que um modelo caro que acerta de primeira. E nenhum dos números apresentados mede tarefas concluídas. O 150x mede tokens. O 5x por desenvolvedor mede tokens. A explosão de consumo pode ser produtividade, pode ser desperdício de agente ineficiente, e o episódio não tem como distinguir os dois casos.</p>
+<p>Some a isso um detalhe que desmente a moldura de abundância: o capítulo do episódio sobre conseguir GPU. Preços voláteis, oferta apertada, B200 e B300 difíceis de acessar, startup precisando pensar em previsão de vinte e quatro meses para garantir alocação. E Morgan nomeando qual é o problema seguinte da indústria: "extreme efficiency". O gargalo computacional não saiu de cena. Mudou de endereço.</p>
+<p>E não há, em cinquenta e sete minutos, um único preço. Nenhum dólar por milhão de tokens, nem para modelo aberto, nem para fechado. A previsão dos 10 a 20% do orçamento não é derivada de nenhuma aritmética exibida. É uma estimativa do CEO de uma empresa cuja receita inteira depende de ela ser verdade, num podcast do fundo que investiu nela.</p>
+<h2>O contraditório</h2>
+<p>O melhor argumento contra tudo isso ataca a premissa, não a conclusão.</p>
+<p>Primeiro: a ideia de que a Fortune 500 adotou modelos abertos por autonomia, e não por preço, não sobrevive à transcrição. Perguntado diretamente se era tudo custo, Morgan responde na primeira frase do episódio que "cost is by far the largest pain point". A famosa passagem sobre desenvolvedores não precisarem pedir permissão vem depois de "they were free to get started with". São duas razões na mesma sentença, e a primeira é preço.</p>
+<p>Segundo: a tese de que a IA entrou nas empresas sem governança é contradita pela fonte duas vezes. O bloqueio declarado à adoção de modelos abertos é segurança. A AT&amp;T migrou 40% do consumo, não 100%, e parou justamente aí. E Morgan descreve os times de segurança da Fortune 500 como veteranos do problema, acostumados a auditar milhares de dependências de código aberto há décadas. Governança não está ausente: ela é a coisa que está segurando o número em 40%.</p>
+<p>Terceiro, e mais duro: se o modelo tivesse mesmo virado commodity, o dinheiro teria migrado junto com o volume. Não migrou. Não houve transferência de valor, houve expansão: preço unitário cai, consumo explode, gasto total sobe, e o dinheiro se reconcentra nas duas pontas, a GPU escassa embaixo e o modelo de fronteira em cima. Isso é o efeito Jevons, não uma revolução de poder.</p>
+<p>E há o golpe final. A "curadoria" que Morgan chama de nova escassez, na fala dele, significa integração: fazer pesos, harness, motor de inferência e nuvem funcionarem juntos. Não significa julgamento executivo. E a decisão de qual modelo usar para qual tarefa já está sendo entregue como produto, com nome e tudo: roteador. O ideal, segundo o próprio Morgan, é "delegate to your smartest model to figure out when to go to an open model". A escassez que se anuncia já tem uma dúzia de fornecedores competindo para eliminá-la.</p>
+<h2>O que fica de pé</h2>
+<p>A tese sobrevive, mas encolhida e com outro nome.</p>
+<p>Cai a ideia de que preço não importava, cai a ideia de ausência de governança, e cai a promessa de que "curadoria" é um novo território humano protegido. Essa última cai sozinha: a camada que se anuncia como escassa é a próxima a ser automatizada, e quem vai automatizá-la é a mesma tecnologia que criou a abundância.</p>
+<p>Fica de pé o fato que ninguém disputou: <strong>volume e dinheiro descolaram</strong>. Oitenta a noventa por cento dos tokens de um lado, oitenta a noventa por cento do orçamento do outro. Para quem aprova orçamento, essa é a única frase do episódio que muda uma decisão. Ela diz que a economia gerada pelos modelos abertos é real e é pequena em dinheiro, porque incide sobre a parte do trabalho que já era barata de decidir.</p>
+<p>E fica uma pergunta que o episódio não faz e você deveria fazer antes da próxima migração: você sabe seu custo por tarefa concluída, ou só sabe seu custo por token? Se for a segunda, você tem um número que desceu 150 vezes e nenhuma prova de que alguma coisa ficou mais barata.</p>
+  </div>
+
+  <section class="artigo-fontes">
+    <h2>Fontes</h2>
+    <p>Antes de aprovar a próxima migração para modelos abertos, descubra se você mede custo por tarefa concluída ou só custo por token: no segundo caso você tem um número que caiu 150 vezes e nenhuma prova de que algo ficou mais barato.</p>
+    <div class="links">
+      <a class="btn" href="https://www.youtube.com/watch?v=rY0wnfFHYbs" target="_blank" rel="noopener">Watch</a>
+    </div>
+  </section>
+
+  <nav class="artigo-nav">
+    <span></span>
+    <a class="dir" href="gpt-6-astra-so-good-even-openai-are-worried.html"><small>Próximo</small><b>GPT 6 Astra, so good even OpenAI are worried</b></a>
+  </nav>
+</main>
+</body>
+</html>
