@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>O modelo barateou a parte que já era barata | Week In Review</title>
+  <meta name="description" content="Ras Mic pediu ao próprio agente para calcular quanto consumiu na semana a preço de API: mais de 24 mil dólares, pagando duas assinaturas de 200. Greg Isenberg lista nove prompts para ganhar dinheiro com o GPT-6 Astra. Lidos pelo verbo, quase todos pedem acesso e permanência em sistemas alheios, e os que dão dinheiro verificável rodam sobre dados que já existiam.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/revista.css">
+</head>
+<body>
+<main class="page">
+  <div class="top">
+    <div><a href="index.html">← Voltar para a edição</a></div>
+    <div class="mid">Issue 010</div>
+    <div class="right"><a href="../../arquivo.html">Arquivo</a> · 11 de setembro de 2026</div>
+  </div>
+
+  <header class="artigo-head">
+    <div class="kicker">03 / Gregisenberg</div>
+    <h1>O modelo barateou a parte que já era barata</h1>
+    <div class="artigo-meta"><span class="tag">gpt-6-astra</span><span class="tag">empreendedorismo</span><span class="tag">computer-use</span><span class="tag">custo-de-inferencia</span><span class="tag">distribuicao</span>
+      <span class="tempo">8 min de leitura</span>
+    </div>
+  </header>
+
+  <div class="artigo-corpo">
+<p>Ras Mic pediu ao próprio agente que calculasse quanto ele tinha consumido de inteligência na semana anterior, convertido a preço de API. O número: mais de 24 mil dólares. O que ele paga de verdade são "a couple of $200 subscriptions". A conclusão dele é aproveitar o subsídio "before they eventually start charging us the real price of these things".</p>
+<p>Esse é o dado mais importante do episódio de Greg Isenberg sobre o GPT-6 Astra, e os dois o tratam como piada de encerramento. Se o consumo real de uma pessoa produtiva é sessenta vezes o que ela paga, então qualquer ideia de negócio construída sobre "o modelo faz isso por mim" está sendo avaliada com um preço de insumo que não existe. O gênero "como eu ganharia dinheiro com X" tem esse defeito de fábrica: ele confunde o que ficou fácil de demonstrar com o que ficou barato de operar. E, olhando os nove prompts de Greg e o projeto de hardware de Ras um por um, quase nada do que gera receita depende do modelo. Depende do que está em volta dele.</p>
+<h2>Os nove prompts são nove pedidos de acesso</h2>
+<p>Greg publicou nove prompts que Greg Brockman repostou. Vale ler a lista pelo verbo escondido em cada um, não pelo resultado prometido.</p>
+<p>O "renegociador de contas" entra "into each provider's chat support" para negociar ou cancelar. O "operador de browser" clica "through the actual sites", preenche formulários e anota "what broke or slow down". O "espião de concorrentes" faz cadastro nos três maiores rivais e "sit inside their product and their emails". O vigia de Facebook Marketplace e Craigslist precisa ficar assistindo listagens de uma cidade e avisar "the second one's mispriced". O "time de QA" abre o app "on a real phone" toda noite.</p>
+<p>Nenhum desses prompts é sobre raciocínio. Todos são sobre <strong>acesso e permanência</strong>: uma sessão autenticada, um telefone de verdade, um cadastro que não é bloqueado, um loop que roda toda noite sem ninguém olhar. O modelo é a parte fácil. A parte difícil é a orquestração e o direito de estar dentro do sistema alheio, e essa parte não vem na assinatura. O próprio Ras admite a incerteza quando defende o computer use: "a lot of people might think it's like insane or it doesn't work or breaks". O exemplo de sucesso que ele dá é achar uma página no site da receita canadense. É um caso de leitura, sem transação, sem conta em jogo.</p>
+<p>Os dois prompts que Greg chama de "no-brainer" para fundadores expõem a outra dependência. O "dashboard de operador" lê "Stripe exports, analytics, customer calls, and project list" para dizer o que faz dinheiro e o que desperdiça tempo. A "auditoria de oportunidades para agentes" estima, tarefa por tarefa, "the current human time, the cost of mistakes, the tools involved". Os dois só funcionam para quem já tem dados organizados e processo descrito. Se a sua empresa não sabe quanto tempo cada tarefa toma, o modelo vai inventar um número plausível, e a auditoria vai parecer ótima. É exatamente o cenário em que a camada visível engana: quanto mais bonito o relatório, menos ele diz sobre o sistema que o alimentou.</p>
+<h2>O caso da caixa de som: onde a demo parou</h2>
+<p>O segmento mais convincente do vídeo é a caixa de som de Ras. Ele quer um HomePod com o agente dele dentro (o Siri, nas palavras dele, "is terrible", mas o hardware é o mais bonito que existe). O Astra abriu o Blender, desenhou uma caixa parecida, listou o que comprar (Raspberry Pi, alto-falante, microfone), estimou "350 to 450 before tax", devolveu links da Amazon canadense somando 561 dólares, gerou um diagrama de montagem, abriu um pull request no repositório do agente e, num thread separado, sugeriu fornecedores chineses para a carcaça. Tudo em "half an hour work".</p>
+<p>É impressionante e vale ser específico sobre o que aconteceu. Ras comprou as peças. Ras fez merge do PR. Nada foi montado. Nada foi ligado. Na hora da gravação, o que existe é um pedido na Amazon, um modelo 3D e código que ele mesmo diz não saber ler para hardware ("I don't know nothing about hardware"). O agente entregou a <strong>descrição completa de um produto</strong>, que é a coisa que ficou barata. O produto, que continua caro, ainda não existe.</p>
+<p>Greg vê nisso o início do "vibe manufacturing", com "thousands of $1 million a year plus businesses". A analogia com 2024 (Lovable, Bolt, Replit, v0) é boa por um motivo diferente do que ele pretende: o vibe coding produziu milhões de apps de fim de semana, e a distribuição não ficou mais barata para nenhum deles. A conta de Greg para o próprio negócio de nicho termina em "create meta ads to drive traffic". Ou seja: o custo migrou inteiro para a mídia paga, que o modelo não desconta. E hardware acrescenta o que software nunca teve: peça que chega errada, fornecedor que some, certificação, frete, devolução. Ras precisa ter certeza de que as peças conversam entre si antes de saber se o PR faz sentido, e ele perguntou ao agente se devia comprar uma unidade de cada, "and it said yes". A resposta certa custa 561 dólares para conferir.</p>
+<h2>Um argumento que fica de pé: coragem é o gargalo, mas não do jeito que parece</h2>
+<p>A frase que Ras repete duas vezes é a mais interessante do episódio: "intelligence has gone up, but the bravery for people to try new things hasn't gone up". Ele usa isso para dizer que gerar landing page com o Astra é "a sad use of intelligence" e que a pessoa deve pedir coisas grandes, como rodar Linux num PS4 esquecido ou montar um home lab.</p>
+<p>Ele tem razão em uma coisa. Os dois usos que ele demonstra com resultado verificável não são ideias de negócio, são <strong>auditorias sobre sistema que já existe</strong>: um app dele saiu de 800 milissegundos para 20 a 30 na página, e uma auditoria de segurança num produto de pagamentos "with a couple of people using it" achou falhas em produção ("you would have been cooked"). Nos dois casos, o valor não veio de coragem nem de prompt. Veio de haver um código real, usuários reais, e um dono que sabia onde doía. O modelo entrou como especialista barato num sistema caro que alguém levou anos para construir.</p>
+<p>Isso inverte a leitura de Ras. A coragem que importa não é a de pedir mais ao modelo. É a de construir e manter a coisa lenta que o modelo vai auditar depois: o app com gente dentro, a base de clientes com histórico, o processo documentado, o canal que traz tráfego. Quem tem isso extrai muito do Astra com dois prompts. Quem não tem recebe nove ideias bonitas e uma caixa da Amazon.</p>
+<p>Há um sinal do próprio mercado no episódio. Ras diz que, pela primeira vez, cancelaria a assinatura da Anthropic pelo Astra. É comportamento de commodity: troca-se de fornecedor pelo melhor preço-desempenho da semana. Camada assim não é onde mora o valor. E o preço real dela, pelos números do próprio Ras, ainda está por chegar.</p>
+<h2>O contraditório</h2>
+<p>O melhor argumento contra esta tese diz que ela descreve o vídeo com precisão e erra na conclusão: o dinheiro está justamente na camada que o modelo acabou de abrir, porque essa camada não era barata, era inacessível.</p>
+<p>Ras não sabia nada de hardware e diz que não teria tentado, porque é intimidante. Em meia hora foi da ideia à lista de compra, ao diagrama, aos fornecedores e a um pull request. Para um desenvolvedor web, descrever e prototipar um produto físico não era barato de outro jeito: era impossível. Quando uma camada passa de inacessível a trivial, quem chega primeiro nela ganha dinheiro, mesmo que ela vire commodity depois. Foi assim com o vibe coding em 2024, e houve gente que ganhou.</p>
+<p>A auditoria vale mais do que o ensaio admite. Um vazamento num produto de pagamentos com usuários reais não é custo de token, é o fim do negócio, e o modelo desconta exatamente esse risco. Ganhar dinheiro inclui não perdê-lo. E a queda de 800 para 20 milissegundos é receita direta em qualquer produto cuja conversão dependa de velocidade.</p>
+<p>O "acesso a sistemas alheios" é o que o computer use ataca de frente. O negociador entra no chat de suporte da operadora pelo mesmo caminho que um humano entra. O operador de navegador clica em sites de terceiros sem API nem parceria. O acesso deixa de ser gargalo quando o agente usa a porta da frente. Quanto ao subsídio, os dois dizem que o Astra gasta menos passos por tarefa, e o preço de inferência por unidade de capacidade caiu em ordens de grandeza desde 2023. Apostar que a conta de 24 mil dólares vai chegar é apostar contra a tendência inteira do setor. E a distribuição não é só mídia paga: o último prompt de Greg é um jogo de navegador com motivo para ser enviado a um amigo, distribuição orgânica fabricada pelo modelo, em nichos onde anúncio caro nem cabe.</p>
+<h2>O que fica de pé</h2>
+<p>A tese sobrevive com uma correção, e a correção é grande.</p>
+<p>Cai a palavra "barata". A camada que o Astra abriu não era barata, era fechada, e o contraditório está certo em que abrir uma porta fechada gera dinheiro para quem passa primeiro. Cai também a aposta na conta que vai chegar: o custo por tarefa concluída está caindo, e o ensaio não tem como sustentar o contrário.</p>
+<p>O que fica de pé é a distinção entre dois tipos de coisa que o vídeo mistura. As ideias que geram receita verificável no episódio (a auditoria de segurança, a otimização de performance, o dashboard de operador) funcionam sobre <strong>dados e processo que já existiam</strong> e que o modelo não cria do zero: o app com gente dentro, o Stripe com histórico, as chamadas gravadas. Nada na transcrição mostra o Astra fabricando esse acervo. As outras ideias, as de acesso e permanência em sistema alheio, dependem de o computer use continuar funcionando em escala e sem ser bloqueado, o que o próprio Ras apresenta como aposta, não como fato.</p>
+<p>A tese corrigida é esta: o Astra deixa de cobrar o ingresso, mas não constrói o que fica dentro. Quem já tem um sistema em operação extrai dinheiro dele em dois prompts. Quem não tem ganha, no melhor caso, a chance de ser o primeiro a construir um. É uma chance real. Continua sendo o trabalho de sempre.</p>
+  </div>
+
+  <section class="artigo-fontes">
+    <h2>Fontes</h2>
+    <p>Antes de apostar numa ideia &quot;o modelo faz isso por mim&quot;, cheque se ela roda sobre um sistema que você já opera ou sobre um acesso que ainda depende de ninguém bloquear: o Astra tira o ingresso, não constrói o que fica dentro.</p>
+    <div class="links">
+      <a class="btn" href="https://www.youtube.com/watch?v=nglqTHwuZ-8" target="_blank" rel="noopener">Watch</a>
+    </div>
+  </section>
+
+  <nav class="artigo-nav">
+    <a class="" href="gpt-live-1-is-now-in-the-api.html"><small>Anterior</small><b>GPT-Live-1 is now in the API</b></a>
+    <span></span>
+  </nav>
+</main>
+</body>
+</html>
